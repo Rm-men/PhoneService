@@ -1,41 +1,41 @@
-CREATE TABLE Users(
-id serial,
-name text,
-age int);
 
-CREATE TABLESPACE ts_fast LOCATION 'E:\SQL';
-CREATE DATABASE sopc TABLESPACE ts_fast;
 --CREATE SCHEMA main;
 --SET SEARCH_PATH = main;
 
-
-REVOKE ALL PRIVILEGES ON DATABASE sopc FROM PUBLIC;
-REVOKE ALL PRIVILEGES ON SCHEMA public FROM PUBLIC;
+--REVOKE ALL PRIVILEGES ON DATABASE sopc FROM PUBLIC;
+--REVOKE ALL PRIVILEGES ON SCHEMA public FROM PUBLIC;
 
 	--Управляющий
-CREATE ROLE main LOGIN SUPERUSER CONNECTION LIMIT 1 PASSWORD '123';
+--CREATE ROLE main LOGIN SUPERUSER CONNECTION LIMIT 1 PASSWORD '123';
 -- Остальные после создания таблиц
 
 
-
+/*
 CREATE DOMAIN C_DATE AS DATE
 NOT NULL CHECK(VALUE <= CURRENT_DATE) DEFAULT CURRENT_DATE;
 
 CREATE DOMAIN C_TIMESTAMP AS TIMESTAMP
 NOT NULL CHECK(VALUE <= CURRENT_TIMESTAMP) DEFAULT CURRENT_TIMESTAMP;
-
-CREATE DOMAIN NUMB_PHONE AS VARCHAR(11) CHECK(VALUE ~ '^[0-9]{11}$');
-
+*/
+/*
+ CREATE DOMAIN NUMB_PHONE AS VARCHAR(11) CHECK(VALUE ~ '^[0-9]{11}$');
+ */
+/*
 CREATE DOMAIN COUNT AS INT
 DEFAULT 1 CHECK(VALUE >=1);
+*/
+
+/*
 CREATE DOMAIN NUMB_CARD AS VARCHAR(16)
 NOT NULL CHECK(
    	VALUE ~ '[0-9]{16}$'
-);
+       );
+*/
 
+/*
 CREATE DOMAIN NUMB_PHONE AS VARCHAR(15)
 CHECK(	VALUE ~ '[^0-9]') ;
-
+*/
 CREATE DOMAIN CASH AS MONEY
 NOT NULL CHECK(	VALUE::numeric(10,2) >=0);
 
@@ -44,7 +44,7 @@ id_client 		  SERIAL PRIMARY KEY,
 name 	  		  VARCHAR(25) NOT NULL,
 family	  		  VARCHAR(45) NOT NULL,
 patronymic 		  VARCHAR(45) NULL,
-phone             NUMB_PHONE NULL UNIQUE,
+phone             VARCHAR(11) NULL UNIQUE,
 email             VARCHAR(255) NULL UNIQUE
 );
 
@@ -53,47 +53,37 @@ id_order_status 		  VARCHAR(10) PRIMARY KEY,
 description_order_status  Varchar(25)
 );
 
-CREATE TABLE Order_( -- FK client order_
+CREATE TABLE Orders( -- FK client order_
 id_order    	  		  SERIAL PRIMARY KEY,
-order_date  	  		  C_TIMESTAMP,
-phone_number	  		  NUMB_PHONE, --номер, на который приходит информация о заказе
-address     	  		  VARCHAR(255) NULL, --
+order_date  	  		  TIMESTAMP,
+phone_number	  		  VARCHAR(11) , --номер, на который приходит информация о заказе
+address     	  		  VARCHAR(255) NULL, -- почта, на которую приходит информация о заказе
 id_client   	  		  INT,
 id_order_status 		  VARCHAR(10),
 CONSTRAINT fk_ord_ordstat FOREIGN KEY (id_Order_status) REFERENCES Order_status (id_Order_status) ON DELETE RESTRICT ON UPDATE CASCADE,
 CONSTRAINT fk_ord_client  FOREIGN KEY (Id_Client) REFERENCES Client (Id_Client) ON DELETE NO ACTION ON UPDATE NO ACTION
-);  -- TABLESPACE ts_fast;
-
-CREATE TABLE Shop(
-name_store 				  VARCHAR(35) PRIMARY KEY,
+);
+CREATE TABLE workshop(
+name_workshop			  VARCHAR(35) PRIMARY KEY,
 address    				  text NOT NULL
 );
-
-CREATE TABLE Employee_type(
-id_employee_type 		VARCHAR(15) PRIMARY KEY ,
-responsible_description TEXT NOT NULL
-);
-
-CREATE TABLE Employee_of_company( --FK - employee_type, shop
+CREATE TABLE Employee_of_company( --FK - employee_type, workshop
 id_employee			    VARCHAR(8) PRIMARY KEY,
 id_employment_contract  VARCHAR(8) UNIQUE,
 passport_serial 	    NUMERIC(4) NOT NULL UNIQUE,
 passport_nubmer 	    NUMERIC(6) NOT NULL UNIQUE,
 adres 				    TEXT,
 id_employee_type 	    VARCHAR(15),
-phone       	        NUMB_PHONE NOT NULL UNIQUE,
+phone       	        VARCHAR(11)  NOT NULL UNIQUE,
 date_of_employment 	    DATE NOT NULL,
-name_store 			    VARCHAR(35),
+name_workshop		    VARCHAR(35),
 family 			        VARCHAR(30) NOT NULL,
 name   			        VARCHAR(30) NOT NULL,
 patronymic 		        VARCHAR(30) NULL,
 login                   VARCHAR(64) CONSTRAINT nnud_emp_log NOT NULL UNIQUE DEFAULT NULL,
 password                VARCHAR(64) CONSTRAINT nnud_emp_pasw NOT NULL UNIQUE DEFAULT NULL,
-CONSTRAINT fk_emp_store FOREIGN KEY(name_store) REFERENCES Shop (name_store) ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT fk_emp_type  FOREIGN KEY(Id_employee_type) REFERENCES Employee_type (Id_employee_type) ON DELETE NO ACTION ON UPDATE CASCADE
+CONSTRAINT fk_emp_store FOREIGN KEY(name_workshop) REFERENCES workshop (name_workshop) ON DELETE NO ACTION ON UPDATE CASCADE
 );
-
-
 /*
 CREATE TABLE Order_delivery( --FK order_, employee_of_company
 id_order_delivery 		  SERIAL PRIMARY KEY,
@@ -105,23 +95,25 @@ CONSTRAINT fk_orddeliv_order FOREIGN KEY (Id_Order) REFERENCES Order_(Id_Order) 
 CONSTRAINT fk_orddeliv_empl FOREIGN KEY (id_employee) REFERENCES Employee_of_company(id_employee) ON DELETE RESTRICT ON UPDATE CASCADE
 );
  */
-CREATE TABLE Pushare_agreement( --FK shop, client, order
+/*
+CREATE TABLE Pushare_agreement( --FK workshop, client, order
 id_pushare_agreement	    SERIAL PRIMARY KEY,
-name_store 			        VARCHAR(35),
+name_workshop		        VARCHAR(35),
 id_client 				    INT,
 all_cost 				    CASH,
-pushare_agreement_date      C_TIMESTAMP,
+pushare_agreement_date      TIMESTAMP,
 id_order 				    INT,
 paid        	  		    BOOLEAN CONSTRAINT def_pa_paid DEFAULT false,
 CONSTRAINT fk_pa_Id_Client  FOREIGN KEY (Id_Client) REFERENCES Client (Id_Client) ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT fk_pa_order      FOREIGN KEY (Id_Order) REFERENCES Order_ (Id_Order)  ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT fk_pa_shop       FOREIGN KEY (Name_store) REFERENCES Shop (Name_store) ON DELETE NO ACTION ON UPDATE CASCADE
+CONSTRAINT fk_pa_order      FOREIGN KEY (Id_Order) REFERENCES Orders (Id_Order)  ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fk_pa_workshop       FOREIGN KEY (Name_workshop) REFERENCES workshop (Name_workshop) ON DELETE NO ACTION ON UPDATE CASCADE
 );
+*/
 
 CREATE TABLE Guarantee(
 id_guarantee 			  VARCHAR(10) PRIMARY KEY,
-garranty_period_in_months INTEGER NULL,
-garranty_conditions 	  TEXT NULL
+period_in_months          INTEGER NULL,
+conditions 	              TEXT NULL
 );
 
 CREATE TABLE Manufacturer(
@@ -129,9 +121,10 @@ id_manufacturer 		  VARCHAR(25) PRIMARY KEY,
 name 					  VARCHAR(150) UNIQUE NOT NULL
 );
 
+/*
 CREATE TABLE Supply_order( -- FK Employee_of_company
 id_supply_order 	           SERIAL PRIMARY KEY,
-date_supl_order 	           C_TIMESTAMP,
+date_supl_order 	           TIMESTAMP,
 id_employee    				   VARCHAR(10),
 CONSTRAINT fk_suplorder_emp    FOREIGN KEY (id_employee) REFERENCES Employee_of_company(id_employee) ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -146,13 +139,13 @@ CREATE TABLE Supply( -- FK supplier, Supply_order
 id_supply 				        SERIAL PRIMARY KEY,
 id_supply_order			        INT,
 id_supplier			            VARCHAR(15),
-date_supply 			        C_TIMESTAMP,
+date_supply 			        TIMESTAMP,
 price_supply 			        CASH,
 description_supply 		        TEXT NULL,
 CONSTRAINT fk_supply_supplorder FOREIGN KEY (id_supply_order) REFERENCES Supply_order (id_supply_order) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT fk_supply_supplier   FOREIGN KEY (Id_supplier) REFERENCES Supplier (Id_supplier) ON DELETE RESTRICT ON UPDATE CASCADE
 );
---drop table  Product cascade;
+*/
 CREATE TABLE Product( 
 id_product		    VARCHAR(40) PRIMARY KEY,
 name                VARCHAR(40),
@@ -160,14 +153,14 @@ price		        CASH,
 counts 		        COUNT
 );
 
-CREATE TABLE supplied_product( -- FK  supply, shop
-name_store	 	                VARCHAR(35) NOT NULL,
+CREATE TABLE supplied_product( -- FK  supply, workshop
+name_workshop	                VARCHAR(35) NOT NULL,
 id_suppply		  	            INT,
 id_product					    INT,
 count 						    COUNT,
 price						    CASH,
 CONSTRAINT pk_supplied_product  PRIMARY KEY (id_suppply, id_product),
-CONSTRAINT fk_pa_shop           FOREIGN KEY (name_store) REFERENCES Shop (name_store) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fk_pa_workshop           FOREIGN KEY (name_workshopREFERENCES workshop (name_workshopON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT fk_pa_idproduct      FOREIGN KEY (id_product) REFERENCES Product (id_product) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT fk_suplgod_Supply    FOREIGN KEY (Id_suppply) REFERENCES Supply (Id_supply) ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -306,8 +299,6 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER t_insert_c_to_products_a
 AFTER INSERT ON Component
 FOR EACH ROW EXECUTE FUNCTION insert_c_to_products_a();
-
-
 
     -- При добавлении модели телефона он автоматически заносится в список товаров
 CREATE OR REPLACE FUNCTION insert_p_to_list() RETURNS TRIGGER AS
