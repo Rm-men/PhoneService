@@ -1,0 +1,36 @@
+﻿<Page x:Class="WPF.Frames.Salesman.P_products_add"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.Frames.Salesman"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="P_products_add">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0,5*"/>
+            <RowDefinition Height="0,5*"/>
+            <RowDefinition Height="0,5*"/>
+            <RowDefinition Height="0,5*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="TB_id" Grid.Row="0" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="ID" 
+                 Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
+        <TextBox x:Name="TB_Name" Grid.Row="1" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Название" 
+                 Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
+        <TextBox x:Name="TB_Price" Grid.Row="2" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Цена" PreviewTextInput="InputOnlyNumbs"
+                 Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
+        <TextBox x:Name="TB_Count" Grid.Row="3" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Количество" PreviewTextInput="InputOnlyNumbs"
+                 Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
+
+        <Button x:Name="btnAdd" Grid.Column="1" Grid.Row="103" Content="Добавить продукт" Height="30" Width="200" Margin="5 0 5 0" Command="{}" Click="B_add_product" />
+    </Grid>
+</Page>

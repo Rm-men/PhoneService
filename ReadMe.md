@@ -1,0 +1,1 @@
+Моделирование интерфейсов в Figma - https://www.figma.com/file/saxusCeYQVUhvxub8AcVMM/Макет-Интерфейсов

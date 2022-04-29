@@ -1,0 +1,38 @@
+﻿<Window x:Class="WPF.Frames.Admin.main_w_admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:WPF.Frames.Admin"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Администратор">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Orientation="Horizontal">
+            <Button x:Name="b_employees" Grid.Column="1"  Height="32" Margin="5 0 5 0" Click="B_to_Employees" >Сотрудники</Button>
+            <Button x:Name="b_product_list" Grid.Column="0"  Height="32" Margin="5 0 5 0" Click="B_to_Product">Товары</Button>
+            <Button x:Name="b_orders" Grid.Column="3"  Height="32" Margin="5 0 5 0" Click="B_to_Orders" >Заказы</Button>
+            <Button x:Name="b_clients" Grid.Column="3"  Height="32" Margin="5 0 5 0" Click="B_to_Clients" >Клиенты</Button>
+            <Button x:Name="b_supplies" Grid.Column="2"  Height="32" Margin="5 0 5 0" Click="B_to_Supply" Opacity="0">Поставки</Button>
+
+        </StackPanel>
+        <Frame x:Name="View_frame" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6"  Margin="5 0 5 0" Background="#FFEEEEEE" NavigationUIVisibility="Hidden" >
+            
+        </Frame>
+    </Grid>
+</Window>

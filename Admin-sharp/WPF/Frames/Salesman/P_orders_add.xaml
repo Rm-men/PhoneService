@@ -1,0 +1,80 @@
+﻿<Page x:Class="WPF.Frames.Salesman.P_orders_add"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.Frames.Salesman"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="P_orders_add">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="0 10 0 0" >
+            <TextBox x:Name="TB_Status"   Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"  materialDesign:HintAssist.Hint="Статус заказа" />
+            <TextBox x:Name="TB_Adress"   Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"    materialDesign:HintAssist.Hint="Адресс" />
+            <TextBox x:Name="TB_Date"    Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"   materialDesign:HintAssist.Hint="Дата заказа"/>
+
+            <TextBox x:Name="TB_PhNumb"   Height="30" Margin="5 0 5 0"  Padding="0 5 0 0 " FontSize="18"  Cursor="IBeam"    materialDesign:HintAssist.Hint="Номер телефона" Opacity="0"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0, 5 ,5 ,0" >
+            <TextBox x:Name="TB_cl_id"       Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"      materialDesign:HintAssist.Hint="ID клиента" Opacity="0" />
+            <TextBox x:Name="TB_cl_Family"   Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"    materialDesign:HintAssist.Hint="Фамилия клиента" />
+            <TextBox x:Name="TB_cl_Name"   Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"  materialDesign:HintAssist.Hint="Имя клиента" />
+            <TextBox x:Name="TB_cl_Patron" Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"    materialDesign:HintAssist.Hint="Отчество клиента" />
+            <TextBox x:Name="TB_IdClient" Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"    materialDesign:HintAssist.Hint="ID клиента " Opacity="0"/>
+
+            <TextBox x:Name="TB_cl_email"    Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"   materialDesign:HintAssist.Hint="Почта клиента"/>
+            <TextBox x:Name="TB_cl_Phone"   Height="30" Margin="5 0 5 0"  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam"    materialDesign:HintAssist.Hint="Телефон клиента" />
+
+            <Button x:Name="b_prd_delete"  Grid.Column="2" Grid.Row="103" Height="32" Margin="5 30 5 0" Click="B_fing_Client" Content="Найти клиента" ></Button>
+        </StackPanel>
+
+        <Button x:Name="btnAddO" Grid.Column="0" Grid.Row="103" Content="Добавить заказ" Height="30" Width="200" Margin="5 0 5 0" Command="{}" Click="B_add" Background="#FFE8E8E8"  />
+        <Button x:Name="btnAddP" Grid.Column="2" Grid.Row="103" Content="Добавить товар" Height="30" Width="200" Margin="5 0 5 0" Command="{}" Click="B_add_prod" Background="#FFA9BFA9" />
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label x:Name="Price_t"  Content="Суманая цена: " HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  FontSize="16" ></Label>
+            <Label x:Name="Price"  Content="0 р" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"  FontSize="16" ></Label>
+        </StackPanel>
+            <DataGrid x:Name="ListProd" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding}"
+				  Margin= "5 5 5 5" FontSize="14" BorderThickness="1" IsReadOnly="True" SelectionMode="Single" 
+				  SelectionUnit="FullRow" CanUserResizeColumns="False" CanUserReorderColumns="False" TextBlock.TextAlignment="Center">
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Background" Value="#ffdadada" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=IdProduct}"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding Path=Type}"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}"/>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}"/>
+                    <DataGridTextColumn Header="Количество" Binding="{Binding Path=Counts}"/>
+            </DataGrid.Columns>
+
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    </Style>
+                </DataGrid.ItemContainerStyle>
+            </DataGrid>
+    </Grid>
+</Page>

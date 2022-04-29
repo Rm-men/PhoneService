@@ -1,0 +1,27 @@
+﻿<Page x:Class="WPF.Frames.Manager.P_products"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.Frames.Manager"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="P_products">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="b_prd_list"  Height="32" Margin="5 0 5 0" Click="Bto_list"  >Список продуктов</Button>
+            <!--<Button x:Name="b_prd_upade"  Height="32" Margin="5 0 5 0" Click="Bto_update_Product" >Изменить товар</Button>-->
+            <Button x:Name="b_prd_insert"  Height="32" Margin="5 0 5 0" Click="Bto_add"  >Добавить товар</Button>
+        </StackPanel>
+        <Frame x:Name="spase" Grid.Row="1">
+
+        </Frame>
+    </Grid>
+
+</Page>
