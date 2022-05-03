@@ -47,12 +47,10 @@ patronymic 		  VARCHAR(45) NULL,
 phone             VARCHAR(11) NULL UNIQUE,
 email             VARCHAR(255) NULL UNIQUE
 );
-
 CREATE TABLE Order_status(
 id_order_status 		  VARCHAR(10) PRIMARY KEY,
 description_order_status  Varchar(25)
 );
-
 CREATE TABLE Orders( -- FK client order_
 id_order    	  		  SERIAL PRIMARY KEY,
 order_date  	  		  TIMESTAMP,
@@ -109,18 +107,15 @@ CONSTRAINT fk_pa_order      FOREIGN KEY (Id_Order) REFERENCES Orders (Id_Order) 
 CONSTRAINT fk_pa_workshop       FOREIGN KEY (Name_workshop) REFERENCES workshop (Name_workshop) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 */
-
 CREATE TABLE Guarantee(
 id_guarantee 			  VARCHAR(10) PRIMARY KEY,
 period_in_months          INTEGER NULL,
 conditions 	              TEXT NULL
 );
-
 CREATE TABLE Manufacturer(
 id_manufacturer 		  VARCHAR(25) PRIMARY KEY,
 name 					  VARCHAR(150) UNIQUE NOT NULL
 );
-
 /*
 CREATE TABLE Supply_order( -- FK Employee_of_company
 id_supply_order 	           SERIAL PRIMARY KEY,
@@ -152,7 +147,7 @@ name                VARCHAR(40),
 price		        CASH,
 counts 		        COUNT
 );
-
+/*
 CREATE TABLE supplied_product( -- FK  supply, workshop
 name_workshop	                VARCHAR(35) NOT NULL,
 id_suppply		  	            INT,
@@ -160,22 +155,20 @@ id_product					    INT,
 count 						    COUNT,
 price						    CASH,
 CONSTRAINT pk_supplied_product  PRIMARY KEY (id_suppply, id_product),
-CONSTRAINT fk_pa_workshop           FOREIGN KEY (name_workshopREFERENCES workshop (name_workshopON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fk_pa_workshop           FOREIGN KEY (name_workshop) REFERENCES workshop (name_workshop) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT fk_pa_idproduct      FOREIGN KEY (id_product) REFERENCES Product (id_product) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT fk_suplgod_Supply    FOREIGN KEY (Id_suppply) REFERENCES Supply (Id_supply) ON DELETE RESTRICT ON UPDATE CASCADE
 );
-
-CREATE TABLE Position_in_order( --FK pushare_agreement, product
+*/
+CREATE TABLE Position_in_order( --FK pushare_agreement, product ???
 id_position 			    SERIAL,
 id_pushare_agreement 	    INT,
 id_product				    varchar(40),
 count_staf				    COUNT,
 CONSTRAINT pk_pos_listgoods PRIMARY KEY (id_position, id_pushare_agreement),
-
 CONSTRAINT fk_pos_product   FOREIGN KEY (id_product) REFERENCES product(id_product) ON DELETE RESTRICT ON UPDATE CASCADE,
 CONSTRAINT fk_pos_pushagree FOREIGN KEY (id_pushare_agreement) REFERENCES Pushare_agreement(id_pushare_agreement) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 CREATE TABLE Phone_model( -- FK Guarantee, List_of_supported_models, product, Manufacturer
 id_phone_model 			         VARCHAR(25) PRIMARY KEY,
 name_model				         VARCHAR(35) NOT NULL,
@@ -187,13 +180,11 @@ CONSTRAINT fk_phmod_id_product   FOREIGN KEY(id_product) REFERENCES product (id_
 CONSTRAINT fk_phmod_guarante     FOREIGN KEY(Guarantee_Phone_model) REFERENCES Guarantee (ID_Guarantee) ON DELETE NO ACTION ON UPDATE RESTRICT,
 CONSTRAINT fk_phmod_manufacturer FOREIGN KEY(Manufacturer) REFERENCES Manufacturer (Id_Manufacturer) ON DELETE RESTRICT ON UPDATE CASCADE
 );
-
 CREATE TABLE Phone( -- FK phone model
 imei 				        VARCHAR(17) PRIMARY KEY,
 id_phone_model  	        VARCHAR(25),
 CONSTRAINT fk_phone_phmodel FOREIGN KEY(Id_Phone_model) REFERENCES Phone_model(Id_Phone_model) ON DELETE RESTRICT ON UPDATE CASCADE
 );
-
 CREATE TABLE Component( --FK - Guarantee, Manufacturer
 id_component   			        VARCHAR(25) PRIMARY KEY,
 type_c 			   			    VARCHAR(20) NOT NULL,
@@ -205,7 +196,7 @@ CONSTRAINT fk_comp_id_product   FOREIGN KEY(id_product) REFERENCES product (id_p
 CONSTRAINT fk_comp_guarantee    FOREIGN KEY(id_guarantee) REFERENCES Guarantee (ID_Guarantee) ON DELETE RESTRICT ON UPDATE RESTRICT,
 CONSTRAINT fk_comp_manufacturer FOREIGN KEY(manufacturer) REFERENCES Manufacturer (Id_Manufacturer) ON DELETE RESTRICT ON UPDATE CASCADE
 );
-
+--Расходники это компоненты?
 CREATE TABLE List_of_supported_models( -- FK - phone model, component
 id_list_of_sup_models 	        VARCHAR (5) PRIMARY KEY,
 list_supmodel_name			    VARCHAR(25),

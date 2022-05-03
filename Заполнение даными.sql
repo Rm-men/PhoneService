@@ -11,6 +11,16 @@ with client_json (doc) as ( -- client
 		"name" 	    : "Андрей",
 		"family" 	: "Андров",
 		"patronymic" : "Андреевич"
+    },
+    {
+		"name" 	    : "Алексей",
+		"family" 	: "Алексеев",
+		"patronymic" : "Алексеевич"
+    },
+    {
+		"name" 	    : "Иван",
+		"family" 	: "Иванович",
+		"patronymic" : "Иванов"
     }
 	]
 	'::json
@@ -33,6 +43,11 @@ with guarante_json (doc) as ( -- guarante
 		"id_guarantee"              : "n_0",
         "warranty_period_in_months" : "0",
         "garranty_conditions"       : "Отсутствие гарантии"
+    },
+	{
+		"id_guarantee"              : "r_1",
+        "warranty_period_in_months" : "1",
+        "garranty_conditions"       : "Гарантися на ремонт - 1 месяц"
     }
 	]
 	'::json
@@ -50,8 +65,24 @@ with manufacturer_json (doc) as ( -- manufacturer
 	'
 	[
 	{
+		"id_manufacturer"       : "ph_hohuwai_1",
+        "name"                  : "Hohuwai"
+    },
+	{
+		"id_manufacturer"       : "ph_hohuwai_2",
+        "name"                  : "Horon"
+    },
+	{
+		"id_manufacturer"       : "ph_xemiom",
+        "name"                  : "Xemion"
+    },
+	{
 		"id_manufacturer"       : "ph_gmsns",
         "name"                  : "GAMSUNS"
+    },
+	{
+		"id_manufacturer"       : "cp_rec",
+        "name"                  : "Rus Electronic Corporation"
     },
 	{
 		"id_manufacturer"       : "cp_tmcs",
@@ -67,7 +98,7 @@ from manufacturer_json j
 cross join lateral json_populate_recordset(null::Manufacturer, doc) as jpr
 ;
 
-with shop_json (doc) as ( -- shop
+with shop_json (doc) as ( -- shop !!! не то
    values
     (
 	'
@@ -86,7 +117,7 @@ from shop_json j
 cross join lateral json_populate_recordset(null::Shop, doc) as jpr
 ;
 
-with Employee_type_json (doc) as ( -- Employee_type
+/*with Employee_type_json (doc) as ( -- Employee_type
    values
     (
 	'
@@ -111,7 +142,7 @@ insert into Employee_type
 select  jpr.*
 from Employee_type_json j
 cross join lateral json_populate_recordset(null::Employee_type, doc) as jpr
-;
+;*/
 
 with Employee_of_company_json (doc) as ( -- Employee_of_company
    values
@@ -205,11 +236,15 @@ with Order_status_json (doc) as ( -- Order_status
 	'
         [
         {
-    "id_order_status"  : "s_5",
+    "id_order_status"  : "s_10",
+    "description_order_status" 		: "принят"
+        },
+        {
+    "id_order_status"  : "s_50",
     "description_order_status" 		: "готов к выдаче"
         },
         {
-    "id_order_status"  : "s_6",
+    "id_order_status"  : "s_60",
     "description_order_status" 		: "получено"
         }
         ]

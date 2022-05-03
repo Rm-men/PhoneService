@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1540.0" style="-fx-background-color: d8d8f2;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="192.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="119.73334350585935" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="109.0666564941406" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowSpan="3">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="380.0" style="-fx-background-color: #3a388a; -fx-background-radius: 5;" text="Клиент" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Phone" editable="false" layoutX="1.0" layoutY="69.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Surname" editable="false" layoutX="1.0" layoutY="125.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Name" editable="false" layoutX="1.0" layoutY="182.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="MiddleName" editable="false" layoutX="1.0" layoutY="240.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <CheckBox fx:id="IsOld" layoutX="6.0" layoutY="297.0" mnemonicParsing="false" pickOnBounds="false" text="Постоянный клиент">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </CheckBox>
+            <Label layoutX="11.0" layoutY="45.0" text="Телефон" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="104.0" text="Фамилия" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="158.0" text="Имя" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="217.0" text="Отчество" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <GridPane.margin>
+            <Insets top="30.0" />
+         </GridPane.margin>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="4">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="380.0" style="-fx-background-color: #3a388a; -fx-background-radius: 5;" text="Адрес" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="CityDistrict" editable="false" layoutX="1.0" layoutY="65.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Settlement" editable="false" layoutX="1.0" layoutY="120.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Street" editable="false" layoutX="1.0" layoutY="174.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="HouseNumber" editable="false" layoutX="1.0" layoutY="229.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Block" editable="false" layoutX="1.0" layoutY="285.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="ApartmentNumber" editable="false" layoutY="341.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <Label layoutX="7.0" layoutY="43.0" text="Район города" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="5.0" layoutY="100.0" text="Населенный пункт" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="155.0" text="Улица" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="209.0" text="Номер дома" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="265.0" text="Корпус / строение" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="319.0" text="Квартира" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowSpan="3">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="380.0" style="-fx-background-color: #3a388a; -fx-background-radius: 5;" text="Бригадир" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="PhoneBrigadir" editable="false" layoutX="1.0" layoutY="65.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="SurnameBrigadir" editable="false" layoutX="1.0" layoutY="120.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="NameBrigadir" editable="false" layoutX="1.0" layoutY="175.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="MiddleNameBrigadir" editable="false" layoutX="1.0" layoutY="230.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="BrigadeNumber" editable="false" layoutX="1.0" layoutY="288.0" prefWidth="360.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <Label layoutX="6.0" layoutY="42.0" text="Телефон" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="100.0" text="Фамилия" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="154.0" text="Имя" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="209.0" text="Отчество" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="266.0" text="Номер бригады" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <GridPane.margin>
+            <Insets top="30.0" />
+         </GridPane.margin>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowSpan="2">
+         <GridPane.margin>
+            <Insets top="30.0" />
+         </GridPane.margin>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="1.0" prefHeight="40.0" prefWidth="380.0" style="-fx-background-color: #3a388a; -fx-background-radius: 5;" text="Услуга" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Square" editable="false" layoutX="19.0" layoutY="132.0" prefHeight="36.0" prefWidth="205.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Service" editable="false" layoutX="19.0" layoutY="63.0" prefHeight="36.0" prefWidth="363.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <Label layoutX="24.0" layoutY="104.0" text="Площадь" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="228.0" layoutY="144.0" text="м" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="244.0" layoutY="139.0" text="2" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="5">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="1.0" prefHeight="40.0" prefWidth="380.0" style="-fx-background-color: #3a388a; -fx-background-radius: 5;" text="Доп. услуги" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="Comment" editable="false" layoutX="8.0" layoutY="418.0" prefHeight="100.0" prefWidth="376.0" />
+            <TableView fx:id="ServiceTV" layoutX="6.0" layoutY="55.0" prefHeight="339.0" prefWidth="374.0">
+              <columns>
+                <TableColumn prefWidth="238.39990234375" text="Услуга" fx:id="ServiceCol"/>
+                <TableColumn prefWidth="134.4000244140625" text="Количество" fx:id="ServiceAmountCol"/>
+              </columns>
+            </TableView>
+            <Label layoutX="14.0" layoutY="396.0" text="Комментарий:" textFill="#3a388a">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="2.0" prefHeight="40.0" prefWidth="380.0" style="-fx-background-color: #3a388a; -fx-background-radius: 5;" text="Итог" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="63.0" text="Цена:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="FinalPrice" editable="false" layoutX="109.0" layoutY="55.0" prefWidth="200.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+            <Label layoutX="21.0" layoutY="112.0" text="≈Время:">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ApproximateTime" editable="false" layoutX="110.0" layoutY="105.0" prefWidth="200.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="2">
+         <children>
+            <ComboBox fx:id="StatusBox" layoutX="86.0" layoutY="86.0" prefWidth="200.0" promptText="Статус:" />
+            <Button fx:id="ChangesBtn" layoutX="98.0" layoutY="142.0" mnemonicParsing="false" style="-fx-background-color: #2ca847; -fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;" text="Редактировать" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="SaveChangesBtn" layoutX="63.0" layoutY="197.0" mnemonicParsing="false" style="-fx-background-color: #2ca847; -fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;" text="Сохранить изменения" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</GridPane>
