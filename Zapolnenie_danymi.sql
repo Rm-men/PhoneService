@@ -5,22 +5,30 @@ with client_json (doc) as ( -- client
 	[
 	{
 		"name" 	    : "Василий",
-		"family" 	: "Васиков"
+		"family" 	: "Васиков",
+        "phone" : "89091234541"
     },
     {
 		"name" 	    : "Андрей",
 		"family" 	: "Андров",
-		"patronymic" : "Андреевич"
+		"patronymic" : "Андреевич",
+        "phone" : "89091234542"
+
     },
     {
 		"name" 	    : "Алексей",
 		"family" 	: "Алексеев",
-		"patronymic" : "Алексеевич"
+		"patronymic" : "Алексеевич",
+        "phone" : "89091234543"
+
     },
     {
 		"name" 	    : "Иван",
 		"family" 	: "Иванович",
-		"patronymic" : "Иванов"
+		"patronymic" : "Иванов",
+        "phone" : "89091234544",
+        "email" : "iii@gmail.com"
+
     }
 	]
 	'::json
