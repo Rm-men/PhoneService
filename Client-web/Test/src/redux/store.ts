@@ -1,14 +1,15 @@
-import { createStore, applyMiddleware, combindeReducers, compose} from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunk from 'redux-thunk';
 import reduxLogger from 'redux-logger';
-import rootReducers from '';
-const configureStore = (reducers = {}, reloadedState = {}, middlewares = []) => createStore(
-	combindeReducers( // объединение для Reducers
-		...rootReducers,
+import rootReducers from './modules';
 
-		...reducers
+
+const configureStore = (reducers = {}, reloadedState = {}, middlewares = []) => createStore(
+	combineReducers( // объединение для Reducers
+		...rootReducers,
+		...reducers // параметры configureStore
 	),
-	preloadedState,
+	preloadedState, // initial состояние
 	compose(  // добавление прослоек и расширений
 		applyMiddleware(
 			...middlewares,

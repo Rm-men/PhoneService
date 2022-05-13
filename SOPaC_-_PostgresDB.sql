@@ -94,3 +94,14 @@ CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (Id_Phone_model) REFERENCES Phone_mo
 CONSTRAINT  fk_lm_component    	FOREIGN KEY (Id_component) REFERENCES Component (Id_component) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
+
+CREATE TABLE List_sirvices( -- FK - phone model, component
+id_service	                    SERIAL PRIMARY KEY,
+name			                VARCHAR(55),
+type                            VARCHAR(25),
+description 			        TEXT,
+min_cost 			            MONEY,
+min_time                            INTERVAL
+);
+
+
