@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="400.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="web.master.ControllerAuth">
+   <children>
+      <TextField fx:id="Login" layoutX="78.0" layoutY="123.0" prefHeight="56.0" prefWidth="245.0" promptText="Логин">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="102.0" layoutY="66.0" text="Авторизация">
+         <font>
+            <Font name="Arial Bold" size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="SignInBtn" layoutX="156.0" layoutY="275.0" mnemonicParsing="false" style="-fx-background-color: #007BFF;" text="Войти" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Button>
+      <PasswordField fx:id="Password" layoutX="77.0" layoutY="199.0" prefHeight="56.0" prefWidth="245.0" promptText="Пароль">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </PasswordField>
+   </children>
+</Pane>
