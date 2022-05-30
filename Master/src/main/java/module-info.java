@@ -7,4 +7,6 @@ module web.master {
 
     opens web.master to javafx.fxml;
     exports web.master;
+    exports web.master.entity;
+    opens web.master.entity to javafx.fxml;
 }

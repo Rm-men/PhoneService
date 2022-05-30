@@ -97,45 +97,6 @@ from guarante_json j
 cross join lateral json_populate_recordset(null::Guarantee, doc) as jpr
 ;
 
-with manufacturer_json (doc) as ( -- manufacturer
-   values
-    (
-	'
-	[
-	{
-		"id_manufacturer"       : "ph_hohuwai_1",
-        "name"                  : "Hohuwai"
-    },
-	{
-		"id_manufacturer"       : "ph_hohuwai_2",
-        "name"                  : "Horon"
-    },
-	{
-		"id_manufacturer"       : "ph_xemiom",
-        "name"                  : "Xemion"
-    },
-	{
-		"id_manufacturer"       : "ph_gmsns",
-        "name"                  : "GAMSUNS"
-    },
-	{
-		"id_manufacturer"       : "cp_rec",
-        "name"                  : "Rus Electronic Corporation"
-    },
-	{
-		"id_manufacturer"       : "cp_tmcs",
-        "name"                  : "The Microcomponents Crafting Service"
-    }
-	]
-	'::json
-	)
-)
-insert into Manufacturer
-select  jpr.*
-from manufacturer_json j
-cross join lateral json_populate_recordset(null::Manufacturer, doc) as jpr
-;
-
 with shop_json (doc) as ( -- shop !!! не то
    values
     (
@@ -176,57 +137,11 @@ cross join lateral json_populate_recordset(null::Shop, doc) as jpr
 	'::json
 	)
 )
-insert into Employee_type
-select  jpr.*
-from Employee_type_json j
-cross join lateral json_populate_recordset(null::Employee_type, doc) as jpr
-;*/
 
-TRUNCATE employee;
-with Employee_json (doc) as ( -- Employee
-   values
-    (
-	'
-        [
-        {
-            "id_contract" : "12345678",
-            "passport_serial" : "3315",
-            "passport_number" : "123123",
-            "address" : "г. Киров",
-            "type" : "adm",
-            "phone" : "89091324445",
-            "date_of_employment" : "2022-04-08",
-            "name_workshop" : "I_Repair",
-            "family" : "Широков",
-            "name" : "Роман",
-            "patronymic" : "Дмитриевич",
-            "login" : "admin",
-            "password" : "123"
-        },
-        {
-            "id_contract" : "12345671",
-            "passport_serial" : "3311",
-            "passport_number" : "123121",
-            "address" : "г. Киров",
-            "type" : "master",
-            "phone" : "89091324441",
-            "date_of_employment" : "2022-04-01",
-            "name_workshop" : "I_Repair",
-            "family" : "Дитриев",
-            "name" : "Дмитрий",
-            "patronymic" : "Иванович",
-            "login" : "cartavr",
-            "password" : "456"
-        }
-        ]
-        '::json
-	)
-)
-insert into Employee (id_contract, passport_serial,passport_number,address,type, phone, date_of_employment, name_workshop, family, name, patronymic, login, password)
-select  jpr.id_contract, jpr.passport_serial, jpr.passport_number, jpr.address, jpr.type, jpr.phone, jpr.date_of_employment, jpr.name_workshop, jpr.family, jpr.name, jpr.patronymic, jpr.login, jpr.password
-from Employee_json j
-cross join lateral json_populate_recordset(null::Employee, doc) as jpr
-;
+ */
+INSERT INTO  employee (id_contract, passport_serial, passport_number, emp_address, type, phone, date_of_employment, workshop, family, name, patronymic, login, password)  VALUES
+('12345678', '3315', '123123', 'г. Киров','admin',  '89091324445', '2022-04-08', 1, 'Широков','Роман','Дмитриевич','admin','123'),
+('12345677', '3314', '123124', 'г. Киров','master',  '89091324444', '2022-04-09', 1, 'Дитриев','Дмитрий','Иванович','cartavr','456');
 
 --truncate component cascade;
 with Component_json (doc) as ( -- Component
@@ -406,10 +321,8 @@ from Phone_model_json j
 cross join lateral json_populate_recordset(null::Pushare_agreement, doc) as jpr
 ;
 
-insert into order_status (id_order_status, description_order_status) values
-('received_0', 'Устройство хранится на складе');
 
-insert into orders (order_date, phone_number, address, id_client, id_order_status) values
-(current_date, '89091233333', 'Киров', 1, 'received_0')
+insert into order_status (id_order_status, description_order_status) values -- СТАТУСЫ
+('received_0', 'Устройство хранится на складе');
 
 

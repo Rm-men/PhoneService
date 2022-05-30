@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.entity.c_Employee;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,8 +40,7 @@ public class ControllerAuth implements Initializable {
                     assert finalCon != null;
 
                     PreparedStatement st = finalCon.prepareStatement(
-                            "SELECT * " +
-                            "FROM employee AS e WHERE e.login = ? AND e.password = ?");
+                            "SELECT * FROM employees_view AS ev WHERE ev.login = ? AND ev.password = ?");
 
                     String login = Login.getText();
                     String enteredPass = Password.getText();
@@ -56,35 +56,21 @@ public class ControllerAuth implements Initializable {
                     st.setString(2, enteredPass);
                     ResultSet rs = st.executeQuery();
                     if(rs.next()){
-                        //     public Employee(Integer id,
-                        //     String id_contract,
-                        //     String passport_serial,
-                        //     String passport_number,
-                        //     String address,
-                        //     String id_employee_type,
-                        //     String phone,
-                        //     Date date_of_employment,
-                        //     String name_workshop,
-                        //     String family,
-                        //     String name,
-                        //     String patronymic,
-                        //     String login,
-                        //     String password) {
-                        c_Employee emp = new c_Employee(
-                                rs.getInt("id"),
-                                rs.getString("id_contract"),
-                                rs.getString("passport_serial"),
-                                rs.getString("passport_number"),
-                                rs.getString("address"),
-                                rs.getString("type"),
-                                rs.getString("phone"),
-                                rs.getDate("date_of_employment"),
-                                rs.getString("name_workshop"),
-                                rs.getString("family"),
-                                rs.getString("name"),
-                                rs.getString("patronymic"),
-                                rs.getString("login"),
-                                rs.getString("password"));
+                        c_Employee emp = new c_Employee();
+                        emp.setId(rs.getInt("id"));
+                                emp.setId_employment_contract(rs.getString("id_contract"));
+                                emp.setPassport_serial(rs.getString("passport_serial"));
+                                emp.setPassport_number(rs.getString("passport_number"));
+                                emp.setEmp_address(rs.getString("emp_address"));
+                                emp.setEmployee_type(rs.getString("type"));
+                                emp.setPhone(rs.getString("phone"));
+                                emp.setDate_of_employment(rs.getDate("date_of_employment"));
+                                emp.setWs_adress(rs.getString("address"));
+                                emp.setFamily(rs.getString("family"));
+                                emp.setName(rs.getString("name"));
+                                emp.setPatronymic(rs.getString("patronymic"));
+                                emp.setLogin(rs.getString("login"));
+                                emp.setPassword(rs.getString("password"));
                         openMain(emp);
                         Stage stage = (Stage)SignInBtn.getScene().getWindow();
                         stage.close();
@@ -94,7 +80,7 @@ public class ControllerAuth implements Initializable {
                         alert.setContentText("Неверный логин или пароль");
                         alert.showAndWait().ifPresent(rt -> {
                             if (rt == ButtonType.OK) {
-                                System.out.println("Pressed OK.");
+                                System.out.println("Pressed ок");
                             }
                         });
                     }
@@ -110,6 +96,8 @@ public class ControllerAuth implements Initializable {
 
     public void openMain(c_Employee cEmployee) throws IOException, SQLException {
         Stage newWindow = new Stage();
+        // FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main.fxml"));
+        // fxmlLoader.setController( new ControllerMain(cEmployee));
         FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main.fxml"));
         fxmlLoader.setController( new ControllerMain(cEmployee));
         Scene scene = new Scene(fxmlLoader.load());

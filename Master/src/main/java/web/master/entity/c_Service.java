@@ -1,4 +1,4 @@
-package web.master;
+package web.master.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;

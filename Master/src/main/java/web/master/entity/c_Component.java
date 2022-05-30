@@ -1,4 +1,4 @@
-package web.master;
+package web.master.entity;
 
 import java.util.Date;
 
