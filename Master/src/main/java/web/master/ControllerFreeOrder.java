@@ -214,7 +214,6 @@ public class ControllerFreeOrder implements Initializable {
         newWindow.setScene(scene);
         newWindow.show();
     }
-
 }
 
 // добавить местоположение устройства в фреордер

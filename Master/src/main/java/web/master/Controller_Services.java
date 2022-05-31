@@ -100,6 +100,8 @@ public class Controller_Services implements Initializable {
             });
             return row;
         });
+
+        cb_category.setOnAction(event -> filters());
     }
     private void initData() {
         try {
@@ -153,7 +155,38 @@ public class Controller_Services implements Initializable {
         }
         return list;
     }
+    private void filters() {
+/*        if (cb_category.getValue() != null) {
+            status = cb_category.getValue().toString();
+        }*/
+/*        if (Search.getText() != "") {
+            phone = "%" + Search.getText() + "%";
+        }*/
+        try {
+            tv_all_list.getItems().clear();
+            list_Cur.clear();
+            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Statement st = con.createStatement();
+            // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
+            ResultSet rs = st.executeQuery("SELECT * FROM list_sirvices WHERE type = '"+ cb_category.getValue().toString()+"';" );
+            while (rs.next()) {
+                c_Service service = new c_Service();
+                service.setId_service(rs.getInt("id"));
+                service.setName(rs.getString("name"));
+                service.setDescription(rs.getString("description"));
+                service.setType(rs.getString("type"));
+                service.setPrice(rs.getBigDecimal("min_cost"));
+                service.setTime(rs.getString("time"));
 
+                list_All.add(service);
+                tv_all_list.getItems().add(service);
+            }
+            //tv_all_list.getItems().clear();
+            //v_all_list.getItems().addAll(list_All);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void refreshSummary() {
         l_c_services.setText(""+tv_cur_list.getItems().size());
         // l_c_price.setText();

@@ -138,10 +138,10 @@ public class ControllerActiveOrder implements Initializable {
         col_phone.setCellValueFactory(new PropertyValueFactory<c_Order, String>("name_model"));
         col_description.setCellValueFactory(new PropertyValueFactory<c_Order, String>("description"));
         col_comments.setCellValueFactory(new PropertyValueFactory<c_Order, String>("comments"));
-        col_services.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
-        col_components.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
-        col_contacts.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
-        col_status.setCellValueFactory(new PropertyValueFactory<c_Order, String>("description_order_status"));
+        //col_services.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
+        //col_components.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
+        //col_contacts.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
+        //col_status.setCellValueFactory(new PropertyValueFactory<c_Order, String>("description_order_status"));
         col_date.setCellValueFactory(new PropertyValueFactory<c_Order, String>("order_date"));
 
         tv_Orders.setItems(OrdersData);

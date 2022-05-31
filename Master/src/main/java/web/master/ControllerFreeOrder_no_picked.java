@@ -39,6 +39,16 @@ public class ControllerFreeOrder_no_picked implements Initializable {
             public void handle(MouseEvent mouseEvent) {
                 System.out.println("Заказ принят");
             }
+            {
+                try {
+                    con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments FROM orders_view");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
         });
     }
     private void initData() {
