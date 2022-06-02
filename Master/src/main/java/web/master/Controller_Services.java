@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import web.master.entity.c_Employee;
-import web.master.entity.c_Order;
+import web.master.entity.Order;
 import web.master.entity.c_Service;
 
 import java.io.IOException;
@@ -42,9 +42,9 @@ public class Controller_Services implements Initializable {
     @FXML private TableColumn<c_Service, String>  col_cur_time;
 
     public c_Employee _Employee; // private
-    public c_Order _Order;
+    public Order _Order;
 
-    public Controller_Services(c_Employee cEmployee, c_Order order)
+    public Controller_Services(c_Employee cEmployee, Order order)
     {
         _Employee = cEmployee;
         _Order = order;
@@ -115,7 +115,7 @@ public class Controller_Services implements Initializable {
                 service.setName(rs.getString("name"));
                 service.setDescription(rs.getString("description"));
                 service.setType(rs.getString("type"));
-                service.setPrice(rs.getBigDecimal("min_cost"));
+                service.setPrice(rs.getBigDecimal("cost"));
                 service.setTime(rs.getString("time"));
 
                 ServicesData.add(service);
@@ -175,7 +175,7 @@ public class Controller_Services implements Initializable {
                 service.setName(rs.getString("name"));
                 service.setDescription(rs.getString("description"));
                 service.setType(rs.getString("type"));
-                service.setPrice(rs.getBigDecimal("min_cost"));
+                service.setPrice(rs.getBigDecimal("cost"));
                 service.setTime(rs.getString("time"));
 
                 list_All.add(service);

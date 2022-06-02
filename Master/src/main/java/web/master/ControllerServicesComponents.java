@@ -14,7 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import web.master.entity.c_Employee;
-import web.master.entity.c_Order;
+import web.master.entity.Order;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,9 +36,9 @@ public class ControllerServicesComponents implements Initializable {
 
 
     public c_Employee _Employee; // private
-    public c_Order _Order;
+    public Order _Order;
 
-    public ControllerServicesComponents(c_Employee cEmployee, c_Order order)
+    public ControllerServicesComponents(c_Employee cEmployee, Order order)
     {
         _Employee = cEmployee;
         _Order = order;
@@ -50,7 +50,7 @@ public class ControllerServicesComponents implements Initializable {
         cb_status.getItems().addAll(statusList);
         // l_date.setText(_Order.getOrder_date());
         // l_phone.setText(_Order.getNamePhone());
-        ta_description.setText(_Order.getDescription());
+        ta_description.setText(_Order.getDescriptionord());
         b_ch_services.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

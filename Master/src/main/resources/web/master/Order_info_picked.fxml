@@ -6,9 +6,9 @@
 
 <AnchorPane prefHeight="853.0" prefWidth="1745.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="l_phone" layoutX="1129.0" layoutY="44.0">
+      <Label fx:id="l_phone" layoutX="1191.0" layoutY="21.0" text="Название устройства">
          <font>
-            <Font size="21.0" />
+            <Font size="23.0" />
          </font>
       </Label>
       <ComboBox fx:id="cb_status" layoutX="1572.0" layoutY="24.0" prefWidth="150.0" promptText="Статус:" />
@@ -49,5 +49,15 @@
       </Label>
       <TextArea fx:id="ta_components" editable="false" layoutX="47.0" layoutY="689.0" prefHeight="106.0" prefWidth="1663.0" />
       <Button fx:id="b_ch_components" layoutX="256.0" layoutY="795.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" text="Изменить компоненты" />
+      <Label fx:id="l_date" layoutX="1585.0" layoutY="796.0" text="гггг-мм-дд">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Text layoutX="1402.0" layoutY="822.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления:">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

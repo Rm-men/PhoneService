@@ -14,7 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import web.master.entity.c_Employee;
-import web.master.entity.c_Order;
+import web.master.entity.Order;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +27,7 @@ public class ControllerActiveOrder_picked implements Initializable {
     @FXML public Button b_ch_components;
     @FXML public ComboBox cb_status;
     @FXML public Label l_phone;
+    @FXML public Label l_date;
     @FXML public TextArea ta_description;
     @FXML public TextArea ta_comments;
     @FXML public TextArea ta_contacts;
@@ -36,9 +37,9 @@ public class ControllerActiveOrder_picked implements Initializable {
 
 
     public c_Employee _Employee; // private
-    public c_Order _Order;
+    public Order _Order;
 
-    public ControllerActiveOrder_picked(c_Employee cEmployee, c_Order order)
+    public ControllerActiveOrder_picked(c_Employee cEmployee, Order order)
     {
         _Employee = cEmployee;
         _Order = order;
@@ -48,9 +49,11 @@ public class ControllerActiveOrder_picked implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         statusList = getStatusList();
         cb_status.getItems().addAll(statusList);
-        // l_date.setText(_Order.getOrder_date());
-        // l_phone.setText(_Order.getNamePhone());
-        ta_description.setText(_Order.getDescription());
+        l_date.setText(_Order.getDateord());
+        l_phone.setText(_Order.getNamePhone());
+        ta_description.setText(_Order.getDescriptionord());
+        ta_comments.setText(_Order.getComments());
+        ta_contacts.setText(_Order.getContacts);
         b_ch_services.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -81,9 +84,9 @@ public class ControllerActiveOrder_picked implements Initializable {
         try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select description_order_status From order_status");
+            ResultSet rs = st.executeQuery("Select descriptionos From order_status");
             while (rs.next()) {
-                String stat = rs.getString("description_order_status");
+                String stat = rs.getString("descriptionos");
                 list.add(stat);
             }
             rs.close();

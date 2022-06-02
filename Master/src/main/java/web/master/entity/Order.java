@@ -1,31 +1,35 @@
 package web.master.entity;
 
-import java.util.Date;
-
-public class c_Order {
+public class Order {
     private Integer id_order;
-    private String order_date  ;
-    private String phone_number;
+    private String dateord;
+    private String phonenumber;
+    private String namecl;
+    private String family;
+    private String patronymic;
+
     private String address;
     private Integer id_client;
     private Integer id_master;
     private Integer id_phone;
-    private String name_model;
+    private String namephone;
     private String id_order_status;
-    private String description;
+    private String descriptionos;
+    private String descriptionord;
     private String comments;
 
-    public c_Order(){}
-    public c_Order (Integer id_order, String order_date, String phone_number, String address, Integer id_client, Integer id_master, Integer id_phone, String id_order_status, String description, String  comments){
+    public Order(){}
+    public Order(Integer id_order, String order_date, String phone_number, String address, Integer id_client, Integer id_master, Integer id_phone, String id_order_status, String descriptionos, String description, String comments){
         this.id_order = id_order;
-        this.order_date = order_date;
-        this. phone_number = phone_number;
+        this.dateord = order_date;
+        this. phonenumber = phone_number;
         this.address = address;
         this.id_client = id_client;
         this.id_master = id_master;
         this.id_phone = id_phone;
         this.id_order_status = id_order_status;
-        this.description = description;
+        this.descriptionos = descriptionos;
+        this.descriptionord = description;
         this.comments = comments;
     }
 
@@ -37,20 +41,20 @@ public class c_Order {
         this.id_order = id_order;
     }
 
-    public String getOrder_date() {
-        return order_date;
+    public String getDateord() {
+        return dateord;
     }
 
-    public void setOrder_date(String order_date) {
-        this.order_date = order_date;
+    public void setDateord(String dateord) {
+        this.dateord = dateord;
     }
 
     public String getPhone_number() {
-        return phone_number;
+        return phonenumber;
     }
 
     public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+        this.phonenumber = phone_number;
     }
 
     public String getAddress() {
@@ -93,12 +97,12 @@ public class c_Order {
         this.id_phone = id_phone;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionord() {
+        return descriptionord;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionord(String descriptionord) {
+        this.descriptionord = descriptionord;
     }
 
     public String getComments() {
@@ -110,10 +114,45 @@ public class c_Order {
     }
 
     public String getNamePhone() {
-        return name_model;
+        return namephone;
     }
 
     public void setNamePhone(String phone) {
-        this.name_model = phone;
+        this.namephone = phone;
+    }
+
+    public String getDescriptionos() {
+        return descriptionos;
+    }
+    public String getContacts() {
+        return descriptionos;
+    }
+
+    public void setDescriptionos(String descriptionos) {
+        this.descriptionos = descriptionos;
+    }
+
+    public String getNamecl() {
+        return namecl;
+    }
+
+    public void setNamecl(String namecl) {
+        this.namecl = namecl;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 }

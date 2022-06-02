@@ -59,12 +59,12 @@ public class ControllerAuth implements Initializable {
                         c_Employee emp = new c_Employee();
                         emp.setId(rs.getInt("id"));
                                 emp.setId_employment_contract(rs.getString("id_contract"));
-                                emp.setPassport_serial(rs.getString("passport_serial"));
-                                emp.setPassport_number(rs.getString("passport_number"));
-                                emp.setEmp_address(rs.getString("emp_address"));
+                                emp.setPassport_serial(rs.getString("paspserial"));
+                                emp.setPassport_number(rs.getString("paspnumber"));
+                                emp.setEmp_address(rs.getString("empaddress"));
                                 emp.setEmployee_type(rs.getString("type"));
                                 emp.setPhone(rs.getString("phone"));
-                                emp.setDate_of_employment(rs.getDate("date_of_employment"));
+                                emp.setDate_of_employment(rs.getDate("dateemploymentet"));
                                 emp.setWs_adress(rs.getString("address"));
                                 emp.setFamily(rs.getString("family"));
                                 emp.setName(rs.getString("name"));

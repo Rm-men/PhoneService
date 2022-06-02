@@ -39,8 +39,8 @@
       <columns>
           <TableColumn fx:id="col_phone" prefWidth="151.0" text="Устройство" />
           <TableColumn fx:id="col_description" prefWidth="683.0" text="Описание" />
-          <TableColumn fx:id="col_comments" prefWidth="679.0" text="Комментарии" />
-          <TableColumn fx:id="col_date" minWidth="9.0" prefWidth="103.0" text="Дата поступления" />
+          <TableColumn fx:id="col_comments" prefWidth="731.0" text="Комментарии" />
+          <TableColumn fx:id="col_date" minWidth="9.0" prefWidth="257.0" text="Дата поступления" />
       </columns>
     </TableView>
 </AnchorPane>

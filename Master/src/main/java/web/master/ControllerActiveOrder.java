@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import web.master.entity.c_Employee;
-import web.master.entity.c_Order;
+import web.master.entity.Order;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,21 +21,21 @@ import java.util.ResourceBundle;
 
 public class ControllerActiveOrder implements Initializable {
     private Connection con;
-    @FXML private TableView<c_Order> tv_Orders;
+    @FXML private TableView<Order> tv_Orders;
     @FXML public Button b_freeOrder;
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
     @FXML public Label l_username;
-    @FXML private ObservableList<c_Order> OrdersData = FXCollections.observableArrayList();
-    @FXML private TableColumn<c_Order, String> col_phone;
-    @FXML private TableColumn<c_Order, String> col_description;
-    @FXML private TableColumn<c_Order, String> col_comments;
-    @FXML private TableColumn<c_Order, String> col_services;
-    @FXML private TableColumn<c_Order, String> col_components;
-    @FXML private TableColumn<c_Order, String> col_contacts;
-    @FXML private TableColumn<c_Order, String> col_status;
-    @FXML private TableColumn<c_Order, String> col_date;
+    @FXML private ObservableList<Order> OrdersData = FXCollections.observableArrayList();
+    @FXML private TableColumn<Order, String> col_phone;
+    @FXML private TableColumn<Order, String> col_description;
+    @FXML private TableColumn<Order, String> col_comments;
+    @FXML private TableColumn<Order, String> col_services;
+    @FXML private TableColumn<Order, String> col_components;
+    @FXML private TableColumn<Order, String> col_contacts;
+    @FXML private TableColumn<Order, String> col_status;
+    @FXML private TableColumn<Order, String> col_date;
 
     public c_Employee _Employee; // private
 
@@ -135,21 +135,21 @@ public class ControllerActiveOrder implements Initializable {
 
         initData();
 
-        col_phone.setCellValueFactory(new PropertyValueFactory<c_Order, String>("name_model"));
-        col_description.setCellValueFactory(new PropertyValueFactory<c_Order, String>("description"));
-        col_comments.setCellValueFactory(new PropertyValueFactory<c_Order, String>("comments"));
+        col_phone.setCellValueFactory(new PropertyValueFactory<Order, String>("namephone"));
+        col_description.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionord"));
+        col_comments.setCellValueFactory(new PropertyValueFactory<Order, String>("comments"));
         //col_services.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
         //col_components.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
         //col_contacts.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
-        //col_status.setCellValueFactory(new PropertyValueFactory<c_Order, String>("description_order_status"));
-        col_date.setCellValueFactory(new PropertyValueFactory<c_Order, String>("order_date"));
+        col_status.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionos"));
+        col_date.setCellValueFactory(new PropertyValueFactory<Order, String>("dateord"));
 
         tv_Orders.setItems(OrdersData);
 
         tv_Orders.setRowFactory(rv -> {
-            TableRow<c_Order> row = new TableRow();
+            TableRow<Order> row = new TableRow();
             row.setOnMouseClicked(mouseEvent -> {
-                c_Order order = row.getItem();
+                Order order = row.getItem();
                 try {
                     rowClick(order);
                 } catch (IOException e) {
@@ -163,41 +163,24 @@ public class ControllerActiveOrder implements Initializable {
         try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
-            ResultSet rs = st.executeQuery("SELECT orders.id_order,\n" +
-                    "       orders.order_date,\n" +
-                    "       orders.phone_number,\n" +
-                    "       orders.address,\n" +
-                    "       c.id_client,\n" +
-                    "       c.family,\n" +
-                    "       c.name,\n" +
-                    "       c.patronymic,\n" +
-                    "       pm.name_model,\n" +
-                    "       os.description_order_status,\n" +
-                    "       orders.description,\n" +
-                    "       orders.comments,\n" +
-                    "       orders.id_master,\n" +
-                    "       orders.id_phone,\n" +
-                    "       orders.id_order_status\n" +
-                    "FROM orders\n" +
-                    "         JOIN phone p ON p.id = orders.id_phone\n" +
-                    "         JOIN phone_model pm ON p.id_phone_model = pm.id_phone_model\n" +
-                    "         JOIN order_status os ON orders.id_order_status::text = os.id_order_status::text\n" +
-                    "         JOIN client c ON c.id_client = orders.id_client\n" +
-                    "WHERE id_master = "+_Employee.getId()+";");
+            ResultSet rs = st.executeQuery("SELECT * FROM orders_view WHERE id_master = "+_Employee.getId()+";");
+
             while (rs.next()) {
-                c_Order order = new c_Order();
+                Order order = new Order();
                 order.setId_order(rs.getInt("id_order"));
-                order.setOrder_date(rs.getDate("order_date").toString());
-                order.setPhone_number(rs.getString("phone_number"));
+                order.setDateord(rs.getDate("dateord").toString());
+                order.setPhone_number(rs.getString("phonenumber"));
                 order.setAddress(rs.getString("address"));
                 order.setId_client(rs.getInt("id_client"));
                 order.setId_master(rs.getInt("id_master"));
                 order.setId_phone(rs.getInt("id_phone"));
                 order.setId_order_status(rs.getString("id_order_status"));
-                order.setDescription(rs.getString("description"));
+                order.setDescriptionord(rs.getString("descriptionord"));
+                order.setDescriptionos(rs.getString("descriptionos"));
                 order.setComments(rs.getString("comments"));
-                order.setNamePhone(rs.getString("name_model"));
+                order.setNamePhone(rs.getString("namephone"));
+                order.setNamecl(rs.getString("namecl"));
+                order.sn
 
                 OrdersData.add(order);
             }
@@ -207,8 +190,8 @@ public class ControllerActiveOrder implements Initializable {
             }
         }
     }
-    public void rowClick(c_Order order) throws IOException{
-        System.out.println("click on active: "+order.getId_client()+", "+ order.getDescription());
+    public void rowClick(Order order) throws IOException{
+        System.out.println("click on active: "+order.getId_client()+", "+ order.getDescriptionord());
         Stage newWindow = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("Order_info_picked.fxml"));
         fxmlLoader.setController( new ControllerActiveOrder_picked(_Employee, order));
