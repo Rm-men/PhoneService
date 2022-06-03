@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import web.master.entity.c_Employee;
+import web.master.entity.Employee;
 import web.master.entity.Order;
 
 import java.io.IOException;
@@ -37,9 +37,9 @@ public class ControllerActiveOrder implements Initializable {
     @FXML private TableColumn<Order, String> col_status;
     @FXML private TableColumn<Order, String> col_date;
 
-    public c_Employee _Employee; // private
+    public Employee _Employee; // private
 
-    public ControllerActiveOrder(c_Employee cEmployee) { _Employee = cEmployee;  };
+    public ControllerActiveOrder(Employee cEmployee) { _Employee = cEmployee;  };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -108,7 +108,6 @@ public class ControllerActiveOrder implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
-
             }
         });
         b_listServices.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -140,8 +139,9 @@ public class ControllerActiveOrder implements Initializable {
         col_comments.setCellValueFactory(new PropertyValueFactory<Order, String>("comments"));
         //col_services.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
         //col_components.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
-        //col_contacts.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
+        col_contacts.setCellValueFactory(new PropertyValueFactory<Order, String>("contacts"));
         col_status.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionos"));
+        //col_status.setCellValueFactory(col_status -> col_status.se(true));
         col_date.setCellValueFactory(new PropertyValueFactory<Order, String>("dateord"));
 
         tv_Orders.setItems(OrdersData);
@@ -180,9 +180,12 @@ public class ControllerActiveOrder implements Initializable {
                 order.setComments(rs.getString("comments"));
                 order.setNamePhone(rs.getString("namephone"));
                 order.setNamecl(rs.getString("namecl"));
-                order.sn
+                order.setNamecl(rs.getString("patronymic"));
+                order.setNamecl(rs.getString("family"));
+                order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
                 OrdersData.add(order);
+                con.close();
             }
         } catch (SQLException e) {
             {

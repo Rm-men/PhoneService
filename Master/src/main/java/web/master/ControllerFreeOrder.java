@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import web.master.entity.c_Employee;
+import web.master.entity.Employee;
 import web.master.entity.Order;
 
 import java.io.IOException;
@@ -33,9 +33,9 @@ public class ControllerFreeOrder implements Initializable {
     @FXML private TableColumn<Order, String>  col_comments;
     @FXML private TableColumn<Order, String>  col_date;
 
-    public c_Employee _Employee; // private
+    public Employee _Employee; // private
 
-    public ControllerFreeOrder(c_Employee cEmployee) { _Employee = cEmployee;  };
+    public ControllerFreeOrder(Employee cEmployee) { _Employee = cEmployee;  };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -193,6 +193,7 @@ public class ControllerFreeOrder implements Initializable {
                 order.setNamePhone(rs.getString("namephone"));
 
                 OrdersData.add(order);
+                con.close();
             }
         } catch (SQLException e) {
             {

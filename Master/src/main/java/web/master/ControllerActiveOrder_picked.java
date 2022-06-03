@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import web.master.entity.c_Employee;
+import web.master.entity.Employee;
 import web.master.entity.Order;
 
 import java.io.IOException;
@@ -36,10 +36,10 @@ public class ControllerActiveOrder_picked implements Initializable {
     private ObservableList<String> statusList = FXCollections.observableArrayList();
 
 
-    public c_Employee _Employee; // private
+    public Employee _Employee; // private
     public Order _Order;
 
-    public ControllerActiveOrder_picked(c_Employee cEmployee, Order order)
+    public ControllerActiveOrder_picked(Employee cEmployee, Order order)
     {
         _Employee = cEmployee;
         _Order = order;
@@ -53,7 +53,7 @@ public class ControllerActiveOrder_picked implements Initializable {
         l_phone.setText(_Order.getNamePhone());
         ta_description.setText(_Order.getDescriptionord());
         ta_comments.setText(_Order.getComments());
-        ta_contacts.setText(_Order.getContacts);
+        ta_contacts.setText(_Order.getContacts());
         b_ch_services.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

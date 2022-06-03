@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import web.master.entity.c_Employee;
+import web.master.entity.Employee;
 import web.master.entity.Order;
 
 import java.net.URL;
@@ -20,10 +20,10 @@ public class ControllerFreeOrder_no_picked implements Initializable {
     @FXML public TextArea ta_description;
 
 
-    public c_Employee _Employee; // private
+    public Employee _Employee; // private
     public Order _Order;
 
-    public ControllerFreeOrder_no_picked(c_Employee cEmployee, Order order)
+    public ControllerFreeOrder_no_picked(Employee cEmployee, Order order)
     {
         _Employee = cEmployee;
         _Order = order;
@@ -68,6 +68,7 @@ public class ControllerFreeOrder_no_picked implements Initializable {
                 order.setId_order_status(rs.getString("id_order_status"));
                 order.setDescriptionord(rs.getString("descriptionord"));
                 order.setComments(rs.getString("comments"));
+                con.close();
             }
         } catch (SQLException e) {
             {

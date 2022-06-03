@@ -2,7 +2,7 @@ package web.master.entity;
 
 import java.util.Date;
 
-public class c_Employee {
+public class Employee {
     private Integer id;
     private String id_employment_contract;
     private String passport_serial;
@@ -20,8 +20,8 @@ public class c_Employee {
     private String login;
     private String password;
 
-    public c_Employee(){};
-    public c_Employee(Integer id, String id_employment_contract, String passport_serial, String passport_number, String id_employee_type, String phone, Date date_of_employment, String name_workshop, String family, String name, String patronymic, String login, String password) {
+    public Employee(){};
+    public Employee(Integer id, String id_employment_contract, String passport_serial, String passport_number, String id_employee_type, String phone, Date date_of_employment, String name_workshop, String family, String name, String patronymic, String login, String password) {
         this.id_employment_contract = id_employment_contract;
         this.passport_serial = passport_serial;
         this.passport_number = passport_number;

@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import web.master.entity.c_Employee;
+import web.master.entity.Employee;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +56,7 @@ public class ControllerAuth implements Initializable {
                     st.setString(2, enteredPass);
                     ResultSet rs = st.executeQuery();
                     if(rs.next()){
-                        c_Employee emp = new c_Employee();
+                        Employee emp = new Employee();
                         emp.setId(rs.getInt("id"));
                                 emp.setId_employment_contract(rs.getString("id_contract"));
                                 emp.setPassport_serial(rs.getString("paspserial"));
@@ -74,6 +74,7 @@ public class ControllerAuth implements Initializable {
                         openMain(emp);
                         Stage stage = (Stage)SignInBtn.getScene().getWindow();
                         stage.close();
+                        con.close();
                     }
                     else{
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -94,7 +95,7 @@ public class ControllerAuth implements Initializable {
         });
     }
 
-    public void openMain(c_Employee cEmployee) throws IOException, SQLException {
+    public void openMain(Employee cEmployee) throws IOException, SQLException {
         Stage newWindow = new Stage();
         // FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main.fxml"));
         // fxmlLoader.setController( new ControllerMain(cEmployee));

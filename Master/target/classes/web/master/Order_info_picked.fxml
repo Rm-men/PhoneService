@@ -28,7 +28,7 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <TextArea fx:id="ta_comments" editable="false" layoutX="53.0" layoutY="226.0" prefHeight="106.0" prefWidth="1663.0" />
+      <TextArea fx:id="ta_comments" editable="true" layoutX="53.0" layoutY="226.0" prefHeight="106.0" prefWidth="1663.0" />
       <Label layoutX="91.0" layoutY="355.0" text="Контакты">
          <font>
             <Font size="19.0" />

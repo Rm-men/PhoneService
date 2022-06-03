@@ -11,8 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import web.master.entity.c_Employee;
-import web.master.entity.c_Service;
+import web.master.entity.Employee;
+import web.master.entity.Service;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,24 +21,22 @@ import java.util.ResourceBundle;
 
 public class ControllerServiceList implements Initializable {
     private Connection con;
-    @FXML private TableView<c_Service> Services;
+    @FXML private TableView<Service> Services;
     @FXML public Button b_freeOrder;
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
-    @FXML public Button b_add;
     @FXML public Label l_username;
-    @FXML private ObservableList<c_Service> ServicesData = FXCollections.observableArrayList();
-    @FXML private TableColumn<c_Service, String> col_Service;
-    @FXML private TableColumn<c_Service, String> col_Type;
-    @FXML private TableColumn<c_Service, String> col_Description;
-    @FXML private TableColumn<c_Service, String> col_Price;
-    @FXML private TableColumn<c_Service, String> col_Time;
+    @FXML private ObservableList<Service> ServicesData = FXCollections.observableArrayList();
+    @FXML private TableColumn<Service, String> col_Service;
+    @FXML private TableColumn<Service, String> col_Type;
+    @FXML private TableColumn<Service, String> col_Description;
+    @FXML private TableColumn<Service, String> col_Price;
+    @FXML private TableColumn<Service, String> col_Time;
 
-    public c_Employee _Employee; // private
+    public Employee _Employee; // private
 
-    public ControllerServiceList(c_Employee cEmployee) { _Employee = cEmployee;  };
-
+    public ControllerServiceList(Employee cEmployee) { _Employee = cEmployee;  };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -129,27 +127,21 @@ public class ControllerServiceList implements Initializable {
                 newWindow.show();
             }
         });
-        b_add.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                initData();
-            }
-        });
         // Подгрузка данных с таблицы
-        // initData();
+        initData();
         // Привязка колонок таблицы
-        col_Service.setCellValueFactory(new PropertyValueFactory<c_Service, String>("name"));
-        col_Type.setCellValueFactory(new PropertyValueFactory<c_Service, String>("type"));
-        col_Description.setCellValueFactory(new PropertyValueFactory<c_Service, String>("description"));
-        col_Price.setCellValueFactory(new PropertyValueFactory<c_Service, String>("min_cost"));
-        col_Time.setCellValueFactory(new PropertyValueFactory<c_Service, String>("time"));
+        col_Service.setCellValueFactory(new PropertyValueFactory<Service, String>("namesrv"));
+        col_Type.setCellValueFactory(new PropertyValueFactory<Service, String>("typesrv"));
+        col_Description.setCellValueFactory(new PropertyValueFactory<Service, String>("descriptionsrv"));
+        col_Price.setCellValueFactory(new PropertyValueFactory<Service, String>("costsrv"));
+        col_Time.setCellValueFactory(new PropertyValueFactory<Service, String>("timesrv"));
         // Занесение данных в таблицу
         Services.setItems(ServicesData);
         // Событие на клик по объекту
         Services.setRowFactory(rv -> {
-            TableRow<c_Service> row = new TableRow();
+            TableRow<Service> row = new TableRow();
             row.setOnMouseClicked(mouseEvent -> {
-                c_Service Service = row.getItem();
+                Service Service = row.getItem();
                 try {
                     rowClick(Service);
                 } catch (IOException e) {
@@ -163,17 +155,18 @@ public class ControllerServiceList implements Initializable {
         try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT id, name, type, description, min_cost, time FROM list_sirvices");
+            ResultSet rs = st.executeQuery("SELECT * FROM list_sirvices;");
             while (rs.next()) {
-                c_Service service = new c_Service();
+                Service service = new Service();
                 service.setId_service(rs.getInt("id"));
-                service.setName(rs.getString("name"));
-                service.setType(rs.getString("type"));
-                service.setDescription(rs.getString("description"));
-                service.setPrice(rs.getBigDecimal("min_cost"));
-                service.setTime(rs.getString("time"));
+                service.setNamesrv(rs.getString("namesrv"));
+                service.setDescriptionsrv(rs.getString("descriptionsrv"));
+                service.setTypesrv(rs.getString("typesrv"));
+                service.setCostsrv(rs.getDouble("costsrv"));
+                service.setTimesrv(rs.getString("timesrv"));
 
                 ServicesData.add(service);
+                con.close();
             }
         } catch (SQLException e) {
             {
@@ -181,8 +174,8 @@ public class ControllerServiceList implements Initializable {
             }
         }
     }
-    public void rowClick(c_Service Service) throws IOException{
-        System.out.println("Pressed doubleclick on."+Service.getName());
+    public void rowClick(Service Service) throws IOException{
+        System.out.println("Pressed doubleclick on."+Service.getNamesrv());
         // Открытие нового окошка детализации
     }
 

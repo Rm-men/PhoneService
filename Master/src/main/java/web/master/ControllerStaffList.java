@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import web.master.entity.c_Employee;
+import web.master.entity.Employee;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,9 +24,9 @@ public class ControllerStaffList implements Initializable {
     @FXML public Button b_listServices;
     @FXML public Label l_username;
 
-    public c_Employee _Employee; // private
+    public Employee _Employee; // private
 
-    public ControllerStaffList(c_Employee cEmployee) { _Employee = cEmployee;  };
+    public ControllerStaffList(Employee cEmployee) { _Employee = cEmployee;  };
 
 
     @Override

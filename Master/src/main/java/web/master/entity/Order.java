@@ -1,13 +1,13 @@
 package web.master.entity;
 
 public class Order {
+    public String contacts;
     private Integer id_order;
     private String dateord;
     private String phonenumber;
     private String namecl;
     private String family;
     private String patronymic;
-
     private String address;
     private Integer id_client;
     private Integer id_master;
@@ -31,6 +31,12 @@ public class Order {
         this.descriptionos = descriptionos;
         this.descriptionord = description;
         this.comments = comments;
+    }
+    public void setContacts(String family, String namecl, String patronymic, String phonenumber) {
+        this.contacts =  family+" "+ namecl + " " +patronymic + " " + phonenumber;
+    }
+    public String getContacts() {
+        return contacts;
     }
 
     public Integer getId_order() {
@@ -122,9 +128,6 @@ public class Order {
     }
 
     public String getDescriptionos() {
-        return descriptionos;
-    }
-    public String getContacts() {
         return descriptionos;
     }
 

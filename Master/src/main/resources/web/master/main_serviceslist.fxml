@@ -32,7 +32,6 @@
                     <Font size="19.0" />
                 </font>
             </Button>
-         <Button fx:id="b_add" layoutX="1330.0" layoutY="25.0" mnemonicParsing="false" text="Button" />
         </children>
     </Pane>
 

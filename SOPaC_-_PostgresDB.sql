@@ -143,20 +143,35 @@ CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (Id_Phone_model) REFERENCES Phone_mo
 CONSTRAINT  fk_lm_component    	FOREIGN KEY (Id_component) REFERENCES Component (Id_component) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
-CREATE TABLE List_sirvices( -- FK - phone model, component
+CREATE TABLE list_sirvices( -- FK - phone model, component
 id      	                    SERIAL PRIMARY KEY,
 namesrv			                VARCHAR(55),
 typesrv                            VARCHAR(25),
 descriptionsrv 			        TEXT,
-costsrv 			            NUMERIC,
+costsrv 			            NUMERIC(12,2),
 timesrv                        INTERVAL
 );
+
+CREATE TABLE order_servises( -- FK - phone model, component
+id      	                    int PRIMARY KEY,
+idservie                        int,
+CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (id) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (idservie) REFERENCES list_sirvices (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+CREATE TABLE order_components( -- FK - phone model, component
+id      	                    int PRIMARY KEY,
+idcomponents                    int,
+CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (id) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (idcomponents) REFERENCES component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
 
 
 create view orders_view
 as
 SELECT orders.id_order,
-       orders.dateord,
+       orders.date,
        orders.phonenumber,
        orders.address,
        c.id_client,

@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import web.master.entity.c_Employee;
+import web.master.entity.Employee;
 import web.master.entity.Order;
 
 import java.io.IOException;
@@ -33,12 +33,11 @@ public class ControllerServicesComponents implements Initializable {
     @FXML public TextArea ta_services;
     @FXML public TextArea ta_components;
     private ObservableList<String> statusList = FXCollections.observableArrayList();
-
-
-    public c_Employee _Employee; // private
+    
+    public Employee _Employee; // private
     public Order _Order;
 
-    public ControllerServicesComponents(c_Employee cEmployee, Order order)
+    public ControllerServicesComponents(Employee cEmployee, Order order)
     {
         _Employee = cEmployee;
         _Order = order;

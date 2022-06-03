@@ -1,15 +1,13 @@
 package web.master.entity;
 
-import java.util.Date;
-
-public class c_Component {
+public class Component {
     private Integer id;
     private String type;
     private String name;
     private String id_guarantee;
     private String manufacturer;
-    private c_Component(){}
-    private c_Component( Integer id, String type, String name, String id_guarantee,  String manufacturer){
+    private Component(){}
+    private Component(Integer id, String type, String name, String id_guarantee, String manufacturer){
         this.id =  id;
         this.type = type;
         this.name = name;
