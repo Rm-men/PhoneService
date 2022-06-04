@@ -166,6 +166,35 @@ CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (id) REFERENCES orders (id_order) ON
 CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (idcomponents) REFERENCES component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
+--------------------------------------------------- запросы для изменениея конфигурации
+------ параметры заказа
+UPDATE orders
+SET customer=subquery.customer,
+    address=subquery.address,
+    partn=subquery.partn
+FROM (SELECT address_id, customer, address, partn
+      FROM  /* big hairy SQL */ ...) AS subquery
+WHERE dummy.address_id=subquery.address_id;
+
+
+------ параметры компонентов
+-- сначала удалить все старые
+DELETE FROM order_components
+    WHERE id = {id};
+-- потом добавить все новые
+-- циклом добавлять каждый
+insert into order_components values (id,idcomponents);
+
+
+------ параметры услуг
+-- сначала удалить все старые
+DELETE FROM order_components
+    WHERE id = {id};
+-- потом добавить все новые
+-- циклом добавлять каждый
+insert into order_components values (id,idcomponents);
+
+
 
 
 create view orders_view

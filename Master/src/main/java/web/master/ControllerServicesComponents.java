@@ -33,7 +33,7 @@ public class ControllerServicesComponents implements Initializable {
     @FXML public TextArea ta_services;
     @FXML public TextArea ta_components;
     private ObservableList<String> statusList = FXCollections.observableArrayList();
-    
+
     public Employee _Employee; // private
     public Order _Order;
 

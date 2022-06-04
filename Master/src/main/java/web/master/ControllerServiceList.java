@@ -178,6 +178,5 @@ public class ControllerServiceList implements Initializable {
         System.out.println("Pressed doubleclick on."+Service.getNamesrv());
         // Открытие нового окошка детализации
     }
-
 }
 

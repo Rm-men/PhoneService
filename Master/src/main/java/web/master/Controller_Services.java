@@ -27,7 +27,7 @@ public class Controller_Services implements Initializable {
     @FXML public Label l_c_time;
     @FXML public TableView tv_all_list;
     @FXML public TableView tv_cur_list;
-    @FXML private ObservableList<Service> ServicesData = FXCollections.observableArrayList();
+    @FXML private ObservableList<Service> list_Services = FXCollections.observableArrayList();
     private ObservableList<Service> list_Cur = FXCollections.observableArrayList();
     private ObservableList<Service> list_All = FXCollections.observableArrayList();
     private ObservableList<String> list_Types = FXCollections.observableArrayList();
@@ -48,7 +48,7 @@ public class Controller_Services implements Initializable {
     {
         _Employee = cEmployee;
         _Order = order;
-    };
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,6 +57,7 @@ public class Controller_Services implements Initializable {
         b_config.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                configureChanges();
                 System.out.println("Click to change services");
                 Stage stage_c = (Stage) b_config.getScene().getWindow();
                 stage_c.close();
@@ -73,8 +74,8 @@ public class Controller_Services implements Initializable {
         col_cur_cost.setCellValueFactory(new PropertyValueFactory<Service, Double>("costsrv"));
         col_cur_time.setCellValueFactory(new PropertyValueFactory<Service, String>("timesrv"));
 
-        tv_all_list.setItems(ServicesData);
 
+        tv_all_list.setItems(list_Services);
         tv_all_list.setRowFactory(rv -> {
             TableRow<Service> row = new TableRow();
             row.setOnMouseClicked(mouseEvent -> {
@@ -117,7 +118,7 @@ public class Controller_Services implements Initializable {
                 service.setCostsrv(rs.getDouble("costsrv"));
                 service.setTimesrv(rs.getString("timesrv"));
 
-                ServicesData.add(service);
+                list_Services.add(service);
             }
             calcTotalSumm();
             con.close();
@@ -184,7 +185,7 @@ public class Controller_Services implements Initializable {
                 service.setTimesrv(rs.getString("timesrv"));
 
                 list_All.add(service);
-                tv_all_list.getItems().add(service);
+                //tv_all_list.getItems().add(service);
             }
             //tv_all_list.getItems().clear();
             //v_all_list.getItems().addAll(list_All);
@@ -203,6 +204,39 @@ public class Controller_Services implements Initializable {
                  sum += serv.getCostsrv();
              }
         l_c_price.setText(""+sum);
+    }
+    public void removeUsed() {
+        Double sum = 0.0;
+        for (Service serv: list_Cur)
+             {
+                 sum += serv.getCostsrv();
+             }
+        l_c_price.setText(""+sum);
+    }
+    public void configureChanges() {
+        try {
+            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Statement st = con.createStatement();
+            // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
+            ResultSet rs = st.executeQuery("UPDATE orders " );
+            while (rs.next()) {
+                Service service = new Service();
+                service.setId_service(rs.getInt("id"));
+                service.setNamesrv(rs.getString("namesrv"));
+                service.setDescriptionsrv(rs.getString("descriptionsrv"));
+                service.setTypesrv(rs.getString("typesrv"));
+                service.setCostsrv(rs.getDouble("costsrv"));
+                service.setTimesrv(rs.getString("timesrv"));
+
+                list_Services.add(service);
+            }
+            calcTotalSumm();
+            con.close();
+        } catch (SQLException e) {
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
