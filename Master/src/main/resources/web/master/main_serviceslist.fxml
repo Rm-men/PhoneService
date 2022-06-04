@@ -32,6 +32,11 @@
                     <Font size="19.0" />
                 </font>
             </Button>
+         <Button fx:id="b_filters" layoutX="1280.0" layoutY="30.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: A0A5CF;" text="Настроить фильтры">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Button>
         </children>
     </Pane>
 
@@ -41,7 +46,7 @@
           <TableColumn fx:id="col_Type" prefWidth="179.0" text="Тип" />
           <TableColumn fx:id="col_Description" prefWidth="787.0" text="Описание" />
           <TableColumn fx:id="col_Price" prefWidth="339.0" text="Минимальная цена" />
-          <TableColumn fx:id="col_Time" prefWidth="290.0" text="Минимальное время ремонта" />
+          <TableColumn fx:id="col_Time" prefWidth="289.0" text="Минимальное время ремонта" />
       </columns>
     </TableView>
 </AnchorPane>

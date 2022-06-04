@@ -32,7 +32,7 @@ public class ControllerFreeOrder_no_picked implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         l_date.setText(_Order.getDateord());
-        ta_phone.setText(_Order.getNamePhone());
+        ta_phone.setText(_Order.getNamephone());
         ta_description.setText(_Order.getDescriptionord());
         b_accept.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -43,7 +43,7 @@ public class ControllerFreeOrder_no_picked implements Initializable {
                 try {
                     con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
                     Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery("SELECT id_order, date, phonenumber, address, id_client, id_master, id_phone, id_order_status, descriptionord, comments FROM orders_view");
+                    ResultSet rs = st.executeQuery("SELECT id_order, dateord, phonenumber, address, id_client, id_master, id_phone, id_order_status, descriptionord, comments FROM orders_view");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

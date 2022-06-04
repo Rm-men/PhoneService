@@ -1,57 +1,59 @@
 package web.master.entity;
 
 public class Component {
-    private Integer id;
-    private String type;
-    private String name;
-    private String id_guarantee;
-    private String manufacturer;
-    private Component(){}
-    private Component(Integer id, String type, String name, String id_guarantee, String manufacturer){
-        this.id =  id;
-        this.type = type;
-        this.name = name;
-        this.id_guarantee = id_guarantee;
-        this.manufacturer = manufacturer;
+    private Integer id_component;
+    private String typecmp;
+    private String namecmp;
+    private Integer id_guaranteecmp;
+    private Integer manufacturercmp;
+    private Double pricecmp;
+    public Component(){}
+
+    public Integer getId_component() {
+        return id_component;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+    public void setId_component(Integer id_component) {
+        this.id_component = id_component;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public String getTypecmp() {
+        return typecmp;
     }
 
-    public String getId_guarantee() {
-        return id_guarantee;
+    public void setTypecmp(String typecmp) {
+        this.typecmp = typecmp;
     }
 
-    public void setId_guarantee(String id_guarantee) {
-        this.id_guarantee = id_guarantee;
+    public String getNamecmp() {
+        return namecmp;
     }
 
-    public String getName() {
-        return name;
+    public void setNamecmp(String namecmp) {
+        this.namecmp = namecmp;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Integer getId_guaranteecmp() {
+        return id_guaranteecmp;
     }
 
-    public String getType() {
-        return type;
+    public void setId_guaranteecmp(Integer id_guaranteecmp) {
+        this.id_guaranteecmp = id_guaranteecmp;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public Integer getManufacturercmp() {
+        return manufacturercmp;
     }
 
-    public Integer getId() {
-        return id;
+    public void setManufacturercmp(Integer manufacturercmp) {
+        this.manufacturercmp = manufacturercmp;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Double getPricecmp() {
+        return pricecmp;
+    }
+
+    public void setPricecmp(Double pricecmp) {
+        this.pricecmp = pricecmp;
     }
 }

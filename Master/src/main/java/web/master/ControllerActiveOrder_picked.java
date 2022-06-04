@@ -1,5 +1,7 @@
 package web.master;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -25,6 +27,7 @@ public class ControllerActiveOrder_picked implements Initializable {
     private static Connection con;
     @FXML public Button b_ch_services;
     @FXML public Button b_ch_components;
+    @FXML public Button b_ch_comment;
     @FXML public ComboBox cb_status;
     @FXML public Label l_phone;
     @FXML public Label l_date;
@@ -33,7 +36,8 @@ public class ControllerActiveOrder_picked implements Initializable {
     @FXML public TextArea ta_contacts;
     @FXML public TextArea ta_services;
     @FXML public TextArea ta_components;
-    private ObservableList<String> statusList = FXCollections.observableArrayList();
+    private static ObservableList<String> statusList = FXCollections.observableArrayList();
+    private ObservableList<String> idstatusList = FXCollections.observableArrayList();
 
 
     public Employee _Employee; // private
@@ -47,12 +51,19 @@ public class ControllerActiveOrder_picked implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        statusList = getStatusList();
+        getStatusList();
+        cb_status.getItems().removeAll(cb_status.getItems());
         cb_status.getItems().addAll(statusList);
+        cb_status.setValue(_Order.getDescriptionos());
+        cb_status.setOnAction(event -> editStatus(cb_status.getValue().toString()));
+
         l_date.setText(_Order.getDateord());
-        l_phone.setText(_Order.getNamePhone());
+        l_phone.setText(_Order.getNamephone());
         ta_description.setText(_Order.getDescriptionord());
+
         ta_comments.setText(_Order.getComments());
+        ta_comments.setOnInputMethodTextChanged(event -> editComment(ta_comments.getText()));
+
         ta_contacts.setText(_Order.getContacts());
         b_ch_services.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -72,6 +83,12 @@ public class ControllerActiveOrder_picked implements Initializable {
                 newWindow.show();
             }
         });
+        b_ch_comment.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                editComment(ta_comments.getText());
+            }
+        });
         b_ch_components.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -79,15 +96,15 @@ public class ControllerActiveOrder_picked implements Initializable {
             }
         });
     }
-    public static ObservableList<String> getStatusList() {
-        ObservableList<String> list = FXCollections.observableArrayList();
+    public void getStatusList() {
+        // ObservableList<String> list = FXCollections.observableArrayList();
         try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select descriptionos From order_status");
+            ResultSet rs = st.executeQuery("Select idos, descriptionos From order_status");
             while (rs.next()) {
-                String stat = rs.getString("descriptionos");
-                list.add(stat);
+                idstatusList.add(rs.getString("idos"));
+                statusList.add(rs.getString("descriptionos"));
             }
             rs.close();
             st.close();
@@ -95,7 +112,35 @@ public class ControllerActiveOrder_picked implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        // return list;
+    }
+
+    public void editStatus(String descos) {
+        try {
+            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            PreparedStatement ps = con.prepareStatement("SELECT idos FROM order_status WHERE descriptionos = ?;");
+            ps.setInt(1, _Order.getId_order());
+            ps.executeQuery();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void  editComment(String comment) {
+        try {
+            System.out.print("Comment changed");
+            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+
+            PreparedStatement ps = con.prepareStatement("UPDATE orders SET comments = ? WHERE id_order = ?");
+            ps.setString(1, comment);
+            ps.setInt(2, _Order.getId_order());
+            ps.executeUpdate();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -40,11 +40,9 @@ CONSTRAINT fk_ord_client  FOREIGN KEY (Id_Client) REFERENCES Client (Id_Client) 
 CONSTRAINT fk_ord_master  FOREIGN KEY (id_master) REFERENCES Employee (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT fk_ord_phone   FOREIGN KEY (id_phone) REFERENCES Phone (id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
-
 insert into orders (date, phonenumber, address, id_client, id_phone, id_order_status,descriptionord,comments, id_master) values -- ЗАКАЗЫ
 -- (current_date, '89091233333', 'Ул. Московская 36', 1, 1,'received_0', 'Плохо работает экран', 'Похоже дело в тачскриние, но менять придется целиком'),
 (current_date, '89091233334', 'Ул. Московская 36', 2, 1,'received_0', 'Не работают науншники', 'Менять разъем 3.5', 1);
-
 
 CREATE TABLE list_workshops(
 id			              serial PRIMARY KEY,
@@ -98,7 +96,9 @@ INSERT INTO manufacturer (name) VALUES
 ('Xemion'),
 ('GAMSUNS'),
 ('Rus Electronic Corporation'),
-('The Microcomponents Crafting Service');
+('The Microcomponents Crafting Service'),
+('Chinivanyoay neiyiao stafs')
+                                     ;
 
 CREATE TABLE Phone_model( -- FK Guarantee, List_of_supported_models, product, Manufacturer
 id_phone_model 			         SERIAL PRIMARY KEY,
@@ -124,23 +124,27 @@ INSERT INTO Phone (imei, id_phone_model) VALUES
 ('354809104570953', 1) ;
 
 CREATE TABLE Component( --FK - Guarantee, Manufacturer
-id_component   			        VARCHAR(25) PRIMARY KEY,
+id_component   			        SERIAL PRIMARY KEY,
 typecmp 		   			    VARCHAR(20) NOT NULL,
 namecmp  		       			VARCHAR(40) NOT NULL,
-id_guarantee 	       		    INT,
-manufacturer       			    INT NOT NULL,
+id_guaranteecmp 	       		    INT,
+manufacturercmp       			    INT NOT NULL,
+pricecmp                        numeric(12,2),
 --id_product					    VARCHAR(40),
 --CONSTRAINT fk_comp_id_product   FOREIGN KEY(id_product) REFERENCES product (id_product) ON DELETE NO ACTION ON UPDATE RESTRICT,
-CONSTRAINT fk_comp_guarantee    FOREIGN KEY(id_guarantee) REFERENCES Guarantee (ID_Guarantee) ON DELETE RESTRICT ON UPDATE RESTRICT,
-CONSTRAINT fk_comp_manufacturer FOREIGN KEY(manufacturer) REFERENCES Manufacturer (Id_Manufacturer) ON DELETE RESTRICT ON UPDATE CASCADE
+CONSTRAINT fk_comp_guarantee    FOREIGN KEY(id_guaranteecmp) REFERENCES Guarantee (ID_Guarantee) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT fk_comp_manufacturer FOREIGN KEY(manufacturercmp) REFERENCES Manufacturer (Id_Manufacturer) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+INSERT INTO component (typecmp, namecmp, id_guaranteecmp, manufacturercmp,pricecmp) VALUES
+('Стекло', 'Универсальное защитное стекло', 1,7,400),
+('Экранный модуль', 'Экранный модуль Xemion', 1,3, 2000);
 --
 CREATE TABLE List_of_supported_models( -- FK - phone model, component
 id_list_of_sup_models 	        SERIAL PRIMARY KEY,
-id_component 			        VARCHAR(25),
-id_phone_model 			        VARCHAR(25),
-CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (Id_Phone_model) REFERENCES Phone_model (Id_Phone_model) ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT  fk_lm_component    	FOREIGN KEY (Id_component) REFERENCES Component (Id_component) ON DELETE NO ACTION ON UPDATE CASCADE
+idcomponent 			        INT,
+idphone_model 			        VARCHAR(25),
+CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (idphone_model) REFERENCES Phone_model (id_phone_model) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_lm_component    	FOREIGN KEY (Idcomponent) REFERENCES Component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
 CREATE TABLE list_sirvices( -- FK - phone model, component

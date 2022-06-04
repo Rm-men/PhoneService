@@ -35,12 +35,13 @@
         </children>
     </Pane>
 
-    <TableView fx:id="tv_Orders" layoutX="23.0" layoutY="100.0" prefHeight="954.0" prefWidth="1826.0">
+    <TableView fx:id="tv_fOrders" layoutX="23.0" layoutY="100.0" prefHeight="954.0" prefWidth="1826.0">
       <columns>
-          <TableColumn fx:id="col_phone" prefWidth="151.0" text="Устройство" />
-          <TableColumn fx:id="col_description" prefWidth="683.0" text="Описание" />
-          <TableColumn fx:id="col_comments" prefWidth="731.0" text="Комментарии" />
-          <TableColumn fx:id="col_date" minWidth="9.0" prefWidth="257.0" text="Дата поступления" />
+          <TableColumn fx:id="col_fphone" prefWidth="151.0" text="Устройство" />
+          <TableColumn fx:id="col_fdescription" prefWidth="683.0" text="Описание" />
+          <TableColumn fx:id="col_fcomments" prefWidth="731.0" text="Комментарии" />
+         <TableColumn fx:id="col_fcontacts" minWidth="9.0" prefWidth="94.0" text="Контакты" />
+          <TableColumn fx:id="col_fdate" minWidth="9.0" prefWidth="165.0" text="Дата поступления" />
       </columns>
     </TableView>
 </AnchorPane>

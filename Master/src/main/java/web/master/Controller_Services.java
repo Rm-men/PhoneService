@@ -52,6 +52,11 @@ public class Controller_Services implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         list_Types = getTypesList();
         cb_category.getItems().addAll(list_Types);
         b_config.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -214,7 +219,7 @@ public class Controller_Services implements Initializable {
         l_c_price.setText(""+sum);
     }
     public void configureChanges() {
-        try {
+/*        try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
@@ -236,7 +241,7 @@ public class Controller_Services implements Initializable {
             {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 }
 

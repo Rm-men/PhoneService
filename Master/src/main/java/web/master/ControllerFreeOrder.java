@@ -21,17 +21,19 @@ import java.util.ResourceBundle;
 
 public class ControllerFreeOrder implements Initializable {
     private Connection con;
-    @FXML private TableView<Order> tv_Orders;
+    @FXML private TableView<Order> tv_fOrders;
     @FXML public Button b_freeOrder;
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
     @FXML public Label l_username;
     @FXML private ObservableList<Order> OrdersData = FXCollections.observableArrayList();
-    @FXML private TableColumn<Order, String>  col_phone;
-    @FXML private TableColumn<Order, String>  col_description;
-    @FXML private TableColumn<Order, String>  col_comments;
-    @FXML private TableColumn<Order, String>  col_date;
+    @FXML private TableColumn<Order, String> col_fphone;
+    @FXML private TableColumn<Order, String> col_fdescription;
+    @FXML private TableColumn<Order, String> col_fcomments;
+    @FXML private TableColumn<Order, String> col_fdate;
+    @FXML private TableColumn<Order, String> col_fcontacts;
+
 
     public Employee _Employee; // private
 
@@ -129,14 +131,15 @@ public class ControllerFreeOrder implements Initializable {
 
         initData();
 
-        col_phone.setCellValueFactory(new PropertyValueFactory<Order, String>("namephone"));
-        col_description.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionord"));
-        col_comments.setCellValueFactory(new PropertyValueFactory<Order, String>("comments"));
-        col_date.setCellValueFactory(new PropertyValueFactory<Order, String>("dateord"));
+        col_fphone.setCellValueFactory(new PropertyValueFactory<Order, String>("namephone"));
+        col_fdescription.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionord"));
+        col_fcomments.setCellValueFactory(new PropertyValueFactory<Order, String>("comments"));
+        col_fdate.setCellValueFactory(new PropertyValueFactory<Order, String>("dateord"));
+        col_fcontacts.setCellValueFactory(new PropertyValueFactory<Order, String>("contacts"));
 
-        tv_Orders.setItems(OrdersData);
+        tv_fOrders.setItems(OrdersData);
 
-        tv_Orders.setRowFactory(rv -> {
+        tv_fOrders.setRowFactory(rv -> {
             TableRow<Order> row = new TableRow();
             row.setOnMouseClicked(mouseEvent -> {
                 Order order = row.getItem();
@@ -190,11 +193,12 @@ public class ControllerFreeOrder implements Initializable {
                 order.setId_order_status(rs.getString("id_order_status"));
                 order.setDescriptionord(rs.getString("descriptionos"));
                 order.setComments(rs.getString("comments"));
-                order.setNamePhone(rs.getString("namephone"));
+                order.setNamephone(rs.getString("namephone"));
+                order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
                 OrdersData.add(order);
-                con.close();
             }
+            con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();

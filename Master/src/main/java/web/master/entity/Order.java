@@ -33,7 +33,9 @@ public class Order {
         this.comments = comments;
     }
     public void setContacts(String family, String namecl, String patronymic, String phonenumber) {
-        this.contacts =  family+" "+ namecl + " " +patronymic + " " + phonenumber;
+        if (patronymic == null) patronymic = "";
+                else patronymic = " "+patronymic;
+        this.contacts =  family+" "+ namecl + patronymic + " " + phonenumber;
     }
     public String getContacts() {
         return contacts;
@@ -119,14 +121,6 @@ public class Order {
         this.comments = comments;
     }
 
-    public String getNamePhone() {
-        return namephone;
-    }
-
-    public void setNamePhone(String phone) {
-        this.namephone = phone;
-    }
-
     public String getDescriptionos() {
         return descriptionos;
     }
@@ -157,5 +151,13 @@ public class Order {
 
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
+    }
+
+    public String getNamephone() {
+        return namephone;
+    }
+
+    public void setNamephone(String namephone) {
+        this.namephone = namephone;
     }
 }

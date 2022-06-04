@@ -32,19 +32,25 @@
                     <Font size="19.0" />
                 </font>
             </Button>
+         <Button fx:id="b_filters" layoutX="1340.0" layoutY="45.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="183.0" style="-fx-background-color: A0A5CF;" text="Настроить фильтры">
+            <font>
+               <Font size="13.0" />
+            </font>
+         </Button>
+         <CheckBox layoutX="1134.0" layoutY="22.0" mnemonicParsing="false" text="Скрывать выполненные" />
         </children>
     </Pane>
 
-    <TableView fx:id="tv_Orders" layoutX="23.0" layoutY="100.0" prefHeight="954.0" prefWidth="1826.0">
+    <TableView fx:id="tv_aOrders" layoutX="23.0" layoutY="100.0" prefHeight="954.0" prefWidth="1826.0">
       <columns>
-          <TableColumn fx:id="col_phone" prefWidth="151.0" text="Устройство" />
-          <TableColumn fx:id="col_description" prefWidth="403.0" text="Описание" />
-          <TableColumn fx:id="col_comments" prefWidth="315.0" text="Комментарии" />
-          <TableColumn fx:id="col_services" prefWidth="344.0" text="Услуги" />
-          <TableColumn fx:id="col_components" prefWidth="173.0" text="Компоненты" />
-          <TableColumn fx:id="col_contacts" prefWidth="166.0" text="Контакты" />
-          <TableColumn fx:id="col_status" prefWidth="129.0" text="Статус" />
-          <TableColumn fx:id="col_date" prefWidth="144.0" text="Дата поступления" />
+          <TableColumn fx:id="col_aphone" prefWidth="151.0" text="Устройство" />
+          <TableColumn fx:id="col_adescription" prefWidth="403.0" text="Описание" />
+          <TableColumn fx:id="col_acomments" prefWidth="315.0" text="Комментарии" />
+          <TableColumn fx:id="col_aservices" prefWidth="344.0" text="Услуги" />
+          <TableColumn fx:id="col_acomponents" prefWidth="173.0" text="Компоненты" />
+          <TableColumn fx:id="col_acontacts" prefWidth="166.0" text="Контакты" />
+          <TableColumn fx:id="col_astatus" prefWidth="129.0" text="Статус" />
+          <TableColumn fx:id="col_adate" prefWidth="144.0" text="Дата поступления" />
       </columns>
     </TableView>
 </AnchorPane>

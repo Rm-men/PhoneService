@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="132.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="23.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Устройство:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Button fx:id="b_confimefilters" layoutX="814.0" layoutY="72.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="150.0" text="Применить фильтры" />
+      <ComboBox fx:id="cb_fa_phone" layoutX="136.0" layoutY="19.0" prefWidth="150.0" />
+      <Text layoutX="306.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Статус:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="cb_fa_status" layoutX="368.0" layoutY="21.0" prefWidth="150.0" />
+      <TextField fx:id="tf_fa_contacts" layoutX="631.0" layoutY="22.0" />
+      <Text layoutX="538.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Контакты:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="21.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления от:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="406.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления до:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="dp_ot" layoutX="211.0" layoutY="76.0" />
+      <DatePicker fx:id="dp_do" layoutX="606.0" layoutY="76.0" />
+      <Button fx:id="b_removeilters" layoutX="828.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Сбросить фильтры" />
+   </children>
+</AnchorPane>
