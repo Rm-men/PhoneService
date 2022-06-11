@@ -1,7 +1,5 @@
 package web.master;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -39,20 +37,25 @@ public class ControllerActiveOrder_picked implements Initializable {
     private static ObservableList<String> statusList = FXCollections.observableArrayList();
     private ObservableList<String> idstatusList = FXCollections.observableArrayList();
 
+    private Stage _stage_c;
+
 
     public Employee _Employee; // private
     public Order _Order;
 
-    public ControllerActiveOrder_picked(Employee cEmployee, Order order)
+    public ControllerActiveOrder_picked(Employee cEmployee, Order order, Stage stage_c)
     {
         _Employee = cEmployee;
         _Order = order;
+        _stage_c = stage_c;
     };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        statusList.clear();
+        idstatusList.clear();
+        cb_status.getItems().clear();
         getStatusList();
-        cb_status.getItems().removeAll(cb_status.getItems());
         cb_status.getItems().addAll(statusList);
         cb_status.setValue(_Order.getDescriptionos());
         cb_status.setOnAction(event -> editStatus(cb_status.getValue().toString()));
@@ -119,13 +122,42 @@ public class ControllerActiveOrder_picked implements Initializable {
         try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             PreparedStatement ps = con.prepareStatement("SELECT idos FROM order_status WHERE descriptionos = ?;");
-            ps.setInt(1, _Order.getId_order());
-            ps.executeQuery();
+            ps.setString(1, descos);
+            ResultSet rs = ps.executeQuery();
+            String idordst = "null";
+
+            while (rs.next()) {
+                idordst = rs.getString("idos");
+            }
+
+            ps = con.prepareStatement("UPDATE orders SET id_order_status = ? WHERE id_order = ?;");
+            ps.setString(1, idordst);
+            ps.setInt(2, _Order.getId_order());
+            ps.executeUpdate();
             ps.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        {
+            Stage stage_c = (Stage) b_ch_comment.getScene().getWindow();
+            stage_c.close();
+            System.out.println("Pressed goToActiveorder.");
+            Stage newWindow = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorderf.fxml"));
+            fxmlLoader.setController( new ControllerActiveOrder(_Employee));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            newWindow.setTitle("Мастерская - активные заказы");
+            newWindow.setScene(scene);
+            newWindow.setMaximized(true);
+            newWindow.show();
+        }
+        _stage_c.close();
     }
     public void  editComment(String comment) {
         try {

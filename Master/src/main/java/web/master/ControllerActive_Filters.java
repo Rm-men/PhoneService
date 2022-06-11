@@ -61,7 +61,7 @@ public class ControllerActive_Filters implements Initializable {
                 System.out.println("Click to remove filters");
             }
         });
-        initData();
+        initDataFiltr();
         cb_fa_phone.getItems().addAll(list_PhoneNames);
         cb_fa_status.getItems().addAll(list_Status);
     }
@@ -76,7 +76,7 @@ public class ControllerActive_Filters implements Initializable {
     public void configureFilters() {
         CAO.applyFilter(cb_fa_phone.getValue(),cb_fa_status.getValue(),dp_ot.getValue(), dp_do.getValue(), tf_fa_contacts.getText());
     }
-    private void initData() {
+    private void initDataFiltr() {
         try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();

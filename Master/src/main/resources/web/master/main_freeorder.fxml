@@ -38,9 +38,9 @@
     <TableView fx:id="tv_fOrders" layoutX="23.0" layoutY="100.0" prefHeight="954.0" prefWidth="1826.0">
       <columns>
           <TableColumn fx:id="col_fphone" prefWidth="151.0" text="Устройство" />
-          <TableColumn fx:id="col_fdescription" prefWidth="683.0" text="Описание" />
-          <TableColumn fx:id="col_fcomments" prefWidth="731.0" text="Комментарии" />
-         <TableColumn fx:id="col_fcontacts" minWidth="9.0" prefWidth="94.0" text="Контакты" />
+          <TableColumn fx:id="col_fdescription" prefWidth="644.0" text="Описание клиента" />
+          <TableColumn fx:id="col_fcomments" prefWidth="573.0" text="Комментарии" />
+         <TableColumn fx:id="col_fcontacts" minWidth="9.0" prefWidth="291.0" text="Контакты" />
           <TableColumn fx:id="col_fdate" minWidth="9.0" prefWidth="165.0" text="Дата поступления" />
       </columns>
     </TableView>

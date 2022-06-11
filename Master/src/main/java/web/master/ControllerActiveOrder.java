@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ControllerActiveOrder implements Initializable {
@@ -27,9 +28,16 @@ public class ControllerActiveOrder implements Initializable {
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
-    @FXML public Button b_filters;
+    @FXML public Button b_confimefilters;
+    @FXML public Button b_removeilters;
+    @FXML public ComboBox cb_fa_phone;
+    @FXML public ComboBox cb_fa_status;
+    @FXML public TextField tf_fa_contacts;
+    @FXML public DatePicker dp_ot;
+    @FXML public DatePicker dp_do;
     @FXML public Label l_username;
     @FXML private ObservableList<Order> OrdersData = FXCollections.observableArrayList();
+    @FXML private ObservableList<Order> OrdersDataBack = FXCollections.observableArrayList();
     @FXML private TableColumn<Order, String> col_aphone;
     @FXML private TableColumn<Order, String> col_adescription;
     @FXML private TableColumn<Order, String> col_acomments;
@@ -39,13 +47,18 @@ public class ControllerActiveOrder implements Initializable {
     @FXML private TableColumn<Order, String> col_astatus;
     @FXML private TableColumn<Order, String> col_adate;
 
+    private ObservableList<String> list_Status = FXCollections.observableArrayList();
+    private ObservableList<String> list_PhoneNames = FXCollections.observableArrayList();
+
     public Employee _Employee; // private
 
     public ControllerActiveOrder(Employee cEmployee) { _Employee = cEmployee;  };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        l_username.setText(_Employee.getName());
+        cb_fa_phone.getItems().removeAll();
+        cb_fa_status.getItems().removeAll();
+        // l_username.setText(_Employee.getName());
         b_activeOrder.setStyle("-fx-background-color: #8d94d8; -fx-border-width: 5px;");
 
         b_freeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -76,7 +89,7 @@ public class ControllerActiveOrder implements Initializable {
                 stage_c.close();
                 System.out.println("Pressed goToActiveorder.");
                 Stage newWindow = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorder.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorderf.fxml"));
                 fxmlLoader.setController( new ControllerActiveOrder(_Employee));
                 Scene scene = null;
                 try {
@@ -133,29 +146,26 @@ public class ControllerActiveOrder implements Initializable {
                 newWindow.show();
             }
         });
-        b_filters.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        b_confimefilters.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                
-                System.out.println("Pressed ao-filters.");
-                Stage newWindow = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("FiltersActiveOrder.fxml"));
-                ControllerActiveOrder controller = loader.<ControllerActiveOrder>getController();
-                fxmlLoader.setController( new ControllerActive_Filters(_Employee, controller));
-
-                Scene scene = null;
-                try {
-                    scene = new Scene(fxmlLoader.load());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                newWindow.setTitle("Мастерская - фильтрация активных заказов");
-                newWindow.setScene(scene);
-                newWindow.show();
+                configureFilters();
+                System.out.println("Click to confirme filters");
+            }
+        });
+        b_removeilters.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removeFilters();
+                System.out.println("Click to remove filters");
             }
         });
 
         initData();
+        initDataFiltr();
+
+        cb_fa_phone.getItems().addAll(list_PhoneNames);
+        cb_fa_status.getItems().addAll(list_Status);
 
         col_aphone.setCellValueFactory(new PropertyValueFactory<Order, String>("namephone"));
         col_adescription.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionord"));
@@ -174,6 +184,7 @@ public class ControllerActiveOrder implements Initializable {
             row.setOnMouseClicked(mouseEvent -> {
                 Order order = row.getItem();
                 try {
+                    if (order != null)
                     rowClick(order);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -210,6 +221,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
                 OrdersData.add(order);
+                OrdersDataBack.add(order);
             }
             con.close();
         } catch (SQLException e) {
@@ -220,9 +232,11 @@ public class ControllerActiveOrder implements Initializable {
     }
     public void rowClick(Order order) throws IOException{
         System.out.println("click on active: "+order.getId_client()+", "+ order.getDescriptionord());
+        System.out.println("click on free: "+order.getId_client()+", "+ order.getDescriptionord());
+        Stage stage_c = (Stage) b_activeOrder.getScene().getWindow();
         Stage newWindow = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("Order_info_picked.fxml"));
-        fxmlLoader.setController( new ControllerActiveOrder_picked(_Employee, order));
+        fxmlLoader.setController( new ControllerActiveOrder_picked(_Employee, order, stage_c));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
@@ -233,36 +247,83 @@ public class ControllerActiveOrder implements Initializable {
         newWindow.setScene(scene);
         newWindow.show();
     }
+    public void removeFilters() {
+        cb_fa_phone.setValue(null);
+        cb_fa_status.setValue(null);
+        dp_ot.setValue(null);
+        dp_do.setValue(null);
+        tf_fa_contacts.setText(null);
+        OrdersData.clear();
+        OrdersData.addAll(OrdersDataBack);
+        tv_aOrders.setItems(OrdersData);
+    }
+    public void configureFilters() {
+        applyFilter(cb_fa_phone.getValue(),cb_fa_status.getValue(),dp_ot.getValue(), dp_do.getValue(), tf_fa_contacts.getText());
+    }
+    private void initDataFiltr() {
+        try {
+            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Statement st = con.createStatement();
+            // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
+            ResultSet rs = st.executeQuery("SELECT namephone FROM phone_model;" );
 
+            list_PhoneNames.add(null);
+            while (rs.next()) {
+                list_PhoneNames.add(rs.getString("namephone"));
+            }
+
+            list_Status.add(null);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT descriptionos FROM order_status;" );
+            while (rs.next()) {
+                list_Status.add(rs.getString("descriptionos"));
+            }
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void applyFilter(Object phname, Object status, LocalDate date_ot, LocalDate date_do, String contacts) {
         try {
-            OrdersData.clear();
+            // OrdersData.clear();
             tv_aOrders.getItems().clear();
+            // OrdersData.addAll(OrdersDataBack);
+            if (contacts == null)
+                contacts = "";
 
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
-            String sql = ("SELECT * FROM orders_view WHERE id_master = ?;");
+            String sql = ("SELECT * FROM orders_view WHERE id_master = ? ");
 
             // Statement st = con.createStatement();
-            if (phname != null && !phname.equals(""))
-                sql+= "AND namephone like ?";
+            if (phname != null)
+                sql+= "AND namephone like ? ";
             else
-                sql+= "AND id_master like ?";
+                sql+= "AND id_master = ? ";
             if (status != null)
-                sql+= "AND descriptionos like ?";
+                sql+= "AND descriptionos like ? ";
             else
-                sql+= "AND id_master like ?";
-/*            if (status != null)
-                sql+= "AND descriptionos like ?";
+                sql+= "AND id_master = ? ";
+            if (contacts != "")
+                sql+= "AND contacts like ? ";
             else
-                sql+= "AND descriptionos like ?";
-            if (status != null)
-                sql+= "AND descriptionos like ?";
-            else
-                sql+= "AND descriptionos like ?";
-            if (status != null)
-                sql+= "AND descriptionos like ?";
-            else
-                sql+= "AND descriptionos like ?";*/
+                sql+= "AND id_master = ? ";
+
+            Date DateOt = null;
+            Date DateDo = null;
+
+            if (dp_ot.getValue() != null) {
+                if (dp_do.getValue() != null) {
+                    DateOt = Date.valueOf(dp_ot.getValue());
+                    DateDo = Date.valueOf(dp_do.getValue());
+                    sql += " AND date_trunc('day', o.\"Date\") BETWEEN ? AND ?";
+                } else {
+                    sql += " AND o.\"Date\" = ?";
+                }
+            }
+
+            sql+=";";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, _Employee.getId());
             if (phname != null && !phname.equals(""))
@@ -273,6 +334,10 @@ public class ControllerActiveOrder implements Initializable {
                 ps.setString(3, status.toString());
             else
                 ps.setInt(3, _Employee.getId());
+            if (contacts != "")
+                ps.setString(4, "%"+contacts+"%");
+            else
+                ps.setInt(4, _Employee.getId());
 
             ResultSet rs = ps.executeQuery();
 
@@ -295,7 +360,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setNamecl(rs.getString("family"));
                 order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
-                OrdersData.add(order);
+                tv_aOrders.getItems().add(order);
             }
             con.close();
         } catch (SQLException e) {

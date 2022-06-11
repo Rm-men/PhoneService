@@ -2,12 +2,16 @@ package web.master;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import web.master.entity.Employee;
 import web.master.entity.Order;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -22,9 +26,11 @@ public class ControllerFreeOrder_no_picked implements Initializable {
 
     public Employee _Employee; // private
     public Order _Order;
+    public Stage _last_stage;
 
-    public ControllerFreeOrder_no_picked(Employee cEmployee, Order order)
+    public ControllerFreeOrder_no_picked(Employee cEmployee, Order order, Stage last_stage)
     {
+        _last_stage = last_stage;
         _Employee = cEmployee;
         _Order = order;
     };
@@ -38,43 +44,40 @@ public class ControllerFreeOrder_no_picked implements Initializable {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 System.out.println("Заказ принят");
-            }
-            {
+                // Stage stage_c = (Stage) b_freeOrder.getScene().getWindow();
                 try {
                     con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
-                    Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery("SELECT id_order, dateord, phonenumber, address, id_client, id_master, id_phone, id_order_status, descriptionord, comments FROM orders_view");
+                    String sql = "UPDATE orders set id_master = ? WHERE id_order = ?";
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    ps.setInt(1, _Employee.getId());
+                    ps.setInt(2, _Order.getId_order());
+                    ps.executeUpdate();
+                    ps.close();
+                    con.close();
+                    Stage stage_c = (Stage) b_accept.getScene().getWindow();
+                    stage_c.close();
+                    {
+                        System.out.println("goToActiveorder.");
+                        Stage newWindow = new Stage();
+                        FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorderf.fxml"));
+                        fxmlLoader.setController( new ControllerActiveOrder(_Employee));
+                        Scene scene = null;
+                        try {
+                            scene = new Scene(fxmlLoader.load());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        newWindow.setTitle("Мастерская - активные заказы");
+                        newWindow.setScene(scene);
+                        newWindow.setMaximized(true);
+                        newWindow.show();
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                _last_stage.close();
             }
-
         });
-    }
-    private void initData() {
-        try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT id_order, date, phonenumber, address, id_client, id_master, id_phone, id_order_status, descriptionord, comments FROM orders_view");
-            while (rs.next()) {
-                Order order = new Order();
-                order.setId_order(rs.getInt("id_order"));
-                order.setDateord(rs.getDate("order_date").toString());
-                order.setPhone_number(rs.getString("phonenumber"));
-                order.setAddress(rs.getString("address"));
-                order.setId_client(rs.getInt("id_client"));
-                order.setId_master(rs.getInt("id_master"));
-                order.setId_phone(rs.getInt("id_phone"));
-                order.setId_order_status(rs.getString("id_order_status"));
-                order.setDescriptionord(rs.getString("descriptionord"));
-                order.setComments(rs.getString("comments"));
-                con.close();
-            }
-        } catch (SQLException e) {
-            {
-                e.printStackTrace();
-            }
-        }
     }
 }
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+    <Pane layoutX="-2.0" prefHeight="99.0" prefWidth="1924.0" style="-fx-background-color: rgba(174, 177, 202, 0.2);">
+        <children>
+            <Button fx:id="b_freeOrder" layoutX="42.0" layoutY="24.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Свободные заказы">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Button>
+            <Button fx:id="b_activeOrder" layoutX="316.0" layoutY="23.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Активные заказы">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Button>
+            <Button fx:id="b_listStaff" layoutX="590.0" layoutY="22.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список товаров">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Button>
+            <Button fx:id="b_listServices" layoutX="875.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список услуг">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Button>
+            <Text layoutX="1137.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Устройство:">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Text>
+            <Button fx:id="b_confimefilters" layoutX="1705.0" layoutY="61.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="136.0" text="Применить фильтры" />
+            <ComboBox fx:id="cb_fa_phone" layoutX="1252.0" layoutY="10.0" prefWidth="150.0" />
+            <Text layoutX="1180.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Статус:">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Text>
+            <ComboBox fx:id="cb_fa_status" layoutX="1252.0" layoutY="37.0" prefWidth="150.0" />
+            <TextField fx:id="tf_fa_contacts" layoutX="1253.0" layoutY="62.0" />
+            <Text layoutX="1154.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Контакты:">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Text>
+            <Text layoutX="1480.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления от:">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Text>
+            <Text layoutX="1479.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления до:">
+                <font>
+                    <Font size="19.0" />
+                </font>
+            </Text>
+            <DatePicker fx:id="dp_ot" layoutX="1667.0" layoutY="2.0" />
+            <DatePicker fx:id="dp_do" layoutX="1667.0" layoutY="35.0" />
+            <Button fx:id="b_removeilters" layoutX="1550.0" layoutY="62.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Сбросить фильтры">
+            <font>
+               <Font size="11.0" />
+            </font></Button>
+        </children>
+
+    </Pane>
+
+
+    <TableView fx:id="tv_aOrders" layoutX="23.0" layoutY="100.0" prefHeight="954.0" prefWidth="1826.0">
+      <columns>
+          <TableColumn fx:id="col_aphone" prefWidth="151.0" text="Устройство" />
+          <TableColumn fx:id="col_adescription" prefWidth="403.0" text="Описание" />
+          <TableColumn fx:id="col_acomments" prefWidth="315.0" text="Комментарии" />
+          <TableColumn fx:id="col_aservices" prefWidth="344.0" text="Услуги" />
+          <TableColumn fx:id="col_acomponents" prefWidth="173.0" text="Компоненты" />
+          <TableColumn fx:id="col_acontacts" prefWidth="166.0" text="Контакты" />
+          <TableColumn fx:id="col_astatus" prefWidth="129.0" text="Статус" />
+          <TableColumn fx:id="col_adate" prefWidth="144.0" text="Дата поступления" />
+      </columns>
+    </TableView>
+   <CheckBox layoutX="14.0" layoutY="1058.0" mnemonicParsing="false" text="Скрывать выполненные" />
+</AnchorPane>
