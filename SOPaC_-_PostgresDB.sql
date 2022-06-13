@@ -180,6 +180,38 @@ CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (id) REFERENCES orders (id_order) ON
 CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (idcomponents) REFERENCES component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
+CREATE TABLE story_order_move( --
+id      	                    SERIAL PRIMARY KEY,
+idorder                         int,
+idhuman                         int,
+idoldstatus                     VARCHAR(10),
+idnewstatus                     VARCHAR(10),
+idoldaddress                    int,
+idnewaddress                    int,
+CONSTRAINT  fk_som_order   FOREIGN KEY (idorder) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_som_human   FOREIGN KEY (idhuman) REFERENCES employee (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_som_oldstatus   FOREIGN KEY (idoldstatus) REFERENCES order_status (idos) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_som_newstatus   FOREIGN KEY (idnewstatus) REFERENCES order_status (idos) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_som_oldaddress  FOREIGN KEY (idoldaddress) REFERENCES list_workshops (id) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT  fk_som_newaddress  FOREIGN KEY (idnewaddress) REFERENCES list_workshops (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+CREATE TABLE on_order_cmp (
+    id_cmp_onord              SERIAL PRIMARY KEY,
+    id_onorderoncomp         int,
+    id_cmp_onlist             int,
+    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_onorderoncomp) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
+    CONSTRAINT  fk_cmponorder_component   FOREIGN KEY (id_cmp_onlist) REFERENCES component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+CREATE TABLE on_order_srv (
+    id_srv_onord              SERIAL PRIMARY KEY,
+    id_onorderonservice      int,
+    id_srvo_nlist             int,
+    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_onorderonservice) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
+    CONSTRAINT  fk_cmponorder_component   FOREIGN KEY (id_srvo_nlist) REFERENCES list_sirvices (id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
 --------------------------------------------------- запросы для изменениея конфигурации
 ------ параметры заказа
 UPDATE orders

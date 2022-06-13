@@ -4,7 +4,8 @@ import {
   Container
 } from "reactstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faVk} from '@fortawesome/free-brands-svg-icons';
+import { faVk, faGithub} from '@fortawesome/free-brands-svg-icons';
+import { faMugHot} from '@fortawesome/free-solid-svg-icons';
 
 const Footer = (props) => {
   return (
@@ -13,20 +14,19 @@ const Footer = (props) => {
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
       	<div className="links">
       		<ul className="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
-      			<li><a href="https://bootstrapbay.com/" target="_blank" rel="noopener noreferrer">Store</a></li>
+      			{/* <li><a href="https://bootstrapbay.com/" target="_blank" rel="noopener noreferrer">Store</a></li>
       			<li><a href="https://bootstrapbay.com/about" target="_blank" rel="noopener noreferrer">About Us</a></li>
       			<li><a href="https://bootstrapbay.com/blog/" target="_blank" rel="noopener noreferrer">Blog</a></li>
-      			<li><a href="https://bootstrapbay.com/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a></li>
+      			<li><a href="https://bootstrapbay.com/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a></li> */}
       		</ul>
       	</div>
       	<div className="social mt-4 mt-md-0">
-          <Button color="primary" outline className="twitter btn-icon" href="https://twitter.com/" target="_blank">
+          <Button color="secondary" outline className="btn-icon" href="https://vk.com/rm_men" target="_blank">
           <FontAwesomeIcon icon={faVk} />
           </Button>
           {" "}
-          <Button color="primary" outline className="facebook btn-icon" href="https://www.facebook.com/" target="_blank">
-            <FontAwesomeIcon icon={['fab', 'facebook-square']}  className='text-secondary'/> {" "}
-            <i className='bi-facebook text-secondary' style={{ fontSize: 20 }}></i>
+          <Button color="secondary" outline className="btn-icon" href="https://github.com/Rm-men/PhoneService" target="_blank">
+          <FontAwesomeIcon icon={faGithub} />
           </Button>
           {" "}
           <Button color="primary" outline className="github btn-icon" href="https://github.com/bootstrapbay" target="_blank">
@@ -36,11 +36,11 @@ const Footer = (props) => {
       </div>
       <div className="copyright text-center">
       	<hr />
-      	<p className="small">&copy; 2019, made with
+      	<p className="small"> 2022, сделано с помощью
           <span className="text-danger">
-            {" "}<FontAwesomeIcon icon="heart" />{" "}
+            {" "}<FontAwesomeIcon icon={faMugHot} />{" "}
           </span>
-          by BootstrapBay
+          by React-Bootstrap
         </p>
       </div>
       </Container>

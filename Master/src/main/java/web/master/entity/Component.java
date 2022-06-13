@@ -2,10 +2,12 @@ package web.master.entity;
 
 public class Component {
     private Integer id_component;
-    private String typecmp;
     private String namecmp;
+    private String typecmp;
     private Integer id_guaranteecmp;
+    private Integer guarante_period;
     private Integer manufacturercmp;
+    private String manufacturercmp_name;
     private Double pricecmp;
     public Component(){}
 
@@ -55,5 +57,21 @@ public class Component {
 
     public void setPricecmp(Double pricecmp) {
         this.pricecmp = pricecmp;
+    }
+
+    public Integer getGuarante_period() {
+        return guarante_period;
+    }
+
+    public void setGuarante_period(Integer guarante_period) {
+        this.guarante_period = guarante_period;
+    }
+
+    public String getManufacturercmp_name() {
+        return manufacturercmp_name;
+    }
+
+    public void setManufacturercmp_name(String manufacturercmp_name) {
+        this.manufacturercmp_name = manufacturercmp_name;
     }
 }

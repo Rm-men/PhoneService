@@ -140,8 +140,8 @@ public class ControllerStaffList implements Initializable {
 
         col_cname.setCellValueFactory(new PropertyValueFactory<Component, String>("namecmp"));
         col_ctype.setCellValueFactory(new PropertyValueFactory<Component, String>("typecmp"));
-        col_cgarranty.setCellValueFactory(new PropertyValueFactory<Component, String>("id_guaranteecmp"));
-        col_manufact.setCellValueFactory(new PropertyValueFactory<Component, String>("manufacturercmp"));
+        col_cgarranty.setCellValueFactory(new PropertyValueFactory<Component, String>("guarante_period"));
+        col_manufact.setCellValueFactory(new PropertyValueFactory<Component, String>("manufacturercmp_name"));
         col_cprice.setCellValueFactory(new PropertyValueFactory<Component, Double>("pricecmp"));
 
         tv_components.setItems(ComponentsData);
@@ -152,7 +152,7 @@ public class ControllerStaffList implements Initializable {
         try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM component");
+            ResultSet rs = st.executeQuery("SELECT * FROM component join guarantee g on g.id_guarantee = component.id_guaranteecmp join manufacturer m on m.id_manufacturer = component.manufacturercmp");
 
             while (rs.next()) {
                 Component comp = new Component();
@@ -160,8 +160,10 @@ public class ControllerStaffList implements Initializable {
                 comp.setTypecmp(rs.getString("typecmp"));
                 comp.setNamecmp(rs.getString("namecmp"));
                 comp.setId_guaranteecmp(rs.getInt("id_guaranteecmp"));
+                comp.setGuarante_period(rs.getInt("period"));
                 comp.setManufacturercmp(rs.getInt("manufacturercmp"));
                 comp.setPricecmp(rs.getDouble("pricecmp"));
+                comp.setManufacturercmp_name(rs.getString("name"));
 
                 ComponentsData.add(comp);
             }

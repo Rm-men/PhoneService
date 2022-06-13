@@ -1,5 +1,5 @@
 import React from 'react';
-import L_Navibar from '../usercabinet/L_Navibar';
+import L_Navibar from '../usercabinet/auth_Navibar';
 import { Button, Nav, Navbar, Table, Container, Row, Form, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

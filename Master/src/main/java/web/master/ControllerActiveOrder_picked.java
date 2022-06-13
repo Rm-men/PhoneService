@@ -7,14 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.entity.Component;
 import web.master.entity.Employee;
 import web.master.entity.Order;
+import web.master.entity.Service;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,8 +34,24 @@ public class ControllerActiveOrder_picked implements Initializable {
     @FXML public TextArea ta_contacts;
     @FXML public TextArea ta_services;
     @FXML public TextArea ta_components;
+
+    @FXML public TableView tv_services;
+    @FXML private TableColumn<Service, String>  col_srv_name;
+    @FXML private TableColumn<Service, String>  col_srv_type;
+    @FXML private TableColumn<Service, String>  col_srv_descr;
+    @FXML private TableColumn<Service, String>  col_srv_time;
+    @FXML private TableColumn<Service, Double>  col_srv_cost;
+
+    @FXML public TableView tv_components;
+    @FXML private TableColumn<Component, String>  col_cmp_name;
+    @FXML private TableColumn<Component, String>  col_cmp_type;
+    @FXML private TableColumn<Component, String>  col_cmp_garanty;
+    @FXML private TableColumn<Component, String>  col_cmp_manufacturer;
+    @FXML private TableColumn<Component, Double>  col_cmp_price;
+
     private static ObservableList<String> statusList = FXCollections.observableArrayList();
     private ObservableList<String> idstatusList = FXCollections.observableArrayList();
+
 
     private Stage _stage_c;
 
@@ -98,6 +114,46 @@ public class ControllerActiveOrder_picked implements Initializable {
                 System.out.println("Click to change components");
             }
         });
+
+        col_srv_name.setCellValueFactory(new PropertyValueFactory<Service, String>("1"));
+        col_srv_type.setCellValueFactory(new PropertyValueFactory<Service, String>("1"));
+        col_srv_descr.setCellValueFactory(new PropertyValueFactory<Service, String>("1"));
+        col_srv_time.setCellValueFactory(new PropertyValueFactory<Service, String>("1"));
+        col_srv_cost.setCellValueFactory(new PropertyValueFactory<Service, Double>("1"));
+
+        col_cmp_name.setCellValueFactory(new PropertyValueFactory<Component, String>("1"));
+        col_cmp_type.setCellValueFactory(new PropertyValueFactory<Component, String>("1"));
+        col_cmp_garanty.setCellValueFactory(new PropertyValueFactory<Component, String>("1"));
+        col_cmp_manufacturer.setCellValueFactory(new PropertyValueFactory<Component, String>("1"));
+        col_cmp_price.setCellValueFactory(new PropertyValueFactory<Component, Double>("1"));
+
+
+        // tv_all_list.setItems(list_Services);
+/*        tv_components.setRowFactory(rv -> {
+            TableRow<Service> row = new TableRow();
+            row.setOnMouseClicked(mouseEvent -> {
+                Service service = row.getItem();
+                try {
+                    all_rowClick(service);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            return row;
+        });*/
+/*        tv_services.setRowFactory(rv -> {
+            TableRow<Service> row = new TableRow();
+            row.setOnMouseClicked(mouseEvent -> {
+                Service service = row.getItem();
+                try {
+                    curr_rowClick(service);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            return row;
+        });*/
+
     }
     public void getStatusList() {
         // ObservableList<String> list = FXCollections.observableArrayList();
@@ -129,6 +185,14 @@ public class ControllerActiveOrder_picked implements Initializable {
             while (rs.next()) {
                 idordst = rs.getString("idos");
             }
+            ps = con.prepareStatement("INSERT INTO story_order_move (idorder, idhuman, idoldstatus, idnewstatus)values (?,?,?,?)");
+            ps.setInt(1, _Order.getId_order());
+            ps.setInt(2, _Employee.getId());
+            ps.setString(3, _Order.getId_order_status());
+            ps.setString(4, idordst);
+/*            ps.setInt(5, _Order.getId_order());
+            ps.setInt(6, _Order.getId_order());*/
+            ps.execute();
 
             ps = con.prepareStatement("UPDATE orders SET id_order_status = ? WHERE id_order = ?;");
             ps.setString(1, idordst);

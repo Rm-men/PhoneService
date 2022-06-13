@@ -1,6 +1,7 @@
 import React from 'react';
-
 import { Button, Container, Form, FormLabel, InputGroup, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 export default function RForm() {
   return (
     <Container>
@@ -9,7 +10,9 @@ export default function RForm() {
           <div className='register-form'>
             <div className='mb-5'>
               <h1>Регистрация</h1>
-              <p className="lead">Создайте свой аккаунт для доступа к оформлению заказа на ремонт</p>
+              <p className='lead'>
+                Создайте свой аккаунт для доступа к оформлению заказа на ремонт
+              </p>
             </div>
             <Form>
               <Form.Group className='mb-3' controlId='formBasicEmail'>
@@ -30,12 +33,14 @@ export default function RForm() {
               <Form.Group className='mb-3' controlId='formBasicCheckbox'>
                 <Form.Check type='checkbox' label='Запомнить меня' />
               </Form.Group>
-              <Button variant='primary' type='submit'>
-                Зарегистрироваться
-              </Button>
+              <Link to="home">
+                <Button variant='primary' type='submit'>
+                  Зарегистрироваться
+                </Button>
+              </Link>
             </Form>
             <p className='small my-4 text-center'>
-              Есть аккаунт? <a href='#a'>Авторизируйтесь</a>
+              Есть аккаунт? <a href='/login'>Авторизируйтесь</a>
             </p>
           </div>
         </Col>

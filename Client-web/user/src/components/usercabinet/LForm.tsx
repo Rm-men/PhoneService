@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Button, Container, Form, FormLabel, InputGroup, Row, Col } from 'react-bootstrap';
 export default function LForm() {
@@ -26,12 +27,14 @@ export default function LForm() {
               <Form.Group className='mb-3' controlId='formBasicCheckbox'>
                 <Form.Check type='checkbox' label='Запомнить меня' />
               </Form.Group>
+              <Link to="/usercabinet">
               <Button variant='primary' type='submit'>
                 Войти
               </Button>
+              </Link>
             </Form>
             <p className='small my-4 text-center'>
-              Нет аккаунта? <a href='#a'>Зарегистрируйтесь</a>
+              Нет аккаунта? <a href='/register'>Зарегистрируйтесь</a>
             </p>
           </div>
         </Col>

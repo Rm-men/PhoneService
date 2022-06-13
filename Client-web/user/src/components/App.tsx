@@ -1,7 +1,7 @@
 import React from 'react';
 import UserCabinet from './wiews/UserCabinet';
 import Landing from './wiews/Landing';
-import Navibar from './usercabinet/L_Navibar';
+import Navibar from './usercabinet/auth_Navibar';
 import { Route, Router, Routes} from 'react-router-dom';
 function App () {
     return (
