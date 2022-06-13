@@ -1,9 +1,17 @@
 import React from 'react';
-
-class App extends React.Component {
-    render() {
-      return <h1>Привет, мир!</h1>;
-    }
+import UserCabinet from './wiews/UserCabinet';
+import Landing from './wiews/Landing';
+import Navibar from './usercabinet/L_Navibar';
+import { Route, Router, Routes} from 'react-router-dom';
+function App () {
+    return (
+      <>
+      <Navibar/>
+      <Routes>
+        <Route path='/home' element={Landing}/>
+        <Route path='/usercabinet' element={UserCabinet}/>
+      </Routes>
+    </>
+    )
   }
-
 export default App;

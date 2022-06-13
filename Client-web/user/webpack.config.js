@@ -12,23 +12,14 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js']
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: '/node_modules/'
             },
             {
-                test: /\.(png|jpe?g|gif)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
-            },
-            {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
+                test: /\.(png|jp?g|gif)$/i,
+                use: [{ loader: 'file-loader', }, ],
             },
         ],
     },
