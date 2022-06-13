@@ -198,18 +198,18 @@ CONSTRAINT  fk_som_newaddress  FOREIGN KEY (idnewaddress) REFERENCES list_worksh
 
 CREATE TABLE on_order_cmp (
     id_cmp_onord              SERIAL PRIMARY KEY,
-    id_onorderoncomp         int,
+    id_order_forcomp          int,
     id_cmp_onlist             int,
-    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_onorderoncomp) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
+    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_order_forcomp) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
     CONSTRAINT  fk_cmponorder_component   FOREIGN KEY (id_cmp_onlist) REFERENCES component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
 CREATE TABLE on_order_srv (
     id_srv_onord              SERIAL PRIMARY KEY,
-    id_onorderonservice      int,
-    id_srvo_nlist             int,
-    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_onorderonservice) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
-    CONSTRAINT  fk_cmponorder_component   FOREIGN KEY (id_srvo_nlist) REFERENCES list_sirvices (id) ON DELETE NO ACTION ON UPDATE CASCADE
+    id_order_forservice      int,
+    id_srv_onlist             int,
+    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_order_forservice) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
+    CONSTRAINT  fk_cmponorder_component   FOREIGN KEY (id_srv_onlist) REFERENCES list_sirvices (id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
 --------------------------------------------------- запросы для изменениея конфигурации
