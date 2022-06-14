@@ -13,6 +13,9 @@ import web.master.mains.ControllerMain;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ResourceBundle;
 
@@ -34,6 +37,8 @@ public class ControllerAuth implements Initializable {
                     Connection con = null;
                     try {
                         con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+                        Conn с = new Conn();
+                        с.setConnect(con);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -45,16 +50,16 @@ public class ControllerAuth implements Initializable {
 
                     String login = Login.getText();
                     String enteredPass = Password.getText();
-/*
+
                     byte[] ress = MessageDigest.getInstance("SHA-256").digest(enteredPass.getBytes(StandardCharsets.UTF_8));
                     StringBuilder passBuild = new StringBuilder();
                     for (byte b : ress) {
                         passBuild.append(String.format("%02x", b));
                     }
-                    */
+                    String pasw = passBuild.toString();
                     st.setString(1, login);
-                    // st.setString(2, passBuild.toString());
-                    st.setString(2, enteredPass);
+                    st.setString(2, passBuild.toString());
+                    // st.setString(2, enteredPass);
                     ResultSet rs = st.executeQuery();
                     if(rs.next()){
                         Employee emp = new Employee();
@@ -75,7 +80,7 @@ public class ControllerAuth implements Initializable {
                         openMain(emp);
                         Stage stage = (Stage)SignInBtn.getScene().getWindow();
                         stage.close();
-                        con.close();
+                        // con.close();
                     }
                     else{
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -91,6 +96,8 @@ public class ControllerAuth implements Initializable {
                     {
                         e.printStackTrace();
                     }
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
                 }
             }
         });

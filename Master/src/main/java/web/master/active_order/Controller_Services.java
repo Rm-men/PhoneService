@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.MainStart;
 import web.master.entity.Employee;
 import web.master.entity.Order;
@@ -20,10 +21,11 @@ import web.master.mains.ControllerActiveOrder;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Controller_Services implements Initializable {
-    private static Connection con;
+    private Connection con;
     @FXML public Button b_config;
     @FXML public ComboBox cb_category;
     @FXML public Label l_c_services;
@@ -48,7 +50,6 @@ public class Controller_Services implements Initializable {
     private ObservableList<String> list_Types = FXCollections.observableArrayList();
 
 
-
     public Employee _Employee; // private
     public Order _Order;
     private Stage _stage_detail;
@@ -65,11 +66,15 @@ public class Controller_Services implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
+        cb_category.setPromptText("Без фильтра");
+        Conn с = new Conn();
+        con = с.getConnect();
+/*        try {
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
+        list_Types.add("Без фильтра");
         list_Types = getTypesList();
         cb_category.getItems().addAll(list_Types);
         b_config.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -162,10 +167,10 @@ public class Controller_Services implements Initializable {
     }
     private void initData() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
-            ResultSet rs = st.executeQuery("SELECT * FROM list_sirvices" );
+            ResultSet rs = st.executeQuery("SELECT * FROM list_sirvices WHERE namesrv != 'Без фильтра'" );
             while (rs.next()) {
                 Service service = new Service();
                 service.setId_service(rs.getInt("id"));
@@ -176,9 +181,11 @@ public class Controller_Services implements Initializable {
                 service.setTimesrv(rs.getString("timesrv"));
                 list_Services.add(service);
             }
+
             PreparedStatement ps = con.prepareStatement("SELECT * FROM on_order_srv JOIN list_sirvices ls on ls.id = on_order_srv.id_srv_onlist WHERE id_order_forservice = ?");
             ps.setInt(1, _Order.getId_order());
             rs = ps.executeQuery();
+            list_Cur.clear();
             while (rs.next()) {
                 Service service = new Service();
                 service.setId_service(rs.getInt("id"));
@@ -191,7 +198,7 @@ public class Controller_Services implements Initializable {
             }
             caclTotal();
             rs.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();
@@ -211,10 +218,10 @@ public class Controller_Services implements Initializable {
         list_Cur.remove(service);
         caclTotal();
     }
-    public static ObservableList<String> getTypesList() {
+    private ObservableList<String> getTypesList() {
         ObservableList<String> list = FXCollections.observableArrayList();
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("Select DISTINCT typesrv From list_sirvices");
             while (rs.next()) {
@@ -223,7 +230,7 @@ public class Controller_Services implements Initializable {
             }
             rs.close();
             st.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -238,11 +245,17 @@ public class Controller_Services implements Initializable {
         }*/
         try {
             tv_all_list.getItems().clear();
-            // list_Cur.clear();
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            list_All.clear();
+            if (Objects.equals(cb_category.getValue().toString(), "Без фильтра") || cb_category.getValue() == null) {
+                initData();
+                return;
+            }
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
-            ResultSet rs = st.executeQuery("SELECT * FROM list_sirvices WHERE typesrv = '"+ cb_category.getValue().toString()+"';" );
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM list_sirvices WHERE typesrv = ?;");
+            ps.setString(1, cb_category.getValue().toString());
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Service service = new Service();
                 service.setId_service(rs.getInt("id"));
@@ -251,13 +264,12 @@ public class Controller_Services implements Initializable {
                 service.setTypesrv(rs.getString("typesrv"));
                 service.setCostsrv(rs.getDouble("costsrv"));
                 service.setTimesrv(rs.getString("timesrv"));
-
                 list_All.add(service);
-                //tv_all_list.getItems().add(service);
+                tv_all_list.getItems().add(service);
             }
             //tv_all_list.getItems().clear();
             //v_all_list.getItems().addAll(list_All);
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -281,7 +293,7 @@ public class Controller_Services implements Initializable {
     }
     public void configureChanges() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
             PreparedStatement ps = con.prepareStatement("DELETE FROM on_order_srv WHERE id_order_forservice = ? " );
@@ -295,7 +307,7 @@ public class Controller_Services implements Initializable {
                 ps.executeUpdate();
             }
             caclTotal();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();

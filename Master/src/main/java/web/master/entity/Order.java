@@ -18,6 +18,10 @@ public class Order {
     private String descriptionord;
     private String comments;
 
+    private String services;
+    private String components;
+
+
     public Order(){}
     public Order(Integer id_order, String order_date, String phone_number, String address, Integer id_client, Integer id_master, Integer id_phone, String id_order_status, String descriptionos, String description, String comments){
         this.id_order = id_order;
@@ -159,5 +163,21 @@ public class Order {
 
     public void setNamephone(String namephone) {
         this.namephone = namephone;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void addServices(String services) {
+        this.services += services;
+    }
+
+    public String getComponents() {
+        return components;
+    }
+
+    public void addComponents(String components) {
+        this.components += components+", " ;
     }
 }

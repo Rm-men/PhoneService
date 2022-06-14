@@ -1,4 +1,4 @@
-package web.master.active_order;
+package web.master.trash;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import web.master.MainStart;
+import web.master.active_order.ControllerActiveOrder_picked;
 import web.master.entity.Employee;
 import web.master.entity.Order;
 import web.master.mains.ControllerFreeOrder;
@@ -25,7 +26,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ControllerActiveOrder_old implements Initializable {
-    private Connection con;
+    private static Connection con;
     @FXML private TableView<Order> tv_aOrders;
     @FXML public Button b_freeOrder;
     @FXML public Button b_activeOrder;
@@ -187,7 +188,8 @@ public class ControllerActiveOrder_old implements Initializable {
     }
     private void initData() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM orders_view WHERE id_master = ?;");
             ps.setInt(1, _Employee.getId());
@@ -214,7 +216,7 @@ public class ControllerActiveOrder_old implements Initializable {
 
                 OrdersData.add(order);
             }
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();
@@ -243,7 +245,7 @@ public class ControllerActiveOrder_old implements Initializable {
             OrdersData.clear();
             tv_aOrders.getItems().clear();
 
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             String sql = ("SELECT * FROM orders_view WHERE id_master = ?;");
 
             // Statement st = con.createStatement();
@@ -301,7 +303,7 @@ public class ControllerActiveOrder_old implements Initializable {
 
                 OrdersData.add(order);
             }
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();

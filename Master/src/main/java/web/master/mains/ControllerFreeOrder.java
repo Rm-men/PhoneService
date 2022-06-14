@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.free_order.ControllerFreeOrder_no_picked;
 import web.master.MainStart;
 import web.master.entity.Employee;
@@ -43,6 +44,9 @@ public class ControllerFreeOrder implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Conn с = new Conn();
+        con = с.getConnect();
+
         l_username.setText(_Employee.getName());
         b_freeOrder.setStyle("-fx-background-color: #8d94d8; -fx-border-width: 5px;");
         b_freeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -157,7 +161,10 @@ public class ControllerFreeOrder implements Initializable {
     }
     private void initData() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Conn с = new Conn();
+            con = с.getConnect();
+
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery("SELECT * FROM orders_view WHERE id_master is null;");
             while (rs.next()) {
@@ -178,7 +185,7 @@ public class ControllerFreeOrder implements Initializable {
 
                 OrdersData.add(order);
             }
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();

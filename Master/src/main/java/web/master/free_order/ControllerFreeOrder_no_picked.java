@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.MainStart;
 import web.master.entity.Employee;
 import web.master.entity.Order;
@@ -19,7 +20,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class ControllerFreeOrder_no_picked implements Initializable {
-    private Connection con;
+    private static Connection con;
     @FXML public Button b_accept;
     @FXML public Label l_date;
     @FXML public TextArea ta_phone;
@@ -48,14 +49,17 @@ public class ControllerFreeOrder_no_picked implements Initializable {
                 System.out.println("Заказ принят");
                 // Stage stage_c = (Stage) b_freeOrder.getScene().getWindow();
                 try {
-                    con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+                    Conn с = new Conn();
+                    con = с.getConnect();
+
+                    // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
                     String sql = "UPDATE orders set id_master = ? WHERE id_order = ?";
                     PreparedStatement ps = con.prepareStatement(sql);
                     ps.setInt(1, _Employee.getId());
                     ps.setInt(2, _Order.getId_order());
                     ps.executeUpdate();
                     ps.close();
-                    con.close();
+                    // con.close();
                     Stage stage_c = (Stage) b_accept.getScene().getWindow();
                     stage_c.close();
                     {

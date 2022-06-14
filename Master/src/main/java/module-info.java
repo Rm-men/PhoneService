@@ -15,4 +15,6 @@ module web.master {
     opens web.master.active_order to javafx.fxml;
     exports web.master.free_order;
     opens web.master.free_order to javafx.fxml;
+    exports web.master.trash;
+    opens web.master.trash to javafx.fxml;
 }

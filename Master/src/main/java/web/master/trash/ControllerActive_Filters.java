@@ -1,4 +1,4 @@
-package web.master;
+package web.master.trash;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.entity.Employee;
 import web.master.entity.Service;
 import web.master.mains.ControllerActiveOrder;
@@ -77,7 +78,9 @@ public class ControllerActive_Filters implements Initializable {
     }
     private void initDataFiltr() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Conn с = new Conn();
+            con = с.getConnect();
             Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
             ResultSet rs = st.executeQuery("SELECT namephone FROM phone_model;" );
@@ -95,7 +98,7 @@ public class ControllerActive_Filters implements Initializable {
             }
             rs.close();
             st.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

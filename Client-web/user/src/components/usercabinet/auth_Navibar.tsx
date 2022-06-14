@@ -4,6 +4,7 @@ import { Button, Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router-dom';
+import UserCabinet from '../wiews/UserCabinet';
 
 export default function L_Navibar() {
   const [show, setShow] = useState(false);
@@ -20,9 +21,9 @@ export default function L_Navibar() {
           <Navbar.Toggle aria-controls='responsive-navbar-nav'></Navbar.Toggle>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='me-auto'>
-              <Nav.Link>Главная страница</Nav.Link>
-              <Nav.Link>Услуги</Nav.Link>
-              <Nav.Link>Личный кабинет</Nav.Link>
+              <Nav.Link href="/home/registred">Главная страница</Nav.Link>
+              <Nav.Link disabled>Услуги</Nav.Link>
+              <Nav.Link href="/usercabinet">Личный кабинет</Nav.Link>
             </Nav>
             <Button variant='primary' onClick={handleShow}>
               <i className='bi-person-circle text-light' style={{ fontSize: 20 }}></i>

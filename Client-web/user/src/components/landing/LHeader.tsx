@@ -49,7 +49,7 @@ const LHeader = () => {
             <Button variant='secondary' onClick={handleClose}>
               Отмена
             </Button>
-            <Link to='/'>
+            <Link to='/register'>
               <Button variant='primary' onClick={handleClose}>
                 Зарегистрироваться
               </Button>

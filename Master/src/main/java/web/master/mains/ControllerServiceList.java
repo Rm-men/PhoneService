@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.MainStart;
 import web.master.entity.Employee;
 import web.master.entity.Service;
@@ -27,6 +28,7 @@ public class ControllerServiceList implements Initializable {
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
+
     @FXML public Label l_username;
     @FXML private ObservableList<Service> ServicesData = FXCollections.observableArrayList();
     @FXML private TableColumn<Service, String> col_Service;
@@ -34,6 +36,8 @@ public class ControllerServiceList implements Initializable {
     @FXML private TableColumn<Service, String> col_Description;
     @FXML private TableColumn<Service, String> col_Price;
     @FXML private TableColumn<Service, String> col_Time;
+
+    @FXML public Button b_filters;
 
     public Employee _Employee; // private
 
@@ -43,6 +47,19 @@ public class ControllerServiceList implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         l_username.setText(_Employee.getName());
         b_listServices.setStyle("-fx-background-color: #8d94d8; -fx-border-width: 5px;");
+        b_filters.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Stage stage_c = (Stage) b_freeOrder.getScene().getWindow();
+                stage_c.close();
+                Conn c = new Conn();
+                try {
+                    c.getConnect().close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         b_freeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -154,7 +171,9 @@ public class ControllerServiceList implements Initializable {
     }
     private void initData() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Conn с = new Conn();
+            con = с.getConnect();
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM list_sirvices;");
             while (rs.next()) {
@@ -167,7 +186,7 @@ public class ControllerServiceList implements Initializable {
                 service.setTimesrv(rs.getString("timesrv"));
 
                 ServicesData.add(service);
-                con.close();
+                // con.close();
             }
         } catch (SQLException e) {
             {

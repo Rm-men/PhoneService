@@ -12,6 +12,8 @@ import Login from './components/wiews/Login';
 import Register from './components/wiews/Register';
 import NewOrder from './components/wiews/NewOrder';
 import L_Navibar from './components/usercabinet/auth_Navibar';
+import LNavbar from './components/landing/LNavbar';
+import L_Landing from './components/wiews/L_Landing'; 
 
 
 // const store = configureStore();
@@ -20,9 +22,9 @@ ReactDOM.render(
 	<React.StrictMode>
 			<BrowserRouter>
             	<Routes>
-					<Route path={"/logined/"} element={<L_Navibar />} />
+					<Route path={"/home/registred"} element={<L_Landing/>} />
             		<Route path={"register"} element={<Register />} />
-            		<Route path={"/"} element={<Landing />} />
+            		<Route path={"/"} element={<Landing/>} />
             		<Route path={"usercabinet"} element={<UserCabinet />} />
             		<Route path={"neworder"} element={<NewOrder />} />
             		<Route path={"login"} element={<Login />} />

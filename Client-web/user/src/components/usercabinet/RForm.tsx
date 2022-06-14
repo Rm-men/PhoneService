@@ -33,7 +33,7 @@ export default function RForm() {
               <Form.Group className='mb-3' controlId='formBasicCheckbox'>
                 <Form.Check type='checkbox' label='Запомнить меня' />
               </Form.Group>
-              <Link to="home">
+              <Link to="/usercabinet">
                 <Button variant='primary' type='submit'>
                   Зарегистрироваться
                 </Button>

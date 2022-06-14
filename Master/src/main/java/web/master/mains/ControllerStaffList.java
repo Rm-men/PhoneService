@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.MainStart;
 import web.master.entity.Component;
 import web.master.entity.Employee;
@@ -150,7 +151,9 @@ public class ControllerStaffList implements Initializable {
 
     private void initData() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Conn с = new Conn();
+            con = с.getConnect();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM component join guarantee g on g.id_guarantee = component.id_guaranteecmp join manufacturer m on m.id_manufacturer = component.manufacturercmp");
 
@@ -167,7 +170,7 @@ public class ControllerStaffList implements Initializable {
 
                 ComponentsData.add(comp);
             }
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();

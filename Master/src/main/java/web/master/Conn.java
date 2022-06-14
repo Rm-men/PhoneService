@@ -1,8 +1,10 @@
 package web.master;
 
-public class Connection {
-    static public class B{
-        Connection con;
+import java.sql.Connection;
+
+public class Conn {
+
+    static Connection con;
 
         public void setConnect(Connection conect){
             con = conect;
@@ -10,6 +12,5 @@ public class Connection {
         public Connection getConnect(){
             return con;
         }
-    }
 
 }

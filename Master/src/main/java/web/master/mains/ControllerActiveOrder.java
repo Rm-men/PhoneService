@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.active_order.ControllerActiveOrder_picked;
 import web.master.MainStart;
 import web.master.entity.Employee;
@@ -172,7 +173,7 @@ public class ControllerActiveOrder implements Initializable {
         col_adescription.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionord"));
         col_acomments.setCellValueFactory(new PropertyValueFactory<Order, String>("comments"));
         // col_aservices.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
-        // col_acomponents.setCellValueFactory(new PropertyValueFactory<c_Order, String>(""));
+        col_acomponents.setCellValueFactory(new PropertyValueFactory<Order, String>("components"));
         col_acontacts.setCellValueFactory(new PropertyValueFactory<Order, String>("contacts"));
         col_astatus.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionos"));
         // col_astatus.setCellValueFactory(col_status -> col_status.se(true));
@@ -196,8 +197,9 @@ public class ControllerActiveOrder implements Initializable {
     }
     private void initData() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
-            Statement st = con.createStatement();
+            Conn с = new Conn();
+            con = с.getConnect();
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             PreparedStatement ps = con.prepareStatement("SELECT * FROM orders_view WHERE id_master = ?;");
             ps.setInt(1, _Employee.getId());
             ResultSet rs = ps.executeQuery();
@@ -221,10 +223,18 @@ public class ControllerActiveOrder implements Initializable {
                 order.setNamecl(rs.getString("family"));
                 order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
+                PreparedStatement ps_prom = con.prepareStatement("SELECT namecmp FROM component  JOIN on_order_cmp ooc on component.id_component = ooc.id_cmp_onlist WHERE id_order_forcomp = ?;");
+                ps_prom.setInt(1, rs.getInt("id_order") );
+                ResultSet rs_prom = ps_prom.executeQuery();
+                while (rs_prom.next())
+                {
+                    order.addComponents(rs_prom.getString("namecmp"));
+                }
+                // order.addServices("");
                 OrdersData.add(order);
                 OrdersDataBack.add(order);
             }
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();
@@ -262,7 +272,7 @@ public class ControllerActiveOrder implements Initializable {
     }
     private void initDataFiltr() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
             ResultSet rs = st.executeQuery("SELECT namephone FROM phone_model;" );
@@ -280,7 +290,7 @@ public class ControllerActiveOrder implements Initializable {
             }
             rs.close();
             st.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -293,7 +303,7 @@ public class ControllerActiveOrder implements Initializable {
             if (contacts == null)
                 contacts = "";
 
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             String sql = ("SELECT * FROM orders_view WHERE id_master = ? ");
 
             // Statement st = con.createStatement();
@@ -362,7 +372,7 @@ public class ControllerActiveOrder implements Initializable {
 
                 tv_aOrders.getItems().add(order);
             }
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();

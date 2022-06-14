@@ -4,7 +4,7 @@ import {
   Container
 } from "reactstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faVk, faGithub} from '@fortawesome/free-brands-svg-icons';
+import { faVk, faGithub, faNodeJs} from '@fortawesome/free-brands-svg-icons';
 import { faMugHot} from '@fortawesome/free-solid-svg-icons';
 
 const Footer = (props) => {
@@ -29,9 +29,6 @@ const Footer = (props) => {
           <FontAwesomeIcon icon={faGithub} />
           </Button>
           {" "}
-          <Button color="primary" outline className="github btn-icon" href="https://github.com/bootstrapbay" target="_blank">
-          <i className='bi-github text-secondary' style={{ fontSize: 20 }}></i>
-          </Button>
         </div>
       </div>
       <div className="copyright text-center">
@@ -40,6 +37,9 @@ const Footer = (props) => {
           <span className="text-danger">
             {" "}<FontAwesomeIcon icon={faMugHot} />{" "}
           </span>
+          {/* <span className="text-success">
+            {" "}<FontAwesomeIcon icon={faNodeJs} />{" "}
+          </span> */}
           by React-Bootstrap
         </p>
       </div>

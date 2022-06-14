@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import web.master.Conn;
 import web.master.MainStart;
 import web.master.entity.Component;
 import web.master.entity.Employee;
@@ -45,7 +46,7 @@ public class ControllerActiveOrder_picked implements Initializable {
 
 
     @FXML public TableView tv_services;
-    private ObservableList<Service> list_Cur = FXCollections.observableArrayList(); // список выбранных услуг для заказа
+    private ObservableList<Service> list_CurServices = FXCollections.observableArrayList(); // список выбранных услуг для заказа
     @FXML private TableColumn<Service, String>  col_srv_name;
     @FXML private TableColumn<Service, String>  col_srv_type;
     @FXML private TableColumn<Service, String>  col_srv_descr;
@@ -53,6 +54,7 @@ public class ControllerActiveOrder_picked implements Initializable {
     @FXML private TableColumn<Service, Double>  col_srv_cost;
 
     @FXML public TableView tv_components;
+    private ObservableList<Component> list_CurComponents = FXCollections.observableArrayList(); // список выбранных компонентов для заказа
     @FXML private TableColumn<Component, String>  col_cmp_name;
     @FXML private TableColumn<Component, String>  col_cmp_type;
     @FXML private TableColumn<Component, Integer> col_cmp_garanty;
@@ -102,7 +104,7 @@ public class ControllerActiveOrder_picked implements Initializable {
                 Stage stage_c = (Stage) b_ch_comment.getScene().getWindow();
                 System.out.println("Click to change services");
                 Stage newWindow = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("ComponentsServices.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("Adding_Services.fxml"));
                 fxmlLoader.setController( new Controller_Services(_Employee, _Order, stage_c, _stage_main));
                 Scene scene = null;
                 try {
@@ -124,7 +126,20 @@ public class ControllerActiveOrder_picked implements Initializable {
         b_ch_components.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("Click to change components");
+                Stage stage_c = (Stage) b_ch_comment.getScene().getWindow();
+                System.out.println("Click to change services");
+                Stage newWindow = new Stage();
+                FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("Adding_Components.fxml"));
+                fxmlLoader.setController( new Controller_Components(_Employee, _Order, stage_c, _stage_main));
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                newWindow.setTitle("Мастерская - выбор компонентов");
+                newWindow.setScene(scene);
+                newWindow.show();
             }
         });
 
@@ -133,15 +148,15 @@ public class ControllerActiveOrder_picked implements Initializable {
         col_srv_descr.setCellValueFactory(new PropertyValueFactory<Service, String>("descriptionsrv"));
         col_srv_time.setCellValueFactory(new PropertyValueFactory<Service, String>("timesrv"));
         col_srv_cost.setCellValueFactory(new PropertyValueFactory<Service, Double>("costsrv"));
-        tv_services.setItems(list_Cur);
-/*
+
         col_cmp_name.setCellValueFactory(new PropertyValueFactory<Component, String>("namecmp"));
         col_cmp_type.setCellValueFactory(new PropertyValueFactory<Component, String>("typecmp"));
         col_cmp_garanty.setCellValueFactory(new PropertyValueFactory<Component, Integer>("guarante_period"));
         col_cmp_manufacturer.setCellValueFactory(new PropertyValueFactory<Component, String>("manufacturercmp_name"));
-        col_cmp_price.setCellValueFactory(new PropertyValueFactory<Component, Double>("pricecmp"));*/
+        col_cmp_price.setCellValueFactory(new PropertyValueFactory<Component, Double>("pricecmp"));
+        caclTotal();
 
-
+/*
         // tv_all_list.setItems(list_Services);
 /*        tv_components.setRowFactory(rv -> {
             TableRow<Service> row = new TableRow();
@@ -171,7 +186,10 @@ public class ControllerActiveOrder_picked implements Initializable {
     }
     private void initData() {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Conn с = new Conn();
+            con = с.getConnect();
+
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
             PreparedStatement ps = con.prepareStatement("SELECT * FROM on_order_srv JOIN list_sirvices ls on ls.id = on_order_srv.id_srv_onlist WHERE id_order_forservice = ?");
@@ -185,10 +203,26 @@ public class ControllerActiveOrder_picked implements Initializable {
                 service.setTypesrv(rs.getString("typesrv"));
                 service.setCostsrv(rs.getDouble("costsrv"));
                 service.setTimesrv(rs.getString("timesrv"));
-                list_Cur.add(service);
+                list_CurServices.add(service);
+                tv_services.getItems().add(service);
+            }
+
+            ps = con.prepareStatement("SELECT * FROM on_order_cmp JOIN component c on on_order_cmp.id_cmp_onlist = c.id_component JOIN manufacturer m on m.id_manufacturer = c.manufacturercmp JOIN guarantee g on g.id_guarantee = c.id_guaranteecmp WHERE id_order_forcomp = ?");
+            ps.setInt(1, _Order.getId_order());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Component cmp = new Component();
+                cmp.setId_component(rs.getInt("id_component"));
+                cmp.setNamecmp(rs.getString("namecmp"));
+                cmp.setTypecmp(rs.getString("typecmp"));
+                cmp.setGuarante_period(rs.getInt("period"));
+                cmp.setManufacturercmp_name(rs.getString("name"));
+                cmp.setPricecmp(rs.getDouble("pricecmp"));
+                list_CurComponents.add(cmp);
+                tv_components.getItems().add(cmp);
             }
             rs.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             {
                 e.printStackTrace();
@@ -262,7 +296,7 @@ public class ControllerActiveOrder_picked implements Initializable {
         }
         _stage_main.close();
     }
-    public void  editComment(String comment) {
+    public void editComment(String comment) {
         try {
             System.out.print("Comment changed");
             con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
@@ -276,6 +310,21 @@ public class ControllerActiveOrder_picked implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void caclTotal() {
+        Double sumC = 0.0;
+        Double sumS = 0.0;
+        for (Component cmp: list_CurComponents)
+        {
+            sumC += cmp.getPricecmp();
+        }
+        for (Service service: list_CurServices)
+        {
+            sumS += service.getCostsrv();
+        }
+        l_service_price.setText(""+sumS);
+        l_components_price.setText(""+sumC);
+        l_total_price.setText(""+(sumC+sumS));
     }
 }
 

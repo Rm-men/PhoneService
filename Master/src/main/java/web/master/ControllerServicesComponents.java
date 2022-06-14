@@ -45,6 +45,9 @@ public class ControllerServicesComponents implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Conn с = new Conn();
+        con = с.getConnect();
+
         statusList = getStatusList();
         cb_status.getItems().addAll(statusList);
         // l_date.setText(_Order.getOrder_date());
@@ -78,16 +81,16 @@ public class ControllerServicesComponents implements Initializable {
     public static ObservableList<String> getStatusList() {
         ObservableList<String> list = FXCollections.observableArrayList();
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select description_order_status From order_status");
+            ResultSet rs = st.executeQuery("Select descriptionos From order_status");
             while (rs.next()) {
                 String stat = rs.getString("description_order_status");
                 list.add(stat);
             }
             rs.close();
             st.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
