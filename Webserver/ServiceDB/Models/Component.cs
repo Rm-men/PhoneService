@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 
 #nullable disable
 
@@ -25,5 +28,6 @@ namespace ServiceDB.Models
         public virtual Manufacturer ManufacturercmpNavigation { get; set; }
         public virtual ICollection<ComponentsComplibility> ComponentsComplibilities { get; set; }
         public virtual ICollection<OnOrderCmp> OnOrderCmps { get; set; }
+
     }
 }

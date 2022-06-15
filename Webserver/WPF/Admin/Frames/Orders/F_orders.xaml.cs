@@ -42,8 +42,8 @@ namespace WPF.Admin.Frames.Orders
 */        }
         public void Refresh()
         {
-/*            spase.Navigate(new P_Orders_table(this));
-*/        }
+            spase.Navigate(new T_orders(this));
+        }
 
         private void Bto_ord_statistic(object sender, RoutedEventArgs e)
         {

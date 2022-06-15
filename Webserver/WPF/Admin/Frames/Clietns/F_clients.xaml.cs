@@ -43,8 +43,8 @@ namespace WPF.Admin.Frames.Clietns
         }
         public void Refresh()
         {
-            /*            spase.Navigate(new P_Orders_table(this));
-            */
+            spase.Navigate(new T_client(this));
+
         }
     }
 }

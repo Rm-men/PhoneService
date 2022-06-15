@@ -144,7 +144,7 @@ create table component
         constraint fk_comp_guarantee
             references guarantee
             on update restrict on delete restrict,
-    manufacturercmp integer     not null
+    manufacturercmp integer
         constraint fk_comp_manufacturer
             references manufacturer
             on update cascade on delete restrict,
@@ -288,4 +288,60 @@ create table on_order_srv
             references list_sirvices
             on update cascade
 );
+
+
+create view employees_view
+            (id, id_contract, paspserial, paspnumber, empaddress, type, phone, dateemploymentet, workshop, family, name,
+             patronymic, login, password, address)
+as
+SELECT e.id,
+       e.id_contract,
+       e.paspserial,
+       e.paspnumber,
+       e.empaddress,
+       e.type,
+       e.phone,
+       e.dateemploymentet,
+       e.workshop,
+       e.family,
+       e.name,
+       e.patronymic,
+       e.login,
+       e.password,
+       lw.address
+FROM employee e
+         JOIN list_workshops lw ON lw.id = e.workshop;
+
+alter table employees_view
+    owner to work100024;
+
+create view orders_view
+            (id_order, dateord, phonenumber, address, agreement, id_client, family, namecl, patronymic, namephone,
+             descriptionos, descriptionord, comments, id_master, id_phone, id_order_status, contacts)
+as
+SELECT orders.id_order,
+       orders.dateord,
+       orders.phonenumber,
+       orders.address,
+       orders.agreement,
+       c.id_client,
+       c.family,
+       c.namecl,
+       c.patronymic,
+       pm.namephone,
+       os.descriptionos,
+       orders.descriptionord,
+       orders.comments,
+       orders.id_master,
+       orders.id_phone,
+       orders.id_order_status,
+       concat(c.family, c.namecl, c.patronymic, orders.phonenumber) AS contacts
+FROM orders
+         JOIN phone p ON p.id = orders.id_phone
+         JOIN phone_model pm ON p.id_phone_model = pm.id_phone_model
+         JOIN order_status os ON orders.id_order_status::text = os.idos::text
+         JOIN client c ON c.id_client = orders.id_client;
+
+alter table orders_view
+    owner to work100024;
 

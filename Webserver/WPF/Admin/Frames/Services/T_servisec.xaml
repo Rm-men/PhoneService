@@ -26,17 +26,11 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="Услуга"             Binding="{Binding Path=IdOrderStatus}"/>
-                <DataGridTextColumn Header="Тип"                Binding="{Binding Path=PhoneNumber}"/>
-                <DataGridTextColumn Header="Описание"           Binding="{Binding Path=Address}"/>
-                <DataGridTextColumn Header="Цена"                Binding="{Binding Path=OrderDate}"/>
-                <DataGridTextColumn Header="Время ремонта"       Binding="{Binding Path=Cost}"/>-->
-
-                <DataGridTextColumn Header="Услуга"              />
-                <DataGridTextColumn Header="Тип"                 />
-                <DataGridTextColumn Header="Описание"            />
-                <DataGridTextColumn Header="Цена"                />
-                <DataGridTextColumn Header="Время ремонта"       />
+                <DataGridTextColumn Header="Услуга"             Binding="{Binding Path=Namesrv}"/>
+                <DataGridTextColumn Header="Тип"                Binding="{Binding Path=Typesrv}"/>
+                <DataGridTextColumn Header="Описание"           Binding="{Binding Path=Descriptionsrv}"/>
+                <DataGridTextColumn Header="Цена"               Binding="{Binding Path=Costsrv}"/>
+                <DataGridTextColumn Header="Время ремонта"      Binding="{Binding Path=CoTimesrvst}"/>
             </DataGrid.Columns>
 
             <DataGrid.ItemContainerStyle>

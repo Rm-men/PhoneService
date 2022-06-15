@@ -373,6 +373,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setNamecl(rs.getString("namecl"));
                 order.setNamecl(rs.getString("patronymic"));
                 order.setNamecl(rs.getString("family"));
+                order.setAgreement(rs.getBoolean("agreement"));
                 order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
                 tv_aOrders.getItems().add(order);

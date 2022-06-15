@@ -66,7 +66,6 @@ public class Controller_Services implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cb_category.setPromptText("Без фильтра");
         Conn с = new Conn();
         con = с.getConnect();
 /*        try {
@@ -224,6 +223,7 @@ public class Controller_Services implements Initializable {
             // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("Select DISTINCT typesrv From list_sirvices");
+            list.add(null);
             while (rs.next()) {
                 String stat = rs.getString("typesrv");
                 list.add(stat);
@@ -246,7 +246,7 @@ public class Controller_Services implements Initializable {
         try {
             tv_all_list.getItems().clear();
             list_All.clear();
-            if (Objects.equals(cb_category.getValue().toString(), "Без фильтра") || cb_category.getValue() == null) {
+            if (cb_category.getValue() == null) {
                 initData();
                 return;
             }

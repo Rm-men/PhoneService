@@ -68,7 +68,6 @@ public class Controller_Components implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cb_category.setPromptText("Без фильтра");
         Conn с = new Conn();
         con = с.getConnect();
 /*        try {
@@ -76,9 +75,7 @@ public class Controller_Components implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
-        // list_Types.add("Без фильтра");
-        list_Types = getTypesList();
-        cb_category.getItems().addAll(list_Types);
+
         b_config.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -126,6 +123,8 @@ public class Controller_Components implements Initializable {
             }
         });
         initData();
+        initDataFiltr();
+        cb_category.getItems().addAll(list_Types);
 
         col_all_name.setCellValueFactory(new PropertyValueFactory<Component, String>("namecmp"));
         col_all_type.setCellValueFactory(new PropertyValueFactory<Component, String>("typecmp"));
@@ -169,6 +168,25 @@ public class Controller_Components implements Initializable {
         cb_category.setOnAction(event -> filters());
         caclTotal();
     }
+    private void initDataFiltr() {
+        try {
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            Statement st = con.createStatement();
+            // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
+            ResultSet rs = st.executeQuery("Select DISTINCT typecmp From component");
+
+            list_Types.add(null);
+            while (rs.next()) {
+                list_Types.add(rs.getString("typecmp"));
+            }
+            rs.close();
+            st.close();
+            // con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initData() {
         try {
             // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
@@ -237,6 +255,7 @@ public class Controller_Components implements Initializable {
                 String stat = rs.getString("typecmp");
                 list.add(stat);
             }
+            list.add(null);
             rs.close();
             st.close();
             // con.close();
@@ -255,9 +274,7 @@ public class Controller_Components implements Initializable {
         try {
             tv_all_list.getItems().clear();
             list_All.clear();
-            String categoty = cb_category.getValue().toString();
-            // String categotyOBJ = cb_category.getValue();
-            if (Objects.equals(categoty, "Без фильтра")) {
+            if (cb_category.getValue() == null) {
                 initData();
                 return;
             }

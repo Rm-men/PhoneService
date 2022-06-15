@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static ServiceDB.Models.Component;
 
 namespace WPF.Admin.Frames.Products
 {
@@ -31,10 +32,10 @@ namespace WPF.Admin.Frames.Products
             Refresh();
         }
 
-/*        public void To_update(Product pr)
+        public void To_update(ComponentInfo cp)
         {
-              spase.Navigate(new P_prosucts_update(pr, this));
-        }*/
+            spase.Navigate(new Redact_product(cp, this));
+        }
 
         public void Bto_add(object sender, RoutedEventArgs e)
         {
@@ -42,7 +43,7 @@ namespace WPF.Admin.Frames.Products
 */        }
         public void Refresh()
         {
-/*            spase.Navigate(new P_products_table(this));
-*/        }
+            spase.Navigate(new T_components(this));
+        }
     }
 }

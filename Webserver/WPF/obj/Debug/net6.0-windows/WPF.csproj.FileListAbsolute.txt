@@ -78,3 +78,13 @@ C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows
 C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Services\F_services.baml
 C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Services\T_servisec.g.cs
 C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Services\T_servisec.baml
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Products\T_components.g.cs
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Products\T_components.baml
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Orders\T_orders.g.cs
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Orders\T_orders.baml
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Clietns\T_client.g.cs
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Employees\T_employees.g.cs
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Clietns\T_client.baml
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Employees\T_employees.baml
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Products\Redact_product.baml
+C:\Users\ADDmen\source\repos\PhoneService\Webserver\WPF\obj\Debug\net6.0-windows\Admin\Frames\Products\Redact_product.g.cs

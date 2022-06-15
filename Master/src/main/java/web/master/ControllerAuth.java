@@ -45,14 +45,12 @@ public class ControllerAuth implements Initializable {
                 String pasw2 = passBuild2.toString();
 
 
-
-
                 Stage newWindow = new Stage();
                 Parent root = null;
                 try {
                     Connection con = null;
                     try {
-                        con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+                        con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
                         Conn с = new Conn();
                         с.setConnect(con);
                     } catch (SQLException e) {

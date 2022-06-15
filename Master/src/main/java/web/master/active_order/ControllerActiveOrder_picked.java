@@ -280,7 +280,7 @@ public class ControllerActiveOrder_picked implements Initializable {
     }
     public void editStatus(String descos) {
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             PreparedStatement ps = con.prepareStatement("SELECT idos FROM order_status WHERE descriptionos = ?;");
             ps.setString(1, descos);
             ResultSet rs = ps.executeQuery();
@@ -303,7 +303,7 @@ public class ControllerActiveOrder_picked implements Initializable {
             ps.setInt(2, _Order.getId_order());
             ps.executeUpdate();
             ps.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -23,8 +23,8 @@ namespace WPF.Admin.Frames.Employees
         public F_employees()
         {
             InitializeComponent();
-/*            spase.Navigate(new F_employees());
-*/        }
+            Refresh();
+        }
 
         public void Bto_list(object sender, RoutedEventArgs e)
         {
@@ -32,7 +32,11 @@ namespace WPF.Admin.Frames.Employees
 */        }
         public void Bto_add(object sender, RoutedEventArgs e)
         {
-/*            spase.Navigate(new F_employees());
+/*            spase.Navigate(new T_employees(this));
 */        }
+        public void Refresh()
+        {
+            spase.Navigate(new T_employees(this));
+        }
     }
 }

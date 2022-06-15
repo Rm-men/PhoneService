@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceDB.Models;
 
 namespace WPF.Admin.Frames.Services
 {
@@ -42,8 +44,8 @@ namespace WPF.Admin.Frames.Services
         }
         public void Refresn()
         {
-/*            dataGrid.ItemsSource = Order.GetInfo();
-            dataGrid.Items.SortDescriptions.Add(new SortDescription("IdOrder", ListSortDirection.Descending));*/
+            dataGrid.ItemsSource = ListSirvice.GetServices();
+            dataGrid.Items.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Descending));
         }
     }
 }

@@ -5,13 +5,28 @@
     <Compile Update="Admin\Frames\Clietns\F_clients.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Admin\Frames\Clietns\T_client.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Admin\Frames\Employees\F_employees.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Employees\T_employees.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Admin\Frames\Orders\F_orders.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Admin\Frames\Orders\T_orders.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Admin\Frames\Products\F_products.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Products\Redact_product.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Products\T_components.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Admin\Frames\Services\F_services.xaml.cs">
@@ -28,13 +43,28 @@
     <Page Update="Admin\Frames\Clietns\F_clients.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Admin\Frames\Clietns\T_client.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Admin\Frames\Employees\F_employees.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Employees\T_employees.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Admin\Frames\Orders\F_orders.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Admin\Frames\Orders\T_orders.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Admin\Frames\Products\F_products.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Products\Redact_product.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Products\T_components.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Admin\Frames\Services\F_services.xaml">
