@@ -17,6 +17,8 @@ public class Order {
     private String descriptionos;
     private String descriptionord;
     private String comments;
+    private Boolean agreement;
+    private String agreementtext;
 
     private String services;
     private String components;
@@ -179,5 +181,18 @@ public class Order {
 
     public void addComponents(String components) {
         this.components += components+", " ;
+    }
+
+    public Boolean getAgreement() {
+        return agreement;
+    }
+
+    public void setAgreement(Boolean agreement) {
+        this.agreement = agreement;
+        if (agreement) this.agreementtext = "Да";
+            else this.agreementtext = "Нет";
+    }
+    public String getAgreementtext() {
+        return agreementtext;
     }
 }

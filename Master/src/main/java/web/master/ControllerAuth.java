@@ -31,6 +31,22 @@ public class ControllerAuth implements Initializable {
         SignInBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                String enteredPassdeb = Password.getText();
+                byte[] ress2 = new byte[0];
+                try {
+                    ress2 = MessageDigest.getInstance("SHA-256").digest(enteredPassdeb.getBytes(StandardCharsets.UTF_8));
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                StringBuilder passBuild2 = new StringBuilder();
+                for (byte b : ress2) {
+                    passBuild2.append(String.format("%02x", b));
+                }
+                String pasw2 = passBuild2.toString();
+
+
+
+
                 Stage newWindow = new Stage();
                 Parent root = null;
                 try {

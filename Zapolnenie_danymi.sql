@@ -64,38 +64,20 @@ with client_json (doc) as ( -- client
 	'::json
 	)
 )
-insert into Client (name, family, patronymic, phone, email)
+insert into Client (namecl, family, patronymic, phone, email)
 select  jpr.name, jpr.family , jpr.patronymic , jpr.phone , jpr.email
 from client_json j
 cross join lateral json_populate_recordset(null::Client, doc) as jpr
 ;
 
-INSERT INTO Client (name, family, patronymic, phone, email) VALUES ('Дмитрий', 'Быстринский', 'Игоревич','89091234567','pocta@m.com');
-
-with guarante_json (doc) as ( -- guarante
-   values
-    (
-	'
-	[
-	{
-		"id_guarantee"              : "n_0",
-        "warranty_period_in_months" : "0",
-        "garranty_conditions"       : "Отсутствие гарантии"
-    },
-	{
-		"id_guarantee"              : "r_1",
-        "warranty_period_in_months" : "1",
-        "garranty_conditions"       : "Гарантися на ремонт - 1 месяц"
-    }
-	]
-	'::json
-	)
-)
-insert into Guarantee
-select  jpr.*
-from guarante_json j
-cross join lateral json_populate_recordset(null::Guarantee, doc) as jpr
-;
+INSERT INTO Client (namecl, family, patronymic, phone, email, clpassword) VALUES
+('Иван', 'Иванов', 'Иванович','89091234561','iii@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Дмитрий', 'Быстринский', 'Игоревич','89091234562','dbi@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Василий', 'Иванов', 'Андреевич','89091234563','via@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Дмитрий', 'Васиков', 'Игоревич','89091234564','dvi@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Дмитрий', 'Андров', 'Игоревич','89091234565','dai@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Василий', 'Васиков', null,'89091234566','vv@m.com','b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0' ), --456
+('Андрей', 'Андров', 'Андреевич','89091234567','aaa@m.com','35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281' ); --789
 
 with shop_json (doc) as ( -- shop !!! не то
    values

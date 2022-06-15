@@ -1,5 +1,5 @@
 import React from 'react';
-import UserCabinet from './wiews/UserCabinet';
+import UserCabinet from './usercabinet/UserCabinet';
 import Landing from './wiews/Landing';
 import Navibar from './usercabinet/auth_Navibar';
 import { Route, Router, Routes} from 'react-router-dom';

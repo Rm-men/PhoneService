@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Admin\Frames\Clietns\F_clients.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Employees\F_employees.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Orders\F_orders.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Products\F_products.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Services\F_services.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Services\T_servisec.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\mainw_admin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Admin\Frames\Clietns\F_clients.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Employees\F_employees.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Orders\F_orders.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Products\F_products.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Services\F_services.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Services\T_servisec.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\mainw_admin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

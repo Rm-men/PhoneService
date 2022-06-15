@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 import App from './components/App';
 import Landing from './components/wiews/Landing'; 
-import UserCabinet from './components/wiews/UserCabinet';
+import UserCabinet from './components/usercabinet/UserCabinet';
 import Login from './components/wiews/Login';
 import Register from './components/wiews/Register';
 import NewOrder from './components/wiews/NewOrder';

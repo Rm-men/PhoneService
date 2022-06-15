@@ -22,6 +22,7 @@ import web.master.entity.Employee;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ControllerStaffList implements Initializable {
@@ -168,6 +169,7 @@ public class ControllerStaffList implements Initializable {
                 comp.setPricecmp(rs.getDouble("pricecmp"));
                 comp.setManufacturercmp_name(rs.getString("name"));
 
+                if (!Objects.equals(rs.getString("typecmp"), "Без фильтра"))
                 ComponentsData.add(comp);
             }
             // con.close();

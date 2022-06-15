@@ -1,0 +1,49 @@
+﻿<Page x:Class="WPF.Admin.Frames.Services.T_servisec"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.Admin.Frames.Services"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="T_servisec">
+
+    <Grid>
+        <DataGrid x:Name="dataGrid"  AutoGenerateColumns="False" ItemsSource="{Binding}"
+				  Margin="10 0 0 0" FontSize="14" BorderThickness="1" IsReadOnly="True" SelectionMode="Single" 
+				  SelectionUnit="FullRow" CanUserResizeColumns="False" CanUserReorderColumns="False" TextBlock.TextAlignment="Center">
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="#ffdadada" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn Header="Услуга"             Binding="{Binding Path=IdOrderStatus}"/>
+                <DataGridTextColumn Header="Тип"                Binding="{Binding Path=PhoneNumber}"/>
+                <DataGridTextColumn Header="Описание"           Binding="{Binding Path=Address}"/>
+                <DataGridTextColumn Header="Цена"                Binding="{Binding Path=OrderDate}"/>
+                <DataGridTextColumn Header="Время ремонта"       Binding="{Binding Path=Cost}"/>-->
+
+                <DataGridTextColumn Header="Услуга"              />
+                <DataGridTextColumn Header="Тип"                 />
+                <DataGridTextColumn Header="Описание"            />
+                <DataGridTextColumn Header="Цена"                />
+                <DataGridTextColumn Header="Время ремонта"       />
+            </DataGrid.Columns>
+
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -22,6 +22,7 @@ import web.master.mains.ControllerActiveOrder;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ControllerActiveOrder_picked implements Initializable {
@@ -30,6 +31,7 @@ public class ControllerActiveOrder_picked implements Initializable {
     @FXML public Button b_ch_components;
     @FXML public Button b_ch_comment;
     @FXML public ComboBox cb_status;
+    @FXML public CheckBox chb_agreement;
 
     @FXML public Label l_phone;
     @FXML public Label l_date;
@@ -66,7 +68,6 @@ public class ControllerActiveOrder_picked implements Initializable {
 
 
     private Stage _stage_main;
-
 
     public Employee _Employee; // private
     public Order _Order;
@@ -188,6 +189,12 @@ public class ControllerActiveOrder_picked implements Initializable {
         try {
             Conn с = new Conn();
             con = с.getConnect();
+            boolean agree = !_Order.getAgreement();
+                chb_agreement.setSelected(!agree);
+                b_ch_components.setDisable(agree);
+                b_ch_services.setDisable(agree);
+                tv_components.setDisable(agree);
+                tv_services.setDisable(agree);
 
             // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
@@ -232,16 +239,40 @@ public class ControllerActiveOrder_picked implements Initializable {
     public void getStatusList() {
         // ObservableList<String> list = FXCollections.observableArrayList();
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select idos, descriptionos From order_status");
+            ResultSet rs = st.executeQuery("Select * From order_status WHERE idos = 'waiting_0' ORDER BY logical_sequence ");
+            int agree_step = 0;
             while (rs.next()) {
-                idstatusList.add(rs.getString("idos"));
-                statusList.add(rs.getString("descriptionos"));
+                agree_step = rs.getInt("logical_sequence");
+            }
+             rs = st.executeQuery("Select * From order_status ORDER BY logical_sequence");
+            if (!_Order.getAgreement())
+            {
+                while (rs.next()) {
+                    idstatusList.add(rs.getString("idos"));
+                    statusList.add(rs.getString("descriptionos"));
+                    if (rs.getInt("logical_sequence") == agree_step) {
+                        rs.close();
+                        st.close();
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                while (rs.next()) {
+                    Integer loc_seq = rs.getInt("logical_sequence");
+                    if (loc_seq <= agree_step) rs.next();
+                    else {
+                        idstatusList.add(rs.getString("idos"));
+                        statusList.add(rs.getString("descriptionos"));
+                    }
+                }
             }
             rs.close();
             st.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

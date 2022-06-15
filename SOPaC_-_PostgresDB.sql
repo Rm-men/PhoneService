@@ -1,56 +1,44 @@
-
-/*
-CREATE DOMAIN CASH AS MONEY
-NOT NULL CHECK(	VALUE::numeric(10,2) >=0);
-*/
-create table list_address
+create table client
 (
-    address     text not null
-        constraint list_address_pk
-            primary key,
-    description text
+    id_client  serial
+        primary key,
+    namecl     varchar(25)  not null,
+    family     varchar(45)  not null,
+    patronymic varchar(45),
+    phone      varchar(11)
+        unique,
+    email      varchar(255) not null
+        unique,
+    clpassword varchar(64)  not null
 );
+INSERT INTO Client (namecl, family, patronymic, phone, email, clpassword) VALUES
+('Иван', 'Иванов', 'Иванович','89091234561','iii@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Дмитрий', 'Быстринский', 'Игоревич','89091234562','dbi@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Василий', 'Иванов', 'Андреевич','89091234563','via@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Дмитрий', 'Васиков', 'Игоревич','89091234564','dvi@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Дмитрий', 'Андров', 'Игоревич','89091234565','dai@m.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' ), --123
+('Василий', 'Васиков', null,'89091234566','vv@m.com','b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0' ), --456
+('Андрей', 'Андров', 'Андреевич','89091234567','aaa@m.com','35a9e381b1a27567549b5f8a6f783c167ebf809f1c4d6a9e367240484d8ce281' ); --789
 
-CREATE TABLE Client(
-id_client 		  SERIAL PRIMARY KEY,
-namecl 	  		  VARCHAR(25) NOT NULL,
-family	  		  VARCHAR(45) NOT NULL,
-patronymic 		  VARCHAR(45) NULL,
-phone             VARCHAR(11) NULL UNIQUE,
-email             VARCHAR(255) NULL UNIQUE
-);
-CREATE TABLE Order_status(
-id_order_status 		  VARCHAR(10) PRIMARY KEY,
-descriptionos  TEXT
-);
 
-create table orders
+create table order_status
 (
-    id_order        serial primary key,
-    dateord         timestamp,
-    phonenumber     varchar(11),
-    address         varchar(255),
-    id_client       integer constraint fk_ord_client references client,
-    id_master       integer,
-    id_phone        integer constraint fk_ord_phonee  references phone,
-    id_order_status varchar(10)  constraint fk_ord_ordstat  references order_status  on update cascade on delete restrict,
-    descriptionord  text,
-    comments        text,
-    priceord        numeric(12, 2) default 0
+    idos             varchar(10) not null
+        primary key,
+    descriptionos    text,
+    logical_sequence serial
 );
+insert into order_status (idos, descriptionos, logical_sequence) values -- СТАТУСЫ
+('received_0', 'Устройство хранится на складе', 1);
 
-insert into orders (dateord, phonenumber, address, id_client, id_phone, id_order_status, descriptionord, comments) values -- ЗАКАЗЫ
-(current_date, '89591233333', 'Ул. Московская 36', 1, 3,'received_0', 'Помята задня крышка', ''),
-(current_date, '89491233333', 'Ул. Московская 36', 2, 4,'received_0', 'Нужна установка защитного стекла', 'Стекло для этого телефона очень редкое, посмотреть на универсальные'),
-(current_date, '89391233333', 'Ул. Московская 36', 3, 2,'received_0', 'Не держит заряд батареи', ''),
-(current_date, '89291233333', 'Ул. Московская 36', 4, 2,'received_0', 'Зависает на холоде', ''),
-(current_date, '89191233334', 'Ул. Московская 36', 5, 4,'received_0', 'Не работает зарядка', 'Менять разъем micro-usb');
 
-CREATE TABLE list_workshops(
-id			              serial PRIMARY KEY,
-address    				  text NOT NULL,
-description    		      text NOT NULL,
-type                      text NOT NULL
+create table list_workshops
+(
+    id          serial
+        primary key,
+    address     text not null,
+    description text not null,
+    type        text not null
 );
 INSERT INTO list_workshops (address, description, type) VALUES
 ('Ул. Московская 36','Основной пункт приема','Пункт приема'),
@@ -58,39 +46,53 @@ INSERT INTO list_workshops (address, description, type) VALUES
 ('Ул. Московская 36','Основной склад', 'Склад');
 
 
-CREATE TABLE Employee( --FK - employee_type, workshop
-id      			    SERIAL PRIMARY KEY,
-id_contract             VARCHAR(8) UNIQUE,
-paspserial 	            VARCHAR(4) NOT NULL UNIQUE,
-paspnumber 	            VARCHAR(6) NOT NULL UNIQUE,
-empaddress 	            TEXT,
-type 	                VARCHAR(15),
-phone       	        VARCHAR(11)  NOT NULL UNIQUE,
-dateemploymentet 	    DATE NOT NULL,
-workshop   		        int NOT NULL,
-family 			        VARCHAR(30) NOT NULL,
-name   			        VARCHAR(30) NOT NULL,
-patronymic 		        VARCHAR(30) NULL,
-login                   VARCHAR(64) CONSTRAINT emp_log NOT NULL UNIQUE DEFAULT NULL,
-password                VARCHAR(64) CONSTRAINT emp_pass NOT NULL UNIQUE DEFAULT NULL,
-CONSTRAINT fk_emp_store FOREIGN KEY(workshop) REFERENCES list_workshops (id) ON DELETE NO ACTION ON UPDATE CASCADE
+create table employee
+(
+    id               serial
+        primary key,
+    id_contract      varchar(8)
+        unique,
+    paspserial       varchar(4)                                  not null
+        unique,
+    paspnumber       varchar(6)                                  not null
+        unique,
+    empaddress       text,
+    type             varchar(15),
+    phone            varchar(11)                                 not null
+        unique,
+    dateemploymentet date                                        not null,
+    workshop         integer                                     not null
+        constraint fk_emp_store
+            references list_workshops
+            on update cascade,
+    family           varchar(30)                                 not null,
+    name             varchar(30)                                 not null,
+    patronymic       varchar(30),
+    login            varchar(64) default NULL::character varying not null
+        unique,
+    password         varchar(64) default NULL::character varying not null
+        unique
 );
 INSERT INTO  employee (id_contract, paspserial, paspnumber, empaddress, type, phone, dateemploymentet, workshop, family, name, patronymic, login, password)  VALUES
-('12345678', '3315', '123123', 'г. Киров','admin',  '89091324445', '2022-04-08', 1, 'Широков','Роман','Дмитриевич','admin','123'),
-('12345677', '3314', '123124', 'г. Киров','master',  '89091324444', '2022-04-09', 1, 'Дитриев','Дмитрий','Иванович','cartavr','456');
+('12345678', '3315', '123123', 'г. Киров','admin',  '89091324445', '2022-04-08', 1, 'Широков','Роман','Дмитриевич','admin','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
+('12345677', '3314', '123124', 'г. Киров','master',  '89091324444', '2022-04-09', 1, 'Дитриев','Дмитрий','Иванович','cartavr','b3a8e0e1f9ab1bfe3a36f231f676f78bb30a519d2b21e6c530c0eee8ebb4a5d0');
 
-
-CREATE TABLE Guarantee(
-id_guarantee 			  SERIAL PRIMARY KEY,
-period                    INTEGER NULL,
-conditions 	              TEXT NULL
+create table guarantee
+(
+    id_guarantee serial
+        primary key,
+    period       integer,
+    conditions   text
 );
 INSERT INTO guarantee (period, conditions) VALUES -- ГАРАНТИЯ
 (0,'Гарантия отсутствует');
 
-CREATE TABLE Manufacturer(
-id_manufacturer 		  SERIAL PRIMARY KEY,
-name 					  VARCHAR(150) UNIQUE NOT NULL
+create table manufacturer
+(
+    id_manufacturer serial
+        primary key,
+    name            varchar(150) not null
+        unique
 );
 INSERT INTO manufacturer (name) VALUES
 ('Hohuwai'),
@@ -99,8 +101,7 @@ INSERT INTO manufacturer (name) VALUES
 ('GAMSUNS'),
 ('Rus Electronic Corporation'),
 ('The Microcomponents Crafting Service'),
-('Chinivanyoay neiyiao stafs')
-                                     ;
+('Chinivanyoay neiyiao stafs');
 
 CREATE TABLE Phone_model( -- FK Guarantee, List_of_supported_models, product, Manufacturer
 id_phone_model 			         SERIAL PRIMARY KEY,
@@ -133,39 +134,102 @@ INSERT INTO Phone (imei, id_phone_model) VALUES
 ('404809114530952', 2) ,
 ('354802114571953', 1) ;
 
-CREATE TABLE Component( --FK - Guarantee, Manufacturer
-id_component   			        SERIAL PRIMARY KEY,
-typecmp 		   			    VARCHAR(20) NOT NULL,
-namecmp  		       			VARCHAR(40) NOT NULL,
-id_guaranteecmp 	       		    INT,
-manufacturercmp       			    INT NOT NULL,
-pricecmp                        numeric(12,2),
---id_product					    VARCHAR(40),
---CONSTRAINT fk_comp_id_product   FOREIGN KEY(id_product) REFERENCES product (id_product) ON DELETE NO ACTION ON UPDATE RESTRICT,
-CONSTRAINT fk_comp_guarantee    FOREIGN KEY(id_guaranteecmp) REFERENCES Guarantee (ID_Guarantee) ON DELETE RESTRICT ON UPDATE RESTRICT,
-CONSTRAINT fk_comp_manufacturer FOREIGN KEY(manufacturercmp) REFERENCES Manufacturer (Id_Manufacturer) ON DELETE RESTRICT ON UPDATE CASCADE
+create table component
+(
+    id_component    serial
+        primary key,
+    typecmp         varchar(20) not null,
+    namecmp         varchar(40) not null,
+    id_guaranteecmp integer
+        constraint fk_comp_guarantee
+            references guarantee
+            on update restrict on delete restrict,
+    manufacturercmp integer     not null
+        constraint fk_comp_manufacturer
+            references manufacturer
+            on update cascade on delete restrict,
+    pricecmp        numeric(12, 2),
+    count           integer default 0
 );
 INSERT INTO component (typecmp, namecmp, id_guaranteecmp, manufacturercmp,pricecmp) VALUES
 ('Стекло', 'Универсальное защитное стекло', 1,7,400),
 ('Экранный модуль', 'Экранный модуль Xemion', 1,3, 2000);
 --
-CREATE TABLE List_of_supported_models( -- FK - phone model, component
-id_list_of_sup_models 	        SERIAL PRIMARY KEY,
-idcomponent 			        INT,
-idphone_model 			        VARCHAR(25),
-CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (idphone_model) REFERENCES Phone_model (id_phone_model) ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT  fk_lm_component    	FOREIGN KEY (Idcomponent) REFERENCES Component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
+create table components_complibility
+(
+    idcc         serial
+        primary key,
+    id_component integer
+        constraint fk_cc_c
+            references component
+            on update cascade,
+    id_phmodel   integer
+        constraint fk_cc_p
+            references phone_model
+            on update cascade
 );
 
-CREATE TABLE list_sirvices( -- FK - phone model, component
-id      	                    SERIAL PRIMARY KEY,
-namesrv			                VARCHAR(55),
-typesrv                            VARCHAR(25),
-descriptionsrv 			        TEXT,
-costsrv 			            NUMERIC(12,2),
-timesrv                        INTERVAL
+create table list_sirvices
+(
+    id             serial
+        primary key,
+    namesrv        varchar(55),
+    typesrv        varchar(25),
+    descriptionsrv text,
+    costsrv        numeric(12, 2),
+    timesrv        text
 );
+insert into list_sirvices (namesrv, typesrv,  descriptionsrv, costsrv, timesrv) values
+('Диагностика', 'выездное','Произведем полную диагностику устройства', 0, '3 days'),
+('Замена экарана', 'замена','Демонтаж старого дисплейного модуля и установка нового', 0, '1 hours'),
+('Замена сенсора', 'замена','Демонтаж старого сенсорного модуля и установка нового', 900, '1 hours'),
+('Замена аккумулятора', 'замена','Разбор смартфона и установка нового аккумулятора', 500, '1 hours'),
+('Замена разъема зарядки', 'замена','', 1000, '1 hours'),
+('Замена разъема наушников', 'замена','', 1000, '1 hours'),
+('Замена задней крышки', 'замена','', 500, '1 hours'),
+('Замена разговорного динамика', 'замена','', 1000, '1 hours'),
+('Замена основного динамика', 'замена','', 1000, '1 hours'),
+('Замена кнопок', 'замена','', 800, '1 hours'),
+('Замена микрофона', 'замена','', 1000, '2 hours'),
+('Замена шлейфов', 'замена','', 500, '1 hours'),
+('Обновление ПО', 'по','', 500, '1 hours'),
+('Обновление прошивки ПО ', 'по','', 500, '1 hours'),
+('Ремонт материнской платы ', 'восстановление','', 1500, '4 hours'),
+('Поклейка защитной пленки', 'интеграция','', 300, '1 hours'),
+('Установка защитного стекла', 'интеграция','', 300, '1 hours'),
+('Чистка раъемов', 'обслуживание','Выполнение чистки основных разъемов телефона', 150.50, '30 mins')
+;
+create table orders
+(
+    id_order        serial
+        primary key,
+    dateord         timestamp,
+    phonenumber     varchar(11),
+    address         varchar(255),
+    id_client       integer
+        constraint fk_ord_client
+            references client,
+    id_master       integer,
+    id_phone        integer
+        constraint fk_ord_phonee
+            references phone,
+    id_order_status varchar(10)
+        constraint fk_ord_ordstat
+            references order_status
+            on update cascade on delete restrict,
+    descriptionord  text,
+    comments        text,
+    priceord        numeric(12, 2) default 0,
+    agreement       boolean        default false
+);
+insert into orders (dateord, phonenumber, address, id_client, id_phone, id_order_status, descriptionord, comments) values -- ЗАКАЗЫ
+(current_date, '89591233331', 'Ул. Московская 36', 1, 3,'received_0', 'Помята задня крышка', ''),
+(current_date, '89491233332', 'Ул. Московская 36', 2, 4,'received_0', 'Нужна установка защитного стекла', 'Стекло для этого телефона очень редкое, посмотреть на универсальные'),
+(current_date, '89391233333', 'Ул. Московская 36', 3, 2,'received_0', 'Не держит заряд батареи', ''),
+(current_date, '89291233334', 'Ул. Московская 36', 4, 2,'received_0', 'Зависает на холоде', ''),
+(current_date, '89191233335', 'Ул. Московская 36', 5, 4,'received_0', 'Не работает зарядка', 'Менять разъем micro-usb');
 
+/*
 CREATE TABLE order_servises( -- FK - phone model, component
 id      	                    int PRIMARY KEY,
 idservie                        int,
@@ -179,15 +243,16 @@ idcomponents                    int,
 CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (id) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT  fk_lm_phone_model   FOREIGN KEY (idcomponents) REFERENCES component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
 );
-
+*/
 CREATE TABLE story_order_move( --
-id      	                    SERIAL PRIMARY KEY,
+idmove      	                SERIAL PRIMARY KEY,
 idorder                         int,
 idhuman                         int,
 idoldstatus                     VARCHAR(10),
 idnewstatus                     VARCHAR(10),
 idoldaddress                    int,
 idnewaddress                    int,
+somdate      timestamp default CURRENT_TIMESTAMP,
 CONSTRAINT  fk_som_order   FOREIGN KEY (idorder) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT  fk_som_human   FOREIGN KEY (idhuman) REFERENCES employee (id) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT  fk_som_oldstatus   FOREIGN KEY (idoldstatus) REFERENCES order_status (idos) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -196,78 +261,31 @@ CONSTRAINT  fk_som_oldaddress  FOREIGN KEY (idoldaddress) REFERENCES list_worksh
 CONSTRAINT  fk_som_newaddress  FOREIGN KEY (idnewaddress) REFERENCES list_workshops (id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
-CREATE TABLE on_order_cmp (
-    id_cmp_onord              SERIAL PRIMARY KEY,
-    id_order_forcomp          int,
-    id_cmp_onlist             int,
-    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_order_forcomp) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
-    CONSTRAINT  fk_cmponorder_component   FOREIGN KEY (id_cmp_onlist) REFERENCES component (id_component) ON DELETE NO ACTION ON UPDATE CASCADE
+create table on_order_cmp
+(
+    id_cmp_onord     serial
+        primary key,
+    id_order_forcomp integer
+        constraint fk_cmponorder_order
+            references orders
+            on update cascade,
+    id_cmp_onlist    integer
+        constraint fk_cmponorder_component
+            references component
+            on update cascade
 );
 
-CREATE TABLE on_order_srv (
-    id_srv_onord              SERIAL PRIMARY KEY,
-    id_order_forservice      int,
-    id_srv_onlist             int,
-    CONSTRAINT  fk_cmponorder_order   FOREIGN KEY (id_order_forservice) REFERENCES orders (id_order) ON DELETE NO ACTION ON UPDATE CASCADE,
-    CONSTRAINT  fk_cmponorder_component   FOREIGN KEY (id_srv_onlist) REFERENCES list_sirvices (id) ON DELETE NO ACTION ON UPDATE CASCADE
+create table on_order_srv
+(
+    id_srv_onord        serial
+        primary key,
+    id_order_forservice integer
+        constraint fk_cmponorder_order
+            references orders
+            on update cascade,
+    id_srv_onlist       integer
+        constraint fk_cmponorder_component
+            references list_sirvices
+            on update cascade
 );
 
---------------------------------------------------- запросы для изменениея конфигурации
------- параметры заказа
-UPDATE orders
-SET customer=subquery.customer,
-    address=subquery.address,
-    partn=subquery.partn
-FROM (SELECT address_id, customer, address, partn
-      FROM  /* big hairy SQL */ ...) AS subquery
-WHERE dummy.address_id=subquery.address_id;
-
-
------- параметры компонентов
--- сначала удалить все старые
-DELETE FROM order_components
-    WHERE id = {id};
--- потом добавить все новые
--- циклом добавлять каждый
-insert into order_components values (id,idcomponents);
-
-
------- параметры услуг
--- сначала удалить все старые
-DELETE FROM order_components
-    WHERE id = {id};
--- потом добавить все новые
--- циклом добавлять каждый
-insert into order_components values (id,idcomponents);
-
-
-
-
-create view orders_view
-            (id_order, dateord, phonenumber, address, id_client, family, namecl, patronymic, namephone, descriptionos,
-             descriptionord, comments, id_master, id_phone, id_order_status, contacts)
-as
-SELECT orders.id_order,
-       orders.dateord,
-       orders.phonenumber,
-       orders.address,
-       c.id_client,
-       c.family,
-       c.namecl,
-       c.patronymic,
-       pm.namephone,
-       os.descriptionos,
-       orders.descriptionord,
-       orders.comments,
-       orders.id_master,
-       orders.id_phone,
-       orders.id_order_status,
-       concat(c.family, c.namecl, c.patronymic, orders.phonenumber) AS contacts
-FROM orders
-         JOIN phone p ON p.id = orders.id_phone
-         JOIN phone_model pm ON p.id_phone_model = pm.id_phone_model
-         JOIN order_status os ON orders.id_order_status::text = os.idos::text
-         JOIN client c ON c.id_client = orders.id_client;
-
-alter table orders_view
-    owner to work100024;

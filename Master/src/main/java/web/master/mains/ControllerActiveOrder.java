@@ -34,6 +34,8 @@ public class ControllerActiveOrder implements Initializable {
     @FXML public Button b_removeilters;
     @FXML public ComboBox cb_fa_phone;
     @FXML public ComboBox cb_fa_status;
+    @FXML public CheckBox chb_compleeted;
+    @FXML public CheckBox chb_agreement;
     @FXML public TextField tf_fa_contacts;
     @FXML public DatePicker dp_ot;
     @FXML public DatePicker dp_do;
@@ -48,6 +50,7 @@ public class ControllerActiveOrder implements Initializable {
     @FXML private TableColumn<Order, String> col_acontacts;
     @FXML private TableColumn<Order, String> col_astatus;
     @FXML private TableColumn<Order, String> col_adate;
+    @FXML private TableColumn<Order, String> col_agreement;
 
     private ObservableList<String> list_Status = FXCollections.observableArrayList();
     private ObservableList<String> list_PhoneNames = FXCollections.observableArrayList();
@@ -178,6 +181,7 @@ public class ControllerActiveOrder implements Initializable {
         col_astatus.setCellValueFactory(new PropertyValueFactory<Order, String>("descriptionos"));
         // col_astatus.setCellValueFactory(col_status -> col_status.se(true));
         col_adate.setCellValueFactory(new PropertyValueFactory<Order, String>("dateord"));
+        col_agreement.setCellValueFactory(new PropertyValueFactory<Order, String>("agreementtext"));
 
         tv_aOrders.setItems(OrdersData);
 
@@ -210,6 +214,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setDateord(rs.getDate("dateord").toString());
                 order.setPhone_number(rs.getString("phonenumber"));
                 order.setAddress(rs.getString("address"));
+                order.setAgreement(rs.getBoolean("agreement"));
                 order.setId_client(rs.getInt("id_client"));
                 order.setId_master(rs.getInt("id_master"));
                 order.setId_phone(rs.getInt("id_phone"));
