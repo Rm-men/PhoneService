@@ -1,4 +1,4 @@
-﻿using ServiceDB.Entity;
+﻿using ServiceDB.Models;
 using Trivial.Security;
 
 namespace WebServer;
@@ -11,10 +11,10 @@ public static class TokenWorker
         return parser.Verify(Program.Sign) && parser.GetPayload().Expiration > DateTime.Now;
     }
 
-    internal static User? GetUserByToken(string token)
+    internal static Client? GetUserByToken(string token)
     {
         var parser = new JsonWebToken<JsonWebTokenPayload>.Parser(token);
         var login = parser.GetPayload().Issuer;
-        return User.GetUserByLogin(login);
+        return Client.GetUserByLogin(login);
     }
 }

@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Alert_update from './alert_update';
-
+import Orders_table from './Orders_table';
 import L_Navibar from './auth_Navibar';
 import {
   Button,
@@ -25,50 +25,7 @@ export default function UserCabinet() {
   const handleShow = () => setShow(true);
   return (
     <>
-      <L_Navibar />
-      <div className='header bg-white mt-5'>
-        <Container>
-          <h1 className='display-4'>Список устройств в ремонте</h1>
-          <Container>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td colSpan={2}>Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </Table>
-          </Container>
-          <Form className='form-subscribe form-inline mb-3'>
-            <div className='text-center'>
-              <Button color='primary' size='lg' className='.text-center mt-3' onClick={handleShow}>
-                Оформить заявку на ремонт
-              </Button>
-            </div>
-          </Form>
-        </Container>
-      </div>
+      <Orders_table/>
       <Alert_update></Alert_update>
       <>
         <Modal show={show} onHide={handleClose}>

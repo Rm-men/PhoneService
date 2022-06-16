@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ServiceDB.Entity;
+using ServiceDB.Models;
 
 namespace WebServer.Models
 {
@@ -17,16 +17,14 @@ namespace WebServer.Models
         public string Email { get; set; }
         public string Clpassword { get; set; }
 
-        public ClientModel(User user)
+        public ClientModel(Client user)
         {
-            //IdClient = user.IdClient;
-            //Namecl = user.Namecl;
-            //Family = user.Family;
-            //Patronymic = user. ;
-            //Phone = user. ;
-            //Email = user. ;
-            //Clpassword = this.Clpassword;
-    }
-
+            IdClient = user.IdClient;
+            Family = user.Family;
+            Namecl = user.Namecl;
+            Patronymic = user.Patronymic;
+            Email = user.Email;
+            Phone = user.Phone;
+        }
     }
 }

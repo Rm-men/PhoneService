@@ -4,8 +4,8 @@ import {
   Row,
   Col
 } from 'reactstrap';
-import RNavbar from '../RNavbar';
-import RForm from '../usercabinet/RForm';
+import RNavbar from '../auth/RNavbar';
+import RForm from '../auth/RForm';
 
 class Register extends React.Component {
   render() {

@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router-dom';
 import UserCabinet from './UserCabinet';
+import Links from '../Links';
 
 export default function L_Navibar() {
   const [show, setShow] = useState(false);
@@ -22,10 +23,10 @@ export default function L_Navibar() {
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='me-auto'>
               <Nav.Link>
-                <Link to="/home/registred" className='text-light'>Главная страница</Link>
+                <Link to={Links.home}className='text-light'>Главная страница</Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/usercabinet" className='text-light'>Личный кабинет</Link>
+                <Link to={Links.usercabinet} className='text-light'>Личный кабинет</Link>
               </Nav.Link>
               <Nav.Link disabled>Услуги</Nav.Link>
               {/* <Nav.Link href="/home/registred">Главная страница</Nav.Link>

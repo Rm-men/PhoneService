@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestPanda.Requests;
 using RestPanda.Requests.Attributes;
-using ServiceDB.Entity;
+using ServiceDB.Models;
 using Trivial.Security;
 using WebServer.Models;
 
@@ -14,12 +14,12 @@ namespace WebServer.Requests
     [RequestHandlerPath("/auth")]
     public class AuthHandler : RequestHandler
     {
-        private string GenerateToken(User user)
+        private string GenerateToken(Client cl)
         {
             var model = new JsonWebTokenPayload
             {
                 Id = Guid.NewGuid().ToString("n"),
-                Issuer = $"{user.Login}",
+                Issuer = $"{cl.Email}",
                 Expiration = DateTime.Now + new TimeSpan(365, 0, 0, 0)
             };
             var jwt = new JsonWebToken<JsonWebTokenPayload>(model, Program.Sign);
@@ -33,13 +33,13 @@ namespace WebServer.Requests
         {
 
             var body = Bind<AuthModel>();
-            if (body is null || string.IsNullOrEmpty(body.login) || string.IsNullOrEmpty(body.password))
+            if (body is null || string.IsNullOrEmpty(body.email) || string.IsNullOrEmpty(body.password))
             {
                 Send(new AnswerModel(false, null, 400, "incorrect request"));
                 return;
             }
 
-            var user = User.GeUserAuth(body.login, body.password);
+            var user = Client.GeUserForAuth(body.email, body.password);
             if (user is null)
             {
                 Send(new AnswerModel(false, null, 401, "incorrect request body"));
@@ -54,16 +54,16 @@ namespace WebServer.Requests
         public void RegisterUser()
         {
             
-            var body = Bind<RegModel>();
+/*            var body = Bind<RegModel>();
             if (RegModel.Check(body))
             {
                 Send(new AnswerModel(false, null, 401, "incorrect request"));
                 return;
             }
-            User user;
-            if (!User.IsHasUser(body.phone))
+            Client user;
+            if (!Client.IsHasUser(body.phone))
             {
-                user = new User(body!.surname, body.name, body.phone)
+                user = new Client(body!.surname, body.name, body.phone)
                 {
                     NameOfCompany = body.nameOfCompany == "" ? null : body.nameOfCompany,
                     Middlename = body.middlename == "" ? null : body.middlename,
@@ -95,7 +95,7 @@ namespace WebServer.Requests
                 user = User.GetUserByPhoneNumber(body.phone);
             }
             var client = new ClientModel(user);
-            Send(new AnswerModel(true, new { access_token = GenerateToken(user), user = client }, null, null));
+            Send(new AnswerModel(true, new { access_token = GenerateToken(user), user = client }, null, null));*/
         }
     }
 }

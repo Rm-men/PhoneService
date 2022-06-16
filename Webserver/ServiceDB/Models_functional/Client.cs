@@ -9,7 +9,7 @@ namespace ServiceDB.Models
 {
     public partial class Client
     {
-        public string FIO { get; set; }
+        // public string FIO { get; set; }
         public static List<Client> GetClients()
         {
             return (from c in Context.db.Clients
@@ -22,7 +22,7 @@ namespace ServiceDB.Models
                         Phone = c.Phone,
                         Email = c.Email,
                         Clpassword = c.Clpassword,
-                        FIO = getFIO(c.Family, c.Namecl, c.Patronymic)
+                        // FIO = getFIO(c.Family, c.Namecl, c.Patronymic)
                     }).ToList();
         }
         public virtual string getFIO()
@@ -40,6 +40,10 @@ namespace ServiceDB.Models
         public static Client? GetUserByLogin(string login)
         {
             return Context.db.Clients.FirstOrDefault(u => u.Email == login);
+        }
+        public static Client GeUserForAuth(string login, string password)
+        {
+            return Context.db.Clients.FirstOrDefault(x => x.Email == login && x.Clpassword == password);
         }
     }
 }
