@@ -23,17 +23,21 @@
             <RowDefinition Height="0,5*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="TB_Name" Grid.Row="0" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Название" 
+        <TextBox x:Name="TB_Name" Grid.Row="0" Grid.Column="1" Height="30" Margin="5 0 5 0" materialDesign:HintAssist.Hint="Название"  materialDesign:HintAssist.HelperText="Название"  materialDesign:HintAssist.HelperTextFontSize="13"
                  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
-        <TextBox x:Name="TB_Type" Grid.Row="1" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Тип" 
+        <ComboBox x:Name="CB_Type" Grid.Row="1" Grid.Column="1" Height="30" Margin="5 0 5 0" Text="" materialDesign:HintAssist.Hint="Тип"  materialDesign:HintAssist.HelperText="Тип"  materialDesign:HintAssist.HelperTextFontSize="13">
+            
+        </ComboBox>
+        <!--<TextBox x:Name="TB_Type" Grid.Row="1" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Тип" materialDesign:HintAssist.HelperText="Тип"  materialDesign:HintAssist.HelperTextFontSize="13"
+                 Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />-->
+        
+        <TextBox x:Name="TB_Garranty_id" Grid.Row="2" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Гарантия" materialDesign:HintAssist.HelperText="Гарантия"  materialDesign:HintAssist.HelperTextFontSize="13"
                  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
-        <TextBox x:Name="TB_Garranty_id" Grid.Row="2" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Гарантия" 
+        <TextBox x:Name="TB_Manufacturer_id" Grid.Row="3" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Производитель" materialDesign:HintAssist.HelperText="Производитель"  materialDesign:HintAssist.HelperTextFontSize="13"
                  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
-        <TextBox x:Name="TB_Manufacturer_id" Grid.Row="3" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Производитель" 
+        <TextBox x:Name="TB_Price" Grid.Row="4" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Цена" PreviewTextInput="InputOnlyNumbs" materialDesign:HintAssist.HelperText="Цена"  materialDesign:HintAssist.HelperTextFontSize="13"
                  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
-        <TextBox x:Name="TB_Price" Grid.Row="4" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Цена" PreviewTextInput="InputOnlyNumbs"
-                 Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
-        <TextBox x:Name="TB_Count" Grid.Row="5" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Количество" PreviewTextInput="InputOnlyNumbs"
+        <TextBox x:Name="TB_Count" Grid.Row="5" Grid.Column="1" Height="30" Margin="5 0 5 0"  materialDesign:HintAssist.Hint="Количество" PreviewTextInput="InputOnlyNumbs" materialDesign:HintAssist.HelperText="Количество"  materialDesign:HintAssist.HelperTextFontSize="13"
                  Padding="2 5 0 0 " FontSize="18"  Cursor="IBeam" />
 
         <Button x:Name="btnAdd" Grid.Column="1" Grid.Row="103" Content="Изменить продукт" Height="30" Width="200" Margin="5 0 5 0" Command="{}" Click="B_update_product"  />

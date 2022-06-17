@@ -14,7 +14,7 @@ public static class TokenWorker
     internal static Client? GetUserByToken(string token)
     {
         var parser = new JsonWebToken<JsonWebTokenPayload>.Parser(token);
-        var login = parser.GetPayload().Issuer;
-        return Client.GetUserByLogin(login);
+        var mail = parser.GetPayload().Issuer;
+        return Client.GetUserByMail(mail);
     }
 }

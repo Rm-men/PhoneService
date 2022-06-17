@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Links from '../Links';
+import BtnNewOrder from '../newOrder/BtnNewOrder';
 
 const LHeader = () => {
   const [show, setShow] = useState(false);
@@ -25,9 +26,7 @@ const LHeader = () => {
     		          <Input type="text" bsSize="lg" className="flex-grow-1 mr-2" id="email4" placeholder="Your email address..." />
     		        </FormGroup> */}
               {/* <h1 className="display-6 opacity-0">0</h1> */}
-              <Button color='primary' size='lg' className=' mt-4' onClick={handleShow}>
-                Оставить заявку на ремонт
-              </Button>
+             <BtnNewOrder/>
             </Form>
           </Col>
           <Col xs='12' md='6'>

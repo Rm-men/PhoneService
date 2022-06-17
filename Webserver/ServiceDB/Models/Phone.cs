@@ -16,6 +16,7 @@ namespace ServiceDB.Models
         public string Imei { get; set; }
         public int? IdPhoneModel { get; set; }
 
+        public virtual PhoneModel IdPhoneModelNavigation { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

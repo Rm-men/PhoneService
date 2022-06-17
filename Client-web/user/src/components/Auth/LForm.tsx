@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 import Links from '../Links';
 
+import React, { useState } from 'react';
 import sha256 from "sha256";
 import {LoginModel} from '../../models/RequestModels';
 import AuthService from '../../redux/services/ServAuth';
@@ -28,14 +29,13 @@ export default function LForm(show) {
 			password: sha256(values.password)
 		};
 		AuthService.login(data).then((res) => {
-			// dispatch(res)
-      // handleClose();
-      navigate(Links.home);
+		  dispatch(res)
+      navigate(Links.usercabinet);
 		})
 	};
   const navigate = useNavigate();
-  // const user = useSelector((state: RootState) => state);
-  // const dispatch = useDispatch<AppDispatch>();
+ const user = useSelector((state: RootState) => state);
+ const dispatch = useDispatch<AppDispatch>();
 
   return (
     <Container>
@@ -65,7 +65,7 @@ export default function LForm(show) {
               </Button>
             </Form>
             <p className='small my-4 text-center'>
-              Нет аккаунта? <a href={Links.auth}>Зарегистрируйтесь</a>
+              Нет аккаунта? <Link to={Links.register}>Зарегистрируйтесь</Link>
             </p>
           </div>
         </Col>

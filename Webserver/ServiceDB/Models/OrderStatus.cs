@@ -16,7 +16,7 @@ namespace ServiceDB.Models
 
         public string Idos { get; set; }
         public string Descriptionos { get; set; }
-        public int? LogicalSequence { get; set; }
+        public int LogicalSequence { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<StoryOrderMove> StoryOrderMoveIdnewstatusNavigations { get; set; }

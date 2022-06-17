@@ -10,6 +10,7 @@ namespace ServiceDB.Models
         public PhoneModel()
         {
             ComponentsComplibilities = new HashSet<ComponentsComplibility>();
+            Phones = new HashSet<Phone>();
         }
 
         public int IdPhoneModel { get; set; }
@@ -21,5 +22,6 @@ namespace ServiceDB.Models
         public virtual Guarantee GuaranteeNavigation { get; set; }
         public virtual Manufacturer ManufacturerNavigation { get; set; }
         public virtual ICollection<ComponentsComplibility> ComponentsComplibilities { get; set; }
+        public virtual ICollection<Phone> Phones { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace WebServer.Models
         public int IdClient { get; set; }
         public string Namecl { get; set; }
         public string Family { get; set; }
-        public string Patronymic { get; set; }
+        public string? Patronymic { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Clpassword { get; set; }
@@ -23,8 +23,17 @@ namespace WebServer.Models
             Family = user.Family;
             Namecl = user.Namecl;
             Patronymic = user.Patronymic;
-            Email = user.Email;
             Phone = user.Phone;
+            Email = user.Email;
+        }
+        public ClientModel(string f, string n, string? p, string pn, string m, string pasw)
+        {
+            this.Family = f;
+            this.Namecl = n;
+            this.Patronymic = p;
+            this.Phone = pn;
+            this.Email = m;
+            this.Clpassword = pasw;
         }
     }
 }

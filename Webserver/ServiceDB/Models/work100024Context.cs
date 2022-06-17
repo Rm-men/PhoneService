@@ -40,13 +40,13 @@ namespace ServiceDB.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("host=45.10.244.15;port=55532;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7");
+                optionsBuilder.UseNpgsql("host=localhost;port=5432;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "C.UTF-8@icu");
+            modelBuilder.HasAnnotation("Relational:Collation", "Russian_Russia.1251");
 
             modelBuilder.Entity<Client>(entity =>
             {
@@ -88,7 +88,7 @@ namespace ServiceDB.Models
                     .HasColumnName("patronymic");
 
                 entity.Property(e => e.Phone)
-                    .HasMaxLength(11)
+                    .HasMaxLength(12)
                     .HasColumnName("phone");
             });
 
@@ -131,7 +131,6 @@ namespace ServiceDB.Models
                 entity.HasOne(d => d.ManufacturercmpNavigation)
                     .WithMany(p => p.Components)
                     .HasForeignKey(d => d.Manufacturercmp)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_comp_manufacturer");
             });
 
@@ -169,10 +168,10 @@ namespace ServiceDB.Models
                 entity.HasIndex(e => e.Login, "employee_login_key")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Paspnumber, "employee_passport_number_key")
+                entity.HasIndex(e => e.Paspnumber, "employee_paspnumber_key")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Paspserial, "employee_passport_serial_key")
+                entity.HasIndex(e => e.Paspserial, "employee_paspserial_key")
                     .IsUnique();
 
                 entity.HasIndex(e => e.Password, "employee_password_key")
@@ -457,7 +456,8 @@ namespace ServiceDB.Models
 
                 entity.Property(e => e.IdOrderStatus)
                     .HasMaxLength(10)
-                    .HasColumnName("id_order_status");
+                    .HasColumnName("id_order_status")
+                    .HasDefaultValueSql("'add_0'::character varying");
 
                 entity.Property(e => e.IdPhone).HasColumnName("id_phone");
 
@@ -493,16 +493,15 @@ namespace ServiceDB.Models
 
                 entity.ToTable("order_status");
 
-                entity.HasIndex(e => e.LogicalSequence, "order_status_logical_sequence_uindex")
-                    .IsUnique();
-
                 entity.Property(e => e.Idos)
                     .HasMaxLength(10)
                     .HasColumnName("idos");
 
                 entity.Property(e => e.Descriptionos).HasColumnName("descriptionos");
 
-                entity.Property(e => e.LogicalSequence).HasColumnName("logical_sequence");
+                entity.Property(e => e.LogicalSequence)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("logical_sequence");
             });
 
             modelBuilder.Entity<OrdersView>(entity =>
@@ -569,6 +568,11 @@ namespace ServiceDB.Models
                 entity.Property(e => e.Imei)
                     .HasMaxLength(17)
                     .HasColumnName("imei");
+
+                entity.HasOne(d => d.IdPhoneModelNavigation)
+                    .WithMany(p => p.Phones)
+                    .HasForeignKey(d => d.IdPhoneModel)
+                    .HasConstraintName("fk_phone_phmodel");
             });
 
             modelBuilder.Entity<PhoneModel>(entity =>
@@ -610,9 +614,7 @@ namespace ServiceDB.Models
 
                 entity.ToTable("story_order_move");
 
-                entity.Property(e => e.Idmove)
-                    .HasColumnName("idmove")
-                    .HasDefaultValueSql("nextval('story_order_move_id_seq'::regclass)");
+                entity.Property(e => e.Idmove).HasColumnName("idmove");
 
                 entity.Property(e => e.Idhuman).HasColumnName("idhuman");
 

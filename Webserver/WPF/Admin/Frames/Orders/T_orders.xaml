@@ -26,12 +26,12 @@
             </DataGrid.CellStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Устройство"             Binding="{Binding Path=IdPhone}"/>
-                <DataGridTextColumn Header="Мастер"                 Binding="{Binding Path=IdMaster}"/>
+                <DataGridTextColumn Header="Устройство"             Binding="{Binding Path=PhoneModel}"/>
+                <DataGridTextColumn Header="Мастер"                 Binding="{Binding Path=FIOm}"/>
                 <DataGridTextColumn Header="Номер в заказе"         Binding="{Binding Path=Phonenumber}"/>
-                <DataGridTextColumn Header="Статус"                 Binding="{Binding Path=IdOrderStatus}"/>
+                <DataGridTextColumn Header="Статус"                 Binding="{Binding Path=Status}"/>
                 <DataGridTextColumn Header="Описание"               Binding="{Binding Path=Descriptionord}"/>
-                <DataGridTextColumn Header="Согласие на ремонт"     Binding="{Binding Path=Agreement}"/>
+                <DataGridTextColumn Header="Согласие на ремонт"     Binding="{Binding Path=AgreementText}"/>
                 <DataGridTextColumn Header="Цена"                   Binding="{Binding Path=Priceord}"/>
             </DataGrid.Columns>
 

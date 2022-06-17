@@ -27,7 +27,7 @@ namespace ServiceDB.Models
             public string Patronymic { get; set; }
             public string Login { get; set; }
             public string Password { get; set; }
-            public string FIO { get; set; }
+            public string FIO { get; set; } //
 
         }
 

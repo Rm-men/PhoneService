@@ -53,49 +53,23 @@ namespace WebServer.Requests
         [Post("/signon")]
         public void RegisterUser()
         {
-            
-/*            var body = Bind<RegModel>();
+            var body = Bind<RegModel>();
             if (RegModel.Check(body))
             {
                 Send(new AnswerModel(false, null, 401, "incorrect request"));
                 return;
             }
-            Client user;
-            if (!Client.IsHasUser(body.phone))
+            var client = new Client(body!.family, body.name, body.patronymic, body.phone, body.email, body.clpassword);
+            if (!client.AddClient())
             {
-                user = new Client(body!.surname, body.name, body.phone)
-                {
-                    NameOfCompany = body.nameOfCompany == "" ? null : body.nameOfCompany,
-                    Middlename = body.middlename == "" ? null : body.middlename,
-                    Email = body.email == "" ? null : body.email,
-                    Login = body.login,
-                    Password = body.password
-                };
-                var team = new Team("Моя команда", user);
-
-                if (!user.Add() || !team.Add())
-                {
-                    Send(new AnswerModel(false, null, 401, "incorrect request"));
-                    return;
-                }
-
-                if (user.NameOfCompany == null) 
-                {
-                    var aloneTeam = new Team("Пойти в одиночку", user);
-                    var aloneTeammate = new Teammate(aloneTeam, user) { IsActive = true, IsTeammate =true};
-                    if (!aloneTeam.Add() || !aloneTeammate.Add())
-                    {
-                        Send(new AnswerModel(false, null, 401, "incorrect request"));
-                        return;
-                    }
-                }                          
+                Send(new AnswerModel(false, null, 401, "incorrect request"));
+                return;
             }
-            else
-            {
-                user = User.GetUserByPhoneNumber(body.phone);
-            }
-            var client = new ClientModel(user);
-            Send(new AnswerModel(true, new { access_token = GenerateToken(user), user = client }, null, null));*/
+
+            var newUser = new ClientModel(client);
+
+            Send(new AnswerModel(true, new { access_token = GenerateToken(client), user = newUser }, null, null));
+
         }
     }
 }

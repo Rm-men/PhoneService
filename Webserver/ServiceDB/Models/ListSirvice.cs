@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 #nullable disable
 
@@ -21,6 +20,5 @@ namespace ServiceDB.Models
         public string Timesrv { get; set; }
 
         public virtual ICollection<OnOrderSrv> OnOrderSrvs { get; set; }
-
     }
 }

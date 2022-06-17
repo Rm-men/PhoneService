@@ -8,6 +8,36 @@ namespace ServiceDB.Models
 {
     public partial class Component
     {
+        public class ListComponentType {
+            public string Type { get; set; }
+        }
+        public static List<ListComponentType> GetComponentsTypes()
+        {
+            return (from o in Context.db.Components
+                    select new ListComponentType()
+                    {
+                       Type = o.Typecmp
+                    }).ToList();
+        }
+        public static List<string> GetComponentsTypesList(List<ListComponentType> list)
+        {
+            List<string> listT = new List<string>();
+            foreach (ListComponentType cp in list)
+            {
+                listT.Add(cp.Type);
+            }
+            return listT;
+        }
+        public static List<string> GetComponentsTypesList()
+        {
+            List<ListComponentType> list = GetComponentsTypes();
+            List<string> listT = new List<string>();
+            foreach (ListComponentType cp in list)
+            {
+                listT.Add(cp.Type);
+            }
+            return listT;
+        }
         public class ComponentInfo
         {
             public int IdComponent { get; set; }
@@ -31,7 +61,7 @@ namespace ServiceDB.Models
                         Typecmp = c.Typecmp,
                         Namecmp = c.Namecmp,
                         IdGuaranteecmp = c.IdGuaranteecmp,
-                        Manufacturercmp = c.Manufacturercmp,
+                        Manufacturercmp = (int)c.Manufacturercmp,
                         Pricecmp = c.Pricecmp,
                         Count = c.Count,
                         Guaranteecmp_period = gar.Period,

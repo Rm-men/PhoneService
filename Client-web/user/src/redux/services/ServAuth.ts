@@ -5,31 +5,16 @@ import {clientActions, State} from '../slices/clientSlice';
 import {RegisterFail,  LoginFail,} from "../actions/authActions"
 import {Client} from "../../models/ClientModel";
 import User from '../../components/User';
+import { useNavigate } from 'react-router-dom';
 
 import Links from '../../components/Links';
 
 class AuthService {
-	register(reg: RegistrationModel) {
-		return axios.post(Links.api_auth + "signon", reg)
-			.then((res) => {
-				const data: Answer = res.data;
-				if (data.status) {
-					setCookie("access_token", data.answer.access_token, {expires: 365, path: ''});
-					const client: Client = data.answer.user;
-					localStorage.setItem('user', JSON.stringify(client))
-					return clientActions.registerSuccess({isAuth: true, client: client});;
-				}
-				return RegisterFail(data.errorText!);
-			}).catch((err) => {
-				return RegisterFail(err);
-			})
-	}
-
-	login(email: LoginModel) {
-		return axios.post(Links.api_auth  + "signin", email).then(
+	login(login: LoginModel) {
+		return axios.post(Links.api_auth  + "signin", login).then(
 			(res) => {
 				const data: Answer = res.data;
-				console.log (' Пошла авторизация, почта: '+email.email+', пароль: '+email.password+'. Сервер вот что сказал на это: '+data.answer);
+				console.log (' Пошла авторизация, почта: '+login.email+', пароль: '+login.password+'. Сервер вот что сказал на это: '+data.answer);
 				if (data.status) {
 					setCookie("access_token", data.answer.access_token, {expires: 365, path: ''});
 					const client: Client = data.answer.user;
@@ -45,6 +30,26 @@ class AuthService {
 			return LoginFail(err);
 		})
 	}
+	register(reg: RegistrationModel) {
+		return axios.post(Links.api_auth + "signon", reg)
+			.then((res) => {
+				const data: Answer = res.data;
+				console.log (' Пошла авторизация, почта: '+reg.email+', пароль: '+reg.clpassword+', отчество: '+reg.patronymic+'. Сервер вот что сказал на это: '+data.answer);
+				if (data.status) {
+					setCookie("access_token", data.answer.access_token, {expires: 365, path: ''});
+					const client: Client = data.answer.user;
+					localStorage.setItem('user', JSON.stringify(client))
+					console.log ('Регистрация успешна');
+					return clientActions.registerSuccess({isAuth: true, client: client});;
+				}
+				console.log ('Кто-то пытался перерегистрироваться');
+				return RegisterFail(data.errorText!);
+			}).catch((err) => {
+				console.log ('Поизошла обшибка');
+				return RegisterFail(err);
+			})
+	}
+
 	logout(){
 		removeCookie("access_token", {path: ''});
 		localStorage.removeItem('user');

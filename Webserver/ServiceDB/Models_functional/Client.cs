@@ -3,17 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-#nullable disable
-
 namespace ServiceDB.Models
 {
     public partial class Client
     {
+
+/*        public string family { get; set; }
+        public string name { get; set; }
+        public string patronymic { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        public string clpassword { get; set; }
+*/
+        public class ClientInfo
+        {
+            public int IdClient { get; set; }
+            public string Namecl { get; set; }
+            public string Family { get; set; }
+            public string Patronymic { get; set; }
+            public string Phone { get; set; }
+            public string Email { get; set; }
+            public string Clpassword { get; set; }
+            public string FIO { get; set; } //
+
+        }
+        public Client(string f, string n, string? p, string pn, string m, string pasw)
+        {
+            this.Family = f;
+            this.Namecl = n;
+            if (p != null)
+            this.Patronymic = p;
+            this.Phone = pn;
+            this.Email = m;
+            this.Clpassword = pasw;
+        }
         // public string FIO { get; set; }
-        public static List<Client> GetClients()
+        public static List<ClientInfo> GetClients()
         {
             return (from c in Context.db.Clients
-                    select new Client()
+                    select new ClientInfo()
                     {
                         IdClient = c.IdClient,
                         Namecl = c.Namecl,
@@ -22,7 +50,7 @@ namespace ServiceDB.Models
                         Phone = c.Phone,
                         Email = c.Email,
                         Clpassword = c.Clpassword,
-                        // FIO = getFIO(c.Family, c.Namecl, c.Patronymic)
+                        FIO = getFIO(c.Family, c.Namecl, c.Patronymic)
                     }).ToList();
         }
         public virtual string getFIO()
@@ -37,13 +65,26 @@ namespace ServiceDB.Models
             if (p != "") fio += $"{f.Substring(0, 1)}.";
             return fio;
         }
-        public static Client? GetUserByLogin(string login)
+        public static Client? GetUserByMail(string login)
         {
             return Context.db.Clients.FirstOrDefault(u => u.Email == login);
         }
         public static Client GeUserForAuth(string login, string password)
         {
             return Context.db.Clients.FirstOrDefault(x => x.Email == login && x.Clpassword == password);
+        }
+        public bool AddClient()
+        {
+            try
+            {
+                Context.db.Clients.Add(this);
+                Context.db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

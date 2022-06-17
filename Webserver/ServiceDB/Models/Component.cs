@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
 
 #nullable disable
 
@@ -20,7 +17,7 @@ namespace ServiceDB.Models
         public string Typecmp { get; set; }
         public string Namecmp { get; set; }
         public int? IdGuaranteecmp { get; set; }
-        public int Manufacturercmp { get; set; }
+        public int? Manufacturercmp { get; set; }
         public decimal? Pricecmp { get; set; }
         public int? Count { get; set; }
 
@@ -28,6 +25,5 @@ namespace ServiceDB.Models
         public virtual Manufacturer ManufacturercmpNavigation { get; set; }
         public virtual ICollection<ComponentsComplibility> ComponentsComplibilities { get; set; }
         public virtual ICollection<OnOrderCmp> OnOrderCmps { get; set; }
-
     }
 }
