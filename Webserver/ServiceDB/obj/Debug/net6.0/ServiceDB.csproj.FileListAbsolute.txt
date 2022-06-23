@@ -12,3 +12,17 @@ C:\Users\ADDmen\source\repos\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\r
 C:\Users\ADDmen\source\repos\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.pdb
 C:\Users\ADDmen\source\repos\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.genruntimeconfig.cache
 C:\Users\ADDmen\source\repos\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ref\ServiceDB.dll
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\bin\Debug\net6.0\ServiceDB.deps.json
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\bin\Debug\net6.0\ServiceDB.runtimeconfig.json
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\bin\Debug\net6.0\ServiceDB.dll
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\bin\Debug\net6.0\ServiceDB.pdb
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.csproj.AssemblyReference.cache
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.AssemblyInfoInputs.cache
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.AssemblyInfo.cs
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.csproj.CoreCompileInputs.cache
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.dll
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\refint\ServiceDB.dll
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.pdb
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ServiceDB.genruntimeconfig.cache
+C:\Users\Noytbuk\Documents\GitHub\PhoneService\Webserver\ServiceDB\obj\Debug\net6.0\ref\ServiceDB.dll

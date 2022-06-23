@@ -4,8 +4,11 @@ import {
   Row,
   Col
 } from 'reactstrap';
+
 import RNavbar from '../auth/RNavbar';
 import LForm from '../auth/LForm';
+// import RNavbar from './../auth/RNavbar';
+// import LForm from './../auth/LForm';
 
 export default class Login extends React.Component {
   render() {

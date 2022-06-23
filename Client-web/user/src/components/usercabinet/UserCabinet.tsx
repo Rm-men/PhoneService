@@ -26,7 +26,7 @@ export default function UserCabinet() {
   return (
     <>
       <Orders_table/>
-      <Alert_update></Alert_update>
+      {/* <Alert_update/> */}
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

@@ -75,7 +75,7 @@ export default function Orders_table() {
       <Container>
         <h1 className='display-4'>Список устройств в ремонте</h1>
         <Container>
-          <Table striped bordered hover>
+          <Table striped bordered hover responsive="sm">
             <thead>
               <tr>
                 <th>Устройство</th>

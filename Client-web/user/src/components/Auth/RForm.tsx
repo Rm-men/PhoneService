@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../redux/store';
 import Page__REGISTER from './RegForm';
 
-
 interface State {
   family: string;
   name: string;
@@ -39,21 +38,22 @@ export default function RForm() {
   });
 
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: event.target.value.trim() });
+    setValues({ ...values, [prop]: event.target.value });
   };
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
   const onClick = (event: any) => {
-    console.log("начало авторизации");
+    console.log('начало авторизации');
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(false);
       return;
     } else setValidated(true); // активация подсветки валидации
-    console.log("подсветили кнопки");
+    console.log('подсветили кнопки');
     if (
       values.passwordcheck === '' ||
       values.clpassword === '' ||
@@ -64,12 +64,13 @@ export default function RForm() {
     ) {
       return;
     }
-    console.log("проверили непустоту полей");
+    // if () return; // если форма невалидна, разворачиваем
+    console.log('проверили непустоту полей');
     if (values.clpassword !== values.passwordcheck) {
       alert('Пароли не совпадают, повторите попытку.');
       return;
     }
-    console.log("проверили пароли");
+    console.log('проверили пароли');
     const data: RegistrationModel = {
       family: values.family,
       name: values.name,
@@ -78,9 +79,9 @@ export default function RForm() {
       email: values.email,
       clpassword: sha256(values.clpassword),
     };
-    console.log("Начали логинить - 1");
+    console.log('Начали логинить - 1');
     AuthService.register(data).then((res) => {
-      console.log("Начали логинить");
+      console.log('Начали логинить');
       dispatch(res);
       // navigate(Links.usercabinet);
       navigate(Links.home);
@@ -90,7 +91,7 @@ export default function RForm() {
 
   return (
     <Container>
-          {/* <ReactPhoneInput defaultCountry={'RU'} onChange={handleChange('phone')}/> */}
+      {/* <ReactPhoneInput defaultCountry={'RU'} onChange={handleChange('phone')}/> */}
 
       <Page__REGISTER></Page__REGISTER>
       <Row className='justify-content-md-center'>
@@ -103,7 +104,9 @@ export default function RForm() {
               </p>
             </div>
 
-            <Form noValidate validated={validated}> {/* флаги для валидации */}
+            <Form noValidate validated={validated}>
+              {' '}
+              {/* флаги для валидации */}
               <Form.Group className='mb-1' controlId='formBasicFamily'>
                 <Form.Label>Фамилия</Form.Label>
                 <Form.Control
@@ -130,17 +133,15 @@ export default function RForm() {
                   Пожалуйста, введите имя
                 </Form.Control.Feedback>
               </Form.Group>
-            </Form>
-            <Form.Group className='mb-3' controlId='formBasicPatr'>
-              <Form.Label>Отчество</Form.Label>
-              <Form.Control
-                type='midle-name'
-                placeholder='Введите отчество (если есть)'
-                value={values.patronymic}
-                onChange={handleChange('patronymic')}
-              />
-            </Form.Group>
-            <Form noValidate validated={validated}>
+              <Form.Group className='mb-3' controlId='formBasicPatr'>
+                <Form.Label>Отчество</Form.Label>
+                <Form.Control
+                  type='midle-name'
+                  placeholder='Введите отчество (если есть)'
+                  value={values.patronymic}
+                  onChange={handleChange('patronymic')}
+                />
+              </Form.Group>
               <Form.Group controlId='formBasicPhNumb'>
                 {/* <Form.Group as={Col} md='4' controlId='formBasicPhNumb'>  - фикисрованная длина*/}
                 <Form.Label>Номер телефона</Form.Label>

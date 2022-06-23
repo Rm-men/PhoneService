@@ -73,17 +73,17 @@ export default function LNavbar() {
     <>
       <Navbar collapseOnSelect expand='lg' bg='primary' variant='dark'>
         <Container>
-          <Navbar.Brand className='navbar-brand d-fles align-items-center text-light'>
+          <Navbar.Brand className='navbar-brand d-fles align-items-center text-light fs-2 me-5'>
             Ремонт телефонов IFixeg
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='responsive-navbar-nav'></Navbar.Toggle>
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='me-auto'>
-              <NavLink to={Links.home} className='text me-2'>
+              <NavLink to={Links.home} className='text me-4 fs-5'>
                 Главная страница
               </NavLink>
               {user.client.isAuth ? (
-                <NavLink to={Links.usercabinet} className='text me-2'>
+                <NavLink to={Links.usercabinet} className='text me-2 fs-5'>
                   Личный кабинет
                 </NavLink>
               ) : (

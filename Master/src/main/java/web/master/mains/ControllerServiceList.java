@@ -64,7 +64,6 @@ public class ControllerServiceList implements Initializable {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_freeOrder.getScene().getWindow();
-                stage_c.close();
                 System.out.println("Pressed goToFreeorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_freeorder.fxml"));
@@ -79,13 +78,13 @@ public class ControllerServiceList implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
+                stage_c.close();
             }
         });
         b_activeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_activeOrder.getScene().getWindow();
-                stage_c.close();
                 System.out.println("Pressed goToActiveorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorderf.fxml"));
@@ -100,14 +99,14 @@ public class ControllerServiceList implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
+                stage_c.close();
             }
         });
         b_listStaff.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_listStaff.getScene().getWindow();
-                stage_c.close();
-                System.out.println("Pressed goToListStaff.");
+                System.out.println("Pressed goToActiveorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_stafflist.fxml"));
                 fxmlLoader.setController( new ControllerStaffList(_Employee));
@@ -121,15 +120,14 @@ public class ControllerServiceList implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
-
+                stage_c.close();
             }
         });
         b_listServices.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_listServices.getScene().getWindow();
-                stage_c.close();
-                System.out.println("Pressed goToListServies.");
+                System.out.println("Pressed goToActiveorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_serviceslist.fxml"));
                 fxmlLoader.setController( new ControllerServiceList(_Employee));
@@ -143,6 +141,7 @@ public class ControllerServiceList implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
+                stage_c.close();
             }
         });
         // Подгрузка данных с таблицы

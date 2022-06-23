@@ -190,7 +190,6 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
         }
         {
             Stage stage_c = (Stage) b_ch_comment.getScene().getWindow();
-            stage_c.close();
             System.out.println("Pressed goToActiveorder.");
             Stage newWindow = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorderf.fxml"));
@@ -204,9 +203,33 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
             newWindow.setTitle("Мастерская - активные заказы");
             newWindow.setScene(scene);
             newWindow.setMaximized(true);
-            newWindow.show();
+            //stage_c.close(); //
+            newWindow.show(); //
+
+            Stage newWindowO = new Stage();
+            FXMLLoader fxmlLoaderO = new FXMLLoader();
+            if (_Order.getAgreement()== null){
+                fxmlLoaderO = new FXMLLoader(MainStart.class.getResource("Order_info_picked_noagree.fxml"));
+                fxmlLoaderO.setController(new ControllerActiveOrder_picked_noagree(_Employee, _Order, stage_c));
+
+            }
+            else if (_Order.getAgreement()) {
+                fxmlLoaderO = new FXMLLoader(MainStart.class.getResource("Order_info_picked.fxml"));
+                fxmlLoaderO.setController( new ControllerActiveOrder_picked(_Employee, _Order, stage_c));
+            }
+            Scene sceneO = null;
+            try {
+                sceneO = new Scene(fxmlLoaderO.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            newWindowO.setTitle("Мастерская - детализация активного заказа");
+            //newWindowO.setScene(sceneO);
+            newWindow.show(); //
+            _stage_main.close();
+            newWindowO.show();
+            stage_c.close();
         }
-        _stage_main.close();
     }
     public void configDiagnostic() {
         try {
@@ -227,7 +250,6 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
         }
         {
             Stage stage_c = (Stage) b_ch_comment.getScene().getWindow();
-            stage_c.close();
             System.out.println("Pressed goToActiveorder.");
             Stage newWindow = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorderf.fxml"));

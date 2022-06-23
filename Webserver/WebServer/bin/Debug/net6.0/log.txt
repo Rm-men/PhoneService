@@ -4856,4 +4856,168 @@ dbug: 23.06.2022 14:24:57.450 RelationalEventId.CommandCreated[20104] (Microsoft
       Created DbCommand for 'ExecuteReader' (0ms).
 dbug: 23.06.2022 14:24:57.450 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
       Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
-dbug: 23.06.2022 14:24:57.450 Relat
+dbug: 23.06.2022 14:24:57.450 Relatdbug: 23.06.2022 16:18:59.256 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'ListWorkshop' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'} that could be matched with the properties on the other entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.271 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'OrderStatus' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'} that could be matched with the properties on the other entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.276 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'ListWorkshop' has been configured by convention because there are multiple properties on one entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.276 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.622 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'ListWorkshop' has been configured by convention because there are multiple properties on one entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.622 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.623 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'ListWorkshop' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'} that could be matched with the properties on the other entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.627 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.630 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 16:18:59.631 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'OrderStatus' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'} that could be matched with the properties on the other entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+info: 23.06.2022 16:19:00.089 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.10 initialized 'ApplicationContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+dbug: 23.06.2022 16:19:00.128 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:00.154 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.146 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.148 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.155 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.168 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.06.2022 16:19:01.172 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (4ms).
+dbug: 23.06.2022 16:19:01.172 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.274 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.279 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+info: 23.06.2022 16:19:01.308 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (29ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+dbug: 23.06.2022 16:19:01.309 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.311 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.313 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.386 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.386 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.387 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.387 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.06.2022 16:19:01.387 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.06.2022 16:19:01.387 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.387 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.387 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+info: 23.06.2022 16:19:01.388 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+dbug: 23.06.2022 16:19:01.388 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.388 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.397 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.06.2022 16:19:01.397 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.06.2022 16:19:01.397 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 16:19:01.398 Relatdbug: 23.06.2022 21:23:56.023 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'ListWorkshop' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'} that could be matched with the properties on the other entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.039 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'OrderStatus' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'} that could be matched with the properties on the other entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.043 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'ListWorkshop' has been configured by convention because there are multiple properties on one entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.044 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.425 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'ListWorkshop' has been configured by convention because there are multiple properties on one entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.426 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.426 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'ListWorkshop' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewaddressNavigations', 'StoryOrderMoveIdoldaddressNavigations'} that could be matched with the properties on the other entity type {'IdnewaddressNavigation', 'IdoldaddressNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.431 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.436 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'StoryOrderMove' to 'OrderStatus' has been configured by convention because there are multiple properties on one entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'} that could be matched with the properties on the other entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+dbug: 23.06.2022 21:23:56.437 CoreEventId.MultipleNavigationProperties[10607] (Microsoft.EntityFrameworkCore.Model) 
+      No relationship from 'OrderStatus' to 'StoryOrderMove' has been configured by convention because there are multiple properties on one entity type {'StoryOrderMoveIdnewstatusNavigations', 'StoryOrderMoveIdoldstatusNavigations'} that could be matched with the properties on the other entity type {'IdnewstatusNavigation', 'IdoldstatusNavigation'}. This message can be disregarded if explicit configuration has been specified in 'OnModelCreating'.
+info: 23.06.2022 21:23:56.992 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.10 initialized 'ApplicationContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: None
+dbug: 23.06.2022 21:23:57.039 RelationalEventId.MigrateUsingConnection[20400] (Microsoft.EntityFrameworkCore.Migrations) 
+      Migrating using database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:57.069 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.036 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.039 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.046 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.060 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.06.2022 21:23:58.065 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (5ms).
+dbug: 23.06.2022 21:23:58.065 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.157 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.165 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+info: 23.06.2022 21:23:58.199 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (36ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+dbug: 23.06.2022 21:23:58.200 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.203 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.206 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.291 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.292 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.292 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.292 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteScalar'.
+dbug: 23.06.2022 21:23:58.292 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteScalar' (0ms).
+dbug: 23.06.2022 21:23:58.292 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.292 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.292 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+info: 23.06.2022 21:23:58.294 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+dbug: 23.06.2022 21:23:58.294 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.294 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.303 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 23.06.2022 21:23:58.304 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (0ms).
+dbug: 23.06.2022 21:23:58.304 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'work100024' on server 'tcp://localhost:5432'.
+dbug: 23.06.2022 21:23:58.304 Relat

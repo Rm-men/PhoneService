@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.Admin"
         mc:Ignorable="d"
-        Title="Администратор сервисного центра">
+        Title="Администратор сервисного центра" Height="85">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -22,12 +22,12 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Orientation="Horizontal">
-            <Button x:Name="b_services" Grid.Column="1"  Height="32" Margin="5 0 5 0" Click="B_to_Services" >Услуги</Button>
-            <Button x:Name="b_product_list" Grid.Column="0"  Height="32" Margin="5 0 5 0" Click="B_to_Product">Товары</Button>
-            <Button x:Name="b_orders" Grid.Column="3"  Height="32" Margin="5 0 5 0" Click="B_to_Orders" >Заказы</Button>
-            <Button x:Name="b_clients" Grid.Column="3"  Height="32" Margin="5 0 5 0" Click="B_to_Clients" Cursor="Hand" >Клиенты</Button>
-            <Button x:Name="b_employees" Grid.Column="1"  Height="32" Margin="5 0 5 0" Click="B_to_Employees" >Сотрудники</Button>
-            <Button x:Name="b_supplies" Grid.Column="2"  Height="32" Margin="5 0 5 0" Click="B_to_Supply" Opacity="0">Поставки</Button>
+            <Button x:Name="b_services" Grid.Column="1"  Height="32" Width="120" Margin="5 0 5 0" Click="B_to_Services" FontSize="18" >Услуги</Button>
+            <Button x:Name="b_product_list" Grid.Column="0"  Height="32" Width="120" Margin="5 0 5 0" Click="B_to_Product" FontSize="18">Товары</Button>
+            <Button x:Name="b_orders" Grid.Column="3"  Height="32" Width="120" Margin="5 0 5 0" Click="B_to_Orders" FontSize="18">Заказы</Button>
+            <Button x:Name="b_clients" Grid.Column="3"  Height="32"  Width="120" Margin="5 0 5 0" Click="B_to_Clients" FontSize="18" >Клиенты</Button>
+            <Button x:Name="b_employees" Grid.Column="1"  Height="32" Width="120" Margin="5 0 5 0" Click="B_to_Employees" FontSize="18">Сотрудники</Button>
+            <Button x:Name="b_supplies" Grid.Column="2"  Height="32" Width="120"  Margin="5 0 5 0" Click="B_to_Supply" Opacity="0">Поставки</Button>
         </StackPanel>
         <Frame x:Name="View_frame" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6"  Margin="5 0 5 0" Background="#FFEEEEEE" NavigationUIVisibility="Hidden" >
         </Frame>

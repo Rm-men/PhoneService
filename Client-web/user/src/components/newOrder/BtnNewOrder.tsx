@@ -52,7 +52,7 @@ export default function BtnNewOrder() {
   const user = useSelector((state: RootState) => state);
   const managerModal = () => {};
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: event.target.value.trim() });
+    setValues({ ...values, [prop]: event.target.value});
   };
   interface State {
     Phonenumber: string;

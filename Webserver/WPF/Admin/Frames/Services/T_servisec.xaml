@@ -30,7 +30,6 @@
                 <DataGridTextColumn Header="Тип"                Binding="{Binding Path=Typesrv}"/>
                 <DataGridTextColumn Header="Описание"           Binding="{Binding Path=Descriptionsrv}"/>
                 <DataGridTextColumn Header="Цена"               Binding="{Binding Path=Costsrv}"/>
-                <DataGridTextColumn Header="Время ремонта"      Binding="{Binding Path=CoTimesrvst}"/>
             </DataGrid.Columns>
 
             <DataGrid.ItemContainerStyle>

@@ -71,7 +71,6 @@ public class ControllerActiveOrder implements Initializable {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_freeOrder.getScene().getWindow();
-                stage_c.close();
                 System.out.println("Pressed goToFreeorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_freeorder.fxml"));
@@ -86,13 +85,13 @@ public class ControllerActiveOrder implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
+                stage_c.close();
             }
         });
         b_activeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_activeOrder.getScene().getWindow();
-                stage_c.close();
                 System.out.println("Pressed goToActiveorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_activeorderf.fxml"));
@@ -107,14 +106,14 @@ public class ControllerActiveOrder implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
+                stage_c.close();
             }
         });
         b_listStaff.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_listStaff.getScene().getWindow();
-                stage_c.close();
-                System.out.println("Pressed goToListStaff.");
+                System.out.println("Pressed goToActiveorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_stafflist.fxml"));
                 fxmlLoader.setController( new ControllerStaffList(_Employee));
@@ -128,15 +127,14 @@ public class ControllerActiveOrder implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
-
+                stage_c.close();
             }
         });
         b_listServices.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Stage stage_c = (Stage) b_listServices.getScene().getWindow();
-                stage_c.close();
-                System.out.println("Pressed goToListServies.");
+                System.out.println("Pressed goToActiveorder.");
                 Stage newWindow = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("main_serviceslist.fxml"));
                 fxmlLoader.setController( new ControllerServiceList(_Employee));
@@ -150,6 +148,7 @@ public class ControllerActiveOrder implements Initializable {
                 newWindow.setScene(scene);
                 newWindow.setMaximized(true);
                 newWindow.show();
+                stage_c.close();
             }
         });
         b_confimefilters.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -383,7 +382,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setNamecl(rs.getString("namecl"));
                 order.setNamecl(rs.getString("patronymic"));
                 order.setNamecl(rs.getString("family"));
-                order.setAgreement(rs.getBoolean("agreement"));
+                order.setAgreement(rs.getObject("agreement", Boolean.class));
                 order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
                 tv_aOrders.getItems().add(order);
