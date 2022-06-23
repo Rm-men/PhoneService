@@ -457,6 +457,8 @@ namespace ServiceDB
 
                 entity.Property(e => e.Descriptionord).HasColumnName("descriptionord");
 
+                entity.Property(e => e.Diagnostic).HasColumnName("diagnostic");
+
                 entity.Property(e => e.IdClient).HasColumnName("id_client");
 
                 entity.Property(e => e.IdMaster).HasColumnName("id_master");
@@ -468,9 +470,11 @@ namespace ServiceDB
 
                 entity.Property(e => e.IdPhone).HasColumnName("id_phone");
 
-                entity.Property(e => e.Phonenumber)
-                    .HasMaxLength(11)
-                    .HasColumnName("phonenumber");
+                entity.Property(e => e.Payed)
+                    .HasColumnName("payed")
+                    .HasDefaultValueSql("false");
+
+                entity.Property(e => e.Phonenumber).HasColumnName("phonenumber");
 
                 entity.Property(e => e.Priceord)
                     .HasPrecision(12, 2)
@@ -533,6 +537,8 @@ namespace ServiceDB
 
                 entity.Property(e => e.Descriptionos).HasColumnName("descriptionos");
 
+                entity.Property(e => e.Diagnostic).HasColumnName("diagnostic");
+
                 entity.Property(e => e.Family)
                     .HasMaxLength(45)
                     .HasColumnName("family");
@@ -559,9 +565,7 @@ namespace ServiceDB
                     .HasMaxLength(45)
                     .HasColumnName("patronymic");
 
-                entity.Property(e => e.Phonenumber)
-                    .HasMaxLength(11)
-                    .HasColumnName("phonenumber");
+                entity.Property(e => e.Phonenumber).HasColumnName("phonenumber");
             });
 
             modelBuilder.Entity<Phone>(entity =>
@@ -683,4 +687,4 @@ namespace ServiceDB
 }
 
 // Scaffold-DbContext "host=45.10.244.15;port=55532;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7" npgsql.entityframeworkcore.postgresql -OutputDir Models
-// Scaffold-DbContext "host=localhost;port=5432;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7" npgsql.entityframeworkcore.postgresql -OutputDir Models
+// Scaffold-DbContext "host=localhost;port=5432;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7" npgsql.entityframeworkcore.postgresql -OutputDir Models -Force

@@ -4,7 +4,6 @@ import { removeCookie, setCookie } from 'typescript-cookie';
 import { clientActions, State } from '../slices/clientSlice';
 import { RegisterFail, LoginFail } from '../actions/authActions';
 import { Client } from '../../models/ClientModel';
-import User from '../../components/User';
 import { useNavigate } from 'react-router-dom';
 
 import Links from '../../components/Links';
@@ -13,10 +12,9 @@ import authHeader from '../AuthHeader';
 
 class ServOrders {
   getOrders() {
-	console.log("Щаяс как приедет");
     return axios.get(Links.api_orders + 'getorder', { headers: authHeader() })
       .then((response) => {
-        console.log(response.data);
+         // console.log(response.data);
         const data: Answer = response.data;
         if (data.status) {
           const orders: OrderModel[] = data.answer.orders;
@@ -29,6 +27,7 @@ class ServOrders {
         return [];
       });
   }
+  
 }
 
 export default new ServOrders();

@@ -4,7 +4,6 @@ import {removeCookie, setCookie} from "typescript-cookie";
 import {clientActions, State} from '../slices/clientSlice';
 import {RegisterFail,  LoginFail,} from "../actions/authActions"
 import {Client} from "../../models/ClientModel";
-import User from '../../components/User';
 
 import Links from '../../components/Links';
 import { NewOrderModel } from '../../models/NewOrderModel';
@@ -17,6 +16,7 @@ class ServAddOrder {
 			(res) => {
 				const data: Answer = res.data;
 				console.log (' Новый заказ инициализирован, адрес: '+order.Address+'. Сервер вот что сказал на это: '+data.answer);
+				console.log (res);
 				// if (data.status) {
 				// 	setCookie("access_token", data.answer.access_token, {expires: 365, path: ''});
 				// 	const client: Client = data.answer.user;

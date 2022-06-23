@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import web.master.Conn;
 import web.master.active_order.ControllerActiveOrder_picked;
 import web.master.MainStart;
+import web.master.active_order.ControllerActiveOrder_picked_noagree;
 import web.master.entity.Employee;
 import web.master.entity.Order;
 
@@ -214,7 +215,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setDateord(rs.getDate("dateord").toString());
                 order.setPhone_number(rs.getString("phonenumber"));
                 order.setAddress(rs.getString("address"));
-                order.setAgreement(rs.getBoolean("agreement"));
+                order.setAgreement(rs.getObject("agreement", Boolean.class));
                 order.setId_client(rs.getInt("id_client"));
                 order.setId_master(rs.getInt("id_master"));
                 order.setId_phone(rs.getInt("id_phone"));
@@ -222,6 +223,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setDescriptionord(rs.getString("descriptionord"));
                 order.setDescriptionos(rs.getString("descriptionos"));
                 order.setComments(rs.getString("comments"));
+                order.setDiagnostic(rs.getString("diagnostic"));
                 order.setNamephone(rs.getString("namephone"));
                 order.setNamecl(rs.getString("namecl"));
                 order.setNamecl(rs.getString("patronymic"));
@@ -250,8 +252,16 @@ public class ControllerActiveOrder implements Initializable {
         System.out.println("click on active: "+order.getId_client()+", "+ order.getDescriptionord());
         Stage stage_c = (Stage) b_activeOrder.getScene().getWindow();
         Stage newWindow = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainStart.class.getResource("Order_info_picked.fxml"));
-        fxmlLoader.setController( new ControllerActiveOrder_picked(_Employee, order, stage_c));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        if (order.getAgreement()== null){
+            fxmlLoader = new FXMLLoader(MainStart.class.getResource("Order_info_picked_noagree.fxml"));
+            fxmlLoader.setController(new ControllerActiveOrder_picked_noagree(_Employee, order, stage_c));
+
+        }
+        else if (order.getAgreement()) {
+            fxmlLoader = new FXMLLoader(MainStart.class.getResource("Order_info_picked.fxml"));
+            fxmlLoader.setController( new ControllerActiveOrder_picked(_Employee, order, stage_c));
+        }
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());

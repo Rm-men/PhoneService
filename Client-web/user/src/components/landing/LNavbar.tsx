@@ -29,17 +29,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../redux/store';
 
-import User from '../User';
-
 export default function LNavbar() {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   interface State {
     email: string;
     password: string;
   }
+  const [validated, setValidated] = useState(false); //тумблер подсветки валидации
   const [values, setValues] = useState<State>({
     email: '',
     password: '',
@@ -47,7 +45,16 @@ export default function LNavbar() {
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value.trim() });
   };
-  const onClick = () => {
+  const onClick = (event: any) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    } else setValidated(true); // активация подсветки валидации
+    if (values.email === '' || values.password === '') {
+      return;
+    }
     const data: LoginModel = {
       email: values.email,
       password: sha256(values.password),
@@ -55,6 +62,7 @@ export default function LNavbar() {
     AuthService.login(data).then((res) => {
       dispatch(res);
       handleClose();
+      navigate(Links.home);
     });
   };
   const navigate = useNavigate();
@@ -66,7 +74,7 @@ export default function LNavbar() {
       <Navbar collapseOnSelect expand='lg' bg='primary' variant='dark'>
         <Container>
           <Navbar.Brand className='navbar-brand d-fles align-items-center text-light'>
-            Ремонт телефонов Ifix
+            Ремонт телефонов IFixeg
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='responsive-navbar-nav'></Navbar.Toggle>
           <Navbar.Collapse id='responsive-navbar-nav'>
@@ -80,9 +88,8 @@ export default function LNavbar() {
                 </NavLink>
               ) : (
                 <>
-                <div  className=' deactive me-2'>
-                  Личный кабинет
-                </div></>
+                  <div className=' deactive me-2'>Личный кабинет</div>
+                </>
               )}
             </Nav>
             <Nav>
@@ -153,10 +160,11 @@ export default function LNavbar() {
                     <div className='mb-5'>
                       <h1>Авторизация</h1>
                     </div>
-                    <Form>
+                    <Form noValidate validated={validated}>
                       <Form.Group className='mb-3' controlId='formBasicEmail'>
                         <Form.Label>Email </Form.Label>
                         <Form.Control
+                          required
                           type='email'
                           placeholder='Введите email'
                           value={values.email}
@@ -169,19 +177,21 @@ export default function LNavbar() {
                       <Form.Group className='mb-3' controlId='formBasicPassword'>
                         <Form.Label>Пароль</Form.Label>
                         <Form.Control
+                          required
                           type='password'
                           placeholder='Введите пароль'
                           value={values.password}
                           onChange={handleChange('password')}
                         />
                       </Form.Group>
-                      <Form.Group className='mb-3' controlId='formBasicCheckbox'>
+                      {/* <Form.Group className='mb-3' controlId='formBasicCheckbox'>
                         <Form.Check type='checkbox' label='Запомнить меня' />
-                      </Form.Group>
+                      </Form.Group> */}
                       <Button variant='primary' onClick={onClick}>
                         Войти
                       </Button>
                     </Form>
+
                     <p className='small my-4 text-center'>
                       Нет аккаунта?{' '}
                       <Link to={Links.register} onClick={handleClose}>

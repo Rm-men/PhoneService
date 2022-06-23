@@ -19,6 +19,7 @@ public class Order {
     private String comments;
     private Boolean agreement;
     private String agreementtext;
+    private String diagnostic;
 
     private String services;
     private String components;
@@ -189,10 +190,22 @@ public class Order {
 
     public void setAgreement(Boolean agreement) {
         this.agreement = agreement;
+        if (agreement == null) {
+            this.agreementtext = "";
+            return;
+        }
         if (agreement) this.agreementtext = "Да";
-            else this.agreementtext = "Нет";
+        else  this.agreementtext = "Нет";
     }
     public String getAgreementtext() {
         return agreementtext;
+    }
+
+    public String getDiagnostic() {
+        return diagnostic;
+    }
+
+    public void setDiagnostic(String diagnostic) {
+        this.diagnostic = diagnostic;
     }
 }

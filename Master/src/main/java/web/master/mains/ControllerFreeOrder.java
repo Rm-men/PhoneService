@@ -166,7 +166,7 @@ public class ControllerFreeOrder implements Initializable {
 
             // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery("SELECT * FROM orders_view WHERE id_master is null;");
+                    ResultSet rs = st.executeQuery("SELECT * FROM orders_view WHERE id_master is null or id_master = 0;");
             while (rs.next()) {
                 Order order = new Order();
                 order.setId_order(rs.getInt("id_order"));

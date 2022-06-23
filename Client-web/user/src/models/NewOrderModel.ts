@@ -5,4 +5,5 @@ export interface NewOrderModel {
 	Email: string,
 	IdPhone : number, 
 	Descriptionord: string,
+	Namephone: string,
 }

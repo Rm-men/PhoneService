@@ -61,7 +61,7 @@ namespace WPF.Admin.Frames.Clietns {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WPF;component/admin/frames/clietns/t_client.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WPF;V1.0.0.0;component/admin/frames/clietns/t_client.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Admin\Frames\Clietns\T_client.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

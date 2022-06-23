@@ -77,7 +77,7 @@ namespace WPF.Admin.Frames.Services {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WPF;component/admin/frames/services/f_services.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WPF;V1.0.0.0;component/admin/frames/services/f_services.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Admin\Frames\Services\F_services.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -24,5 +24,6 @@ namespace ServiceDB.Models
         public int? IdPhone { get; set; }
         public string IdOrderStatus { get; set; }
         public string Contacts { get; set; }
+        public string Diagnostic { get; set; }
     }
 }

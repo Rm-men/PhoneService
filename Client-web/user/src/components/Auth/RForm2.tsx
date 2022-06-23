@@ -1,52 +1,99 @@
 import 'react-app-polyfill/ie11';
-import * as React from 'react';
+import { Button, Container, FormLabel, InputGroup, Row, Col, Form } from 'react-bootstrap';
+
+import React, { useState } from 'react';
 import * as ReactDOM from 'react-dom';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { Formik, Field, FormikHelpers } from 'formik';
 
-interface Values {
-  firstName: string;
-  lastName: string;
-  email: string;
-}
+export default function FormExample() {
+  const [validated, setValidated] = useState(false);
 
-export default function Rform2 ()  {
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidated(true);
+  };
+
   return (
-    <div>
-      <h1>Signup</h1>
-      <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          email: '',
-        }}
-        onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
-        ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
-        }}
-      >
-        <Form>
-          <label htmlFor="firstName">First Name</label>
-          <Field id="firstName" name="firstName" placeholder="John" />
-
-          <label htmlFor="lastName">Last Name</label>
-          <Field id="lastName" name="lastName" placeholder="Doe" />
-
-          <label htmlFor="email">Email</label>
-          <Field
-            id="email"
-            name="email"
-            placeholder="john@acme.com"
-            type="email"
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Row className='mb-3'>
+        <Form.Group as={Col} md='4' controlId='validationCustom02'>
+          <Form.Label>Фамилия</Form.Label>
+          <Form.Control required type='text' placeholder='Введите фамилию' />
+          <Form.Control.Feedback></Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md='4' controlId='validationCustom01'>
+          <Form.Label>Имя</Form.Label>
+          <Form.Control required type='text' placeholder='Введите имя' defaultValue='' />
+          <Form.Control.Feedback></Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md='4' controlId='validationCustom01'>
+          <Form.Label>Отчество</Form.Label>
+          <Form.Control
+            required
+            type='text'
+            placeholder='Введите отчество (если есть)'
+            defaultValue=''
           />
-
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
-    </div>
+          <Form.Control.Feedback></Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md='4' controlId='validationCustomUsername'>
+          <Form.Label>Номер телефона</Form.Label>
+          <InputGroup hasValidation>
+            <InputGroup.Text id='inputGroupPrepend'>+7</InputGroup.Text>
+            <Form.Control
+              // type='number' появляются стрелочки для изменения числа, для номера оно не надо
+              placeholder='Введите Email'
+              aria-describedby='inputGroupPrepend'
+              required
+            />
+            <Form.Control.Feedback type='invalid'>
+              Пожалуйста, введите ваш номер телефона
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
+      </Row>
+      <Form.Group as={Col} md='4' controlId='validationCustomUsername'>
+        <Form.Label>Email</Form.Label>
+        <InputGroup hasValidation>
+          <InputGroup.Text id='inputGroupPrepend'>@</InputGroup.Text>
+          <Form.Control
+            type='email'
+            placeholder='Введите Email'
+            aria-describedby='inputGroupPrepend'
+            required
+          />
+          <Form.Control.Feedback type='invalid'>
+            Пожалуйста, введите ваш Email
+          </Form.Control.Feedback>
+        </InputGroup>
+      </Form.Group>
+      <Row className='mb-3'>
+        <Form.Group as={Col} md='3' controlId='validationCustom04'>
+          <Form.Label>Пароль</Form.Label>
+          <Form.Control type='password' placeholder='Введите пароль' required />
+          <Form.Control.Feedback type='invalid'>Пожалуйста, введите пароль</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md='3' controlId='validationCustom05'>
+          <Form.Label>Повторите пароль</Form.Label>
+          <Form.Control type='password' placeholder='Введите пароль повторно' required />
+          <Form.Control.Feedback type='invalid'>
+            Пожалуйста, повторите введеный пароль.
+          </Form.Control.Feedback>
+        </Form.Group>
+      </Row>
+      <Form.Group className='mb-3'>
+        {/* <Form.Check
+          required
+          label="Agree to terms and conditions"
+          feedback="You must agree before submitting."
+          feedbackType="invalid"
+        /> */}
+      </Form.Group>
+      <Button type='submit'>Зарегистрироваться</Button>
+    </Form>
   );
-};
+}

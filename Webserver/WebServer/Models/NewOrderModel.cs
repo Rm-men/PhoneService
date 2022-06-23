@@ -14,6 +14,7 @@ namespace WebServer.Models
         public int? IdPhone { get; set; }
         public string Descriptionord { get; set; }
         public string Email { get; set; }
+        public string Namephone { get; set; }
         public NewOrderModel()
         {
         }

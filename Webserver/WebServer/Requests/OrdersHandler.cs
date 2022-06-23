@@ -8,11 +8,12 @@ using RestPanda.Requests.Attributes;
 using ServiceDB.Models;
 using Trivial.Security;
 using WebServer.Models;
+using static ServiceDB.Models.Order;
 
 namespace WebServer.Requests
 {
     [RequestHandlerPath("/usercabinet")]
-    public class NewOrderHandler : RequestHandler
+    public class OrdersHandler : RequestHandler
     {
         private string GenerateToken(Client cl)
         {
@@ -41,14 +42,16 @@ namespace WebServer.Requests
 
             var user = Client.GetUserByMail(body.Email);
 
-            var order = new Order(body.Phonenumber, body.Address, user.IdClient, body.IdPhone, body.Descriptionord );
-            if (order is null)
+            PhoneModel ph = PhoneModel.getPhoneModel(body.Namephone);
+
+            var ord = new Order(body.Phonenumber, body.Address, user.IdClient, ph.IdPhoneModel, body.Descriptionord );
+            if (ord is null)
             {
                 Send(new AnswerModel(false, null, 401, "incorrect request body"));
                 return;
             }
-            var ormod = new NewOrderModel(order);
-            if (!order.AddOrder())
+            var order = new NewOrderModel(ord);
+            if (!ord.AddOrder())
             {
                 Send(new AnswerModel(false, null, 401, "incorrect request"));
                 return;
@@ -71,7 +74,7 @@ namespace WebServer.Requests
                 Send(new AnswerModel(false, null, 400, "incorrect request"));
                 return;
             }
-            List<Order.OrderInfo> orders = Order.GetOrdersForUser(user.Email);
+            List<OrderInfo> orders = GetOrdersInfoForUser(user.IdClient);
 
             Send(new AnswerModel(true, new { orders = orders }, null, null));
         }

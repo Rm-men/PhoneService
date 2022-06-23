@@ -450,6 +450,8 @@ namespace ServiceDB.Models
 
                 entity.Property(e => e.Descriptionord).HasColumnName("descriptionord");
 
+                entity.Property(e => e.Diagnostic).HasColumnName("diagnostic");
+
                 entity.Property(e => e.IdClient).HasColumnName("id_client");
 
                 entity.Property(e => e.IdMaster).HasColumnName("id_master");
@@ -461,9 +463,11 @@ namespace ServiceDB.Models
 
                 entity.Property(e => e.IdPhone).HasColumnName("id_phone");
 
-                entity.Property(e => e.Phonenumber)
-                    .HasMaxLength(11)
-                    .HasColumnName("phonenumber");
+                entity.Property(e => e.Payed)
+                    .HasColumnName("payed")
+                    .HasDefaultValueSql("false");
+
+                entity.Property(e => e.Phonenumber).HasColumnName("phonenumber");
 
                 entity.Property(e => e.Priceord)
                     .HasPrecision(12, 2)
@@ -526,6 +530,8 @@ namespace ServiceDB.Models
 
                 entity.Property(e => e.Descriptionos).HasColumnName("descriptionos");
 
+                entity.Property(e => e.Diagnostic).HasColumnName("diagnostic");
+
                 entity.Property(e => e.Family)
                     .HasMaxLength(45)
                     .HasColumnName("family");
@@ -552,9 +558,7 @@ namespace ServiceDB.Models
                     .HasMaxLength(45)
                     .HasColumnName("patronymic");
 
-                entity.Property(e => e.Phonenumber)
-                    .HasMaxLength(11)
-                    .HasColumnName("phonenumber");
+                entity.Property(e => e.Phonenumber).HasColumnName("phonenumber");
             });
 
             modelBuilder.Entity<Phone>(entity =>

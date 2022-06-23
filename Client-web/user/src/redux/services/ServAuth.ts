@@ -4,7 +4,6 @@ import {removeCookie, setCookie} from "typescript-cookie";
 import {clientActions, State} from '../slices/clientSlice';
 import {RegisterFail,  LoginFail,} from "../actions/authActions"
 import {Client} from "../../models/ClientModel";
-import User from '../../components/User';
 import { useNavigate } from 'react-router-dom';
 
 import Links from '../../components/Links';
@@ -23,7 +22,8 @@ class AuthService {
 					// User.user;
 					return clientActions.loginSuccess({isAuth: true, client: client});;
 				}
-				console.log ('Кто-то попутал логин/пароль');
+				console.log ('Неверный логин/пароль');
+				alert('Неверный логин/пароль');
 				return LoginFail(data.errorText!);
 			}).catch((err) => {
 				console.log ('Поизошла обшибка');

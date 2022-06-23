@@ -330,14 +330,13 @@ public class ControllerActiveOrder_picked implements Initializable {
     public void editComment(String comment) {
         try {
             System.out.print("Comment changed");
-            con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
-
+            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             PreparedStatement ps = con.prepareStatement("UPDATE orders SET comments = ? WHERE id_order = ?");
             ps.setString(1, comment);
             ps.setInt(2, _Order.getId_order());
             ps.executeUpdate();
             ps.close();
-            con.close();
+            // con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
