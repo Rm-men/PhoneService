@@ -336,6 +336,11 @@ public class Controller_Components implements Initializable {
                 ps.executeUpdate();
             }
             caclTotal();
+            ps = con.prepareStatement("Update orders set priceord= ? WHERE id_order =  ?" );
+                ps.setInt(1, Integer.parseInt(l_c_price.getText()));
+                ps.setInt(2, _Order.getId_order());
+                ps.executeUpdate();
+
             // con.close();
         } catch (SQLException e) {
             {

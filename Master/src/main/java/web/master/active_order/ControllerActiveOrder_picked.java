@@ -31,7 +31,10 @@ public class ControllerActiveOrder_picked implements Initializable {
     @FXML public Button b_ch_components;
     @FXML public Button b_ch_comment;
     @FXML public ComboBox cb_status;
-    @FXML public CheckBox chb_agreement;
+    // @FXML public CheckBox chb_agreement;
+    @FXML public CheckBox chb_payed;
+
+    @FXML public Label l_agree;
 
     @FXML public Label l_phone;
     @FXML public Label l_date;
@@ -62,6 +65,7 @@ public class ControllerActiveOrder_picked implements Initializable {
     @FXML private TableColumn<Component, Integer> col_cmp_garanty;
     @FXML private TableColumn<Component, String>  col_cmp_manufacturer;
     @FXML private TableColumn<Component, Double>  col_cmp_price;
+    String agretext = "";
 
     private static ObservableList<String> statusList = FXCollections.observableArrayList();
     private ObservableList<String> idstatusList = FXCollections.observableArrayList();
@@ -190,14 +194,19 @@ public class ControllerActiveOrder_picked implements Initializable {
             Conn с = new Conn();
             con = с.getConnect();
             boolean agree = !_Order.getAgreement();
-                chb_agreement.setSelected(!agree);
+            if (_Order.getAgreement())
+                 agretext = "получено";
+            else
+                agretext = "отказано";
+            l_agree.setText(agretext);
+                // chb_agreement.setSelected(!agree);
+            if (_Order.getPayed() != null)
+                chb_payed.setSelected(_Order.getPayed());
                 b_ch_components.setDisable(agree);
                 b_ch_services.setDisable(agree);
                 tv_components.setDisable(agree);
                 tv_services.setDisable(agree);
-
-            // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
-            Statement st = con.createStatement();
+                Statement st = con.createStatement();
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
             PreparedStatement ps = con.prepareStatement("SELECT * FROM on_order_srv JOIN list_sirvices ls on ls.id = on_order_srv.id_srv_onlist WHERE id_order_forservice = ?");
             ps.setInt(1, _Order.getId_order());
@@ -241,35 +250,117 @@ public class ControllerActiveOrder_picked implements Initializable {
         try {
             // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select * From order_status WHERE idos = 'waiting_0' ORDER BY logical_sequence ");
-            int agree_step = 0;
+            ResultSet rs = st.executeQuery("Select * From order_status WHERE idos = 'process_1' ORDER BY logical_sequence ");
+            int process_1 = 0;
             while (rs.next()) {
-                agree_step = rs.getInt("logical_sequence");
+                process_1 = rs.getInt("logical_sequence");
+            }
+            rs = st.executeQuery("Select * From order_status WHERE idos = 'getting_1' ORDER BY logical_sequence ");
+            int getting_1 = 0;
+            while (rs.next()) {
+                getting_1 = rs.getInt("logical_sequence");
+            }
+            rs = st.executeQuery("Select * From order_status WHERE idos = 'repair_0' ORDER BY logical_sequence ");
+            int repair_0 = 0;
+            while (rs.next()) {
+                repair_0 = rs.getInt("logical_sequence");
+            }
+            rs = st.executeQuery("Select * From order_status WHERE idos = 'repair_1' ORDER BY logical_sequence ");
+            int repair_1 = 0;
+            while (rs.next()) {
+                repair_1 = rs.getInt("logical_sequence");
+            }
+            rs = st.executeQuery("Select * From order_status WHERE idos = 'transfer_0' ORDER BY logical_sequence ");
+            int transfer_0 = 0;
+            while (rs.next()) {
+                transfer_0 = rs.getInt("logical_sequence");
             }
              rs = st.executeQuery("Select * From order_status ORDER BY logical_sequence");
-            if (!_Order.getAgreement())
-            {
-                while (rs.next()) {
+            if (_Order.getAgreement() == null) // если до соглашения еще не дошло
+            { // отобразить все до пункта process_1 (Проводится диагностика) вклюичтельно
+                while (rs.next())
+                {
+                    int logick_seq = rs.getInt("logical_sequence");
                     idstatusList.add(rs.getString("idos"));
                     statusList.add(rs.getString("descriptionos"));
-                    if (rs.getInt("logical_sequence") == agree_step) {
+                    if (logick_seq == process_1) {
                         rs.close();
                         st.close();
                         return;
                     }
                 }
             }
-            else
-            {
-                while (rs.next()) {
-                    Integer loc_seq = rs.getInt("logical_sequence");
-                    if (loc_seq <= agree_step) rs.next();
-                    else {
-                        idstatusList.add(rs.getString("idos"));
-                        statusList.add(rs.getString("descriptionos"));
+            else {
+                if (!_Order.getAgreement()) // если полчен отказ
+                {// отобразить всё от transfer_0 (Транспортируется к пункту выдачи) до пункта getting_0 (Готово к выдаче) вклюичтельно
+                    while (rs.next()) {
+
+                        int logick_seq = rs.getInt("logical_sequence");
+                        if (logick_seq < transfer_0 ){ // если еще не transfer_0 (Транспортируется к пункту выдачи), то пропустить
+                            // rs.next();
+                        }
+                        else{
+                            if (_Order.getPayed() != null){ // если это этап выдачи и есть оплата - оставить
+                                if (logick_seq == getting_1 && _Order.getPayed()){ // если это этап выдачи и есть оплата - оставить
+                                    idstatusList.add(rs.getString("idos"));
+                                    statusList.add(rs.getString("descriptionos"));
+                                    rs.close();
+                                    st.close();
+                                    return;
+                                }
+                                else {
+                                    if (logick_seq == getting_1 ){ // если это этап выдачи и есть оплата - оставить
+                                        return;
+                                    }
+                                    idstatusList.add(rs.getString("idos"));
+                                    statusList.add(rs.getString("descriptionos"));
+                                }
+                            }
+                        }
+                    }
+                }
+                else // если полчено согласие
+                {// отобразить всё от repair_0 (Производится ремонт) до пункта getting_0 (Готово к выдаче) вклюичтельно
+                    while (rs.next()) {
+
+                        int logick_seq = rs.getInt("logical_sequence");
+                        if (logick_seq < repair_0 ){ // если еще не transfer_0 (Транспортируется к пункту выдачи), то пропустить
+                            // rs.next();
+                        }
+                        else{
+                            if (_Order.getPayed() == null){ // если это этап ремонта - до repair_1 (Ремонт окончен) включительно
+                                if (logick_seq <= repair_1){ // если это этап завершения ремнота
+                                    idstatusList.add(rs.getString("idos"));
+                                    statusList.add(rs.getString("descriptionos"));
+/*                                    rs.close();
+                                    st.close();
+                                    return;*/
+                                }
+                            }
+                            else
+                            {
+                                    if (logick_seq < repair_1 ){ // если еще не transfer_0 (Транспортируется к пункту выдачи), то пропустить
+                                        // rs.next();
+                                    }
+                                    else{
+                                        if (logick_seq == getting_1 && _Order.getPayed()){ // если это этап после ремонта
+                                            idstatusList.add(rs.getString("idos"));
+                                            statusList.add(rs.getString("descriptionos"));
+                                            return;
+                                        }
+                                        else if (logick_seq == getting_1)
+                                        {
+                                            return;
+                                        }
+                                        idstatusList.add(rs.getString("idos"));
+                                        statusList.add(rs.getString("descriptionos"));
+                                    }
+                            }
+                        }
                     }
                 }
             }
+
             rs.close();
             st.close();
             // con.close();
@@ -302,6 +393,14 @@ public class ControllerActiveOrder_picked implements Initializable {
             ps.setString(1, idordst);
             ps.setInt(2, _Order.getId_order());
             ps.executeUpdate();
+
+            if (Objects.equals(idordst, "repair_1"))
+            {
+                ps = con.prepareStatement("UPDATE orders SET payed = ? WHERE id_order = ?;");
+                ps.setBoolean(1, false);
+                ps.setInt(2, _Order.getId_order());
+                ps.executeUpdate();
+            }
             ps.close();
             // con.close();
         } catch (SQLException e) {

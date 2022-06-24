@@ -19,6 +19,7 @@ class AuthService {
 					const client: Client = data.answer.user;
 					localStorage.setItem('user', JSON.stringify(client));
 					console.log ('Авторизация успешна');
+					alert("Авторизация успешна");
 					// User.user;
 					return clientActions.loginSuccess({isAuth: true, client: client});;
 				}
@@ -26,6 +27,7 @@ class AuthService {
 				alert('Неверный логин/пароль');
 				return LoginFail(data.errorText!);
 			}).catch((err) => {
+				alert("Произошла ошибка");
 				console.log ('Поизошла обшибка');
 			return LoginFail(err);
 		})

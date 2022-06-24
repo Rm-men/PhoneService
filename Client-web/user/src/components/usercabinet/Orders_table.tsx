@@ -13,8 +13,9 @@ import {
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Link } from 'react-router-dom';
 import Links from '../Links';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+
 import BtnNewOrder from '../newOrder/BtnNewOrder';
 import ServOrders from '../../redux/services/ServOrders';
 import ServGetLists from '../../redux/services/ServGetLists';
@@ -47,6 +48,7 @@ export default function Orders_table() {
   };
   const rowClick = (order: any) => {
     setCurOrders(order);
+    console.log('Согласие ' + order.Agreement);
     ServGetLists.getOrderMove(order?.IdOrder).then((res: any) => {
       // console.log('ид заказа = ' + order?.IdOrder);
       // console.log('ид покупателя = ' + order?.IdClient);
@@ -55,6 +57,31 @@ export default function Orders_table() {
     });
     // console.log('тыкнули на '+curorder?.PhoneModel);
     setShow(true);
+  };
+  const clickPay = () => {
+    ServOrders.setPay(curorder?.IdOrder).then((res: any) => {
+      // console.log('ид заказа = ' + order?.IdOrder);
+      // console.log('ид покупателя = ' + order?.IdClient);
+      navigate(0);
+    });
+  };
+  const navigate = useNavigate();
+
+  const clickAgre = () => {
+    ServOrders.setAgree(curorder?.IdOrder).then((res: any) => {
+      // console.log('ид заказа = ' + order?.IdOrder);
+      // console.log('ид покупателя = ' + order?.IdClient);
+      navigate(Links.usercabinet);
+      navigate(0);
+    });
+  };
+  const clickDisAgre = () => {
+    ServOrders.setDisAgree(curorder?.IdOrder).then((res: any) => {
+      // console.log('ид заказа = ' + order?.IdOrder);
+      // console.log('ид покупателя = ' + order?.IdClient);
+      navigate(Links.usercabinet);
+      navigate(0);
+    });
   };
 
   React.useEffect(() => {
@@ -75,7 +102,7 @@ export default function Orders_table() {
       <Container>
         <h1 className='display-4'>Список устройств в ремонте</h1>
         <Container>
-          <Table striped bordered hover responsive="sm">
+          <Table striped bordered hover responsive='sm'>
             <thead>
               <tr>
                 <th>Устройство</th>
@@ -114,34 +141,53 @@ export default function Orders_table() {
           </Modal.Header>
           <Modal.Body>
             <Card body>Устройство: {curorder?.PhoneModel}</Card>
+            <Card body>Производитель: {curorder?.Manufacturer}</Card>
             <Card body>Описание: {curorder?.Descriptionord}</Card>
             <Card body>Текущий статус: {curorder?.Status}</Card>
             <Card body>Сумма ремнота: {curorder?.Priceord}</Card>
             {curorder?.Agreement ? (
-              <Card className=' deactive me-2'>
-                <Card>
-                  <Card.Body>
-                    <Card.Title>Оплата заказа</Card.Title>
-                    <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
-                    <Button variant='primary' onClick={handleClose}>
-                      Оплатить
-                    </Button>
-                  </Card.Body>
-                </Card>{' '}
-              </Card>
+              <>
+                {curorder?.Payed !== null ? ( // если настало время оплаты
+                  <>
+                    {!curorder?.Payed ? ( // заказ не оплачен
+                        <Card className=' deactive'>
+                          <Card>
+                            <Card.Body>
+                              <Card.Title>Оплата заказа</Card.Title>
+                              <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
+                              <Button variant='primary' onClick={clickPay}>
+                                Оплатить
+                              </Button>
+                            </Card.Body>
+                          </Card>
+                        </Card>
+                    ) : ( // заказ оплачен
+                        <Card className=' deactive'>
+                          <Card>
+                            <Card.Body>
+                              <Card.Title>Заказ оплачен</Card.Title>
+                              <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
+                            </Card.Body>
+                          </Card>
+                        </Card>
+                    )}
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
             ) : (
               <>
-                {curorder?.IdOrderStatus.toString() === 'waiting_0' ? ( // при статусе "ожидает подтверждения"
-                // должно: выводиться описание диагностики и согласмие на длаьнейший ремонт
+                {curorder?.IdOrderStatus.toString() === 'waiting_0' && curorder?.Agreement === null ? ( // осуществление выбора согласия на ремонт
                   <>
                     <Card>
                       <Card.Body>
                         <Card.Title>Результат диагностики:</Card.Title>
                         <Card.Text>{curorder?.Diagnostic}</Card.Text>
-                        <Button variant='light' className='me-2' onClick={handleClose}>
+                        <Button variant='light' className='me-2' onClick={clickDisAgre}>
                           Отказ от ремонта
                         </Button>
-                        <Button variant='primary' onClick={handleClose}>
+                        <Button variant='primary' onClick={clickAgre}>
                           Согласие на ремонт
                         </Button>
                       </Card.Body>
@@ -149,62 +195,56 @@ export default function Orders_table() {
                   </>
                 ) : (
                   <>
-                      {curorder?.Agreement ?  // при полученном согласии на ремнот
+                    {curorder?.Agreement !== null ? ( // Статус согласия утвержден
                       <>
-                    <Card body>Согласие на диагностику: получено</Card>
-                    <Card>
-                      <Card.Body>
-                        <Card.Title>Результат диагностики:</Card.Title>
-                        <Card.Text>{curorder?.Diagnostic}</Card.Text>
-                      </Card.Body>
-                    </Card>
-                      </> 
-                      : 
-                      <>
-                    <Card body>Согласие на диагностику: отказано</Card>
-                    <Card>
-                      <Card.Body>
-                        <Card.Title>Результат диагностики:</Card.Title>
-                        <Card.Text>{curorder?.Diagnostic}</Card.Text>
-                      </Card.Body>
-                    </Card>
+                        {curorder?.Agreement ? ( //
+                          <Card body>Согласие на ремонт: получено</Card>
+                        ) : (
+                          <>
+                            <Card body>Согласие на ремонт: отказано</Card>
+                          </>
+                        )}
+                        <Card>
+                          <Card.Body>
+                            <Card.Title>Результат диагностики:</Card.Title>
+                            <Card.Text>{curorder?.Diagnostic}</Card.Text>
+                          </Card.Body>
+                        </Card>
                       </>
-                      }
+                    ) : (
+                      <></>
+                    )}
                   </>
                 )}
               </>
             )}
 
-            <Card body>
-              <Card.Body>История перемещений:</Card.Body>
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Статус</th>
-                    <th>Дата</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ordmoves?.map((move) => (
-                    <tr>
-                      <td>{move?.NewstatusDesc}</td>
-                      <td>{move?.Somdate}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Card>
+            {ordmoves.length >= 1 ? ( // если статусы перемещения вообще есть - отобразить их
+              <>
+                <Card body>
+                  <Card.Body>История перемещений:</Card.Body>
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>Статус</th>
+                        <th>Дата</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ordmoves?.map((move) => (
+                        <tr>
+                          <td>{move?.NewstatusDesc}</td>
+                          <td>{move?.Somdate}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </Card>
+              </>
+            ) : (
+              <></>
+            )}
           </Modal.Body>
-          {/* <Modal.Footer>
-            <Link to='/'>
-              <Button variant='secondary' onClick={handleClose}>
-                Выйти
-              </Button>
-            </Link>
-            <Button variant='primary' onClick={handleClose}>
-              Отмена
-            </Button>
-          </Modal.Footer> */}
         </Modal>
       </>
     </div>

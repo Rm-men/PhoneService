@@ -32,7 +32,7 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
     @FXML public Button b_ch_comment;
     @FXML public Button b_ch_configure;
     @FXML public ComboBox cb_status;
-    @FXML public CheckBox chb_agreement;
+    // @FXML public CheckBox chb_agreement;
 
     @FXML public Label l_phone;
     @FXML public Label l_date;
@@ -82,7 +82,6 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
         String st = _Order.getDiagnostic();
         ta_diagnostic.setText(_Order.getDiagnostic());
 
-
         ta_comments.setText(_Order.getComments());
         ta_comments.setOnInputMethodTextChanged(event -> editComment(ta_comments.getText()));
 
@@ -116,7 +115,7 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
         try {
             // con = DriverManager.getConnection("jdbc:postgresql://45.10.244.15:55532/work100024", "work100024", "iS~pLC*gmrAgl6aJ1pL7");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select * From order_status WHERE idos = 'waiting_0' ORDER BY logical_sequence ");
+            ResultSet rs = st.executeQuery("Select * From order_status WHERE idos = 'process_1' ORDER BY logical_sequence ");
             int agree_step = 0;
             while (rs.next()) {
                 agree_step = rs.getInt("logical_sequence");
@@ -180,7 +179,7 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
             ps.executeUpdate();
 
             ps = con.prepareStatement("UPDATE orders SET diagnostic = ? WHERE id_order = ?;");
-            ps.setString(1, ta_diagnostic.toString());
+            ps.setString(1, ta_diagnostic.getText().toString());
             ps.setInt(2, _Order.getId_order());
             ps.executeUpdate();
             ps.close();
@@ -206,7 +205,7 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
             //stage_c.close(); //
             newWindow.show(); //
 
-            Stage newWindowO = new Stage();
+/*            Stage newWindowO = new Stage();
             FXMLLoader fxmlLoaderO = new FXMLLoader();
             if (_Order.getAgreement()== null){
                 fxmlLoaderO = new FXMLLoader(MainStart.class.getResource("Order_info_picked_noagree.fxml"));
@@ -223,11 +222,11 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            newWindowO.setTitle("Мастерская - детализация активного заказа");
+            newWindowO.setTitle("Мастерская - детализация активного заказа");*/
             //newWindowO.setScene(sceneO);
             newWindow.show(); //
             _stage_main.close();
-            newWindowO.show();
+            // newWindowO.show();
             stage_c.close();
         }
     }
@@ -242,6 +241,16 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
 
             ps = con.prepareStatement("UPDATE orders SET id_order_status = 'waiting_0' WHERE id_order = ?;");
             ps.setInt(1, _Order.getId_order());
+            ps.executeUpdate();
+
+            ps = con.prepareStatement("INSERT INTO on_order_srv (id_order_forservice, id_srv_onlist) VALUES (?,?)" );
+                ps.setInt(1, _Order.getId_order());
+                ps.setInt(2, 1);
+                ps.executeUpdate();
+
+            ps = con.prepareStatement("UPDATE orders SET priceord = ? WHERE id_order = ?;");
+            ps.setInt(1, 200);
+            ps.setInt(2, _Order.getId_order());
             ps.executeUpdate();
             ps.close();
             // con.close();
@@ -264,10 +273,10 @@ public class ControllerActiveOrder_picked_noagree implements Initializable {
             newWindow.setScene(scene);
             newWindow.setMaximized(true);
             newWindow.show();
+            stage_c.close();
         }
-/*
         _stage_main.close();
-*/
+
     }
     public void editComment(String comment) {
         try {

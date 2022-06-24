@@ -18,6 +18,7 @@ public class Order {
     private String descriptionord;
     private String comments;
     private Boolean agreement;
+    private Boolean payed;
     private String agreementtext;
     private String diagnostic;
 
@@ -206,6 +207,17 @@ public class Order {
     }
 
     public void setDiagnostic(String diagnostic) {
+        if (diagnostic == null)
+            this.diagnostic = "";
+        else
         this.diagnostic = diagnostic;
+    }
+
+    public Boolean getPayed() {
+        return payed;
+    }
+
+    public void setPayed(Boolean payed) {
+        this.payed = payed;
     }
 }

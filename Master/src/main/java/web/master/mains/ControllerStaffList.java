@@ -31,7 +31,7 @@ public class ControllerStaffList implements Initializable {
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
-    @FXML public Label l_username;
+    // @FXML public Label l_username;
     @FXML public TableView tv_components;
     @FXML private TableColumn<Component, String> col_cname;
     @FXML private TableColumn<Component, String> col_ctype;
@@ -49,7 +49,7 @@ public class ControllerStaffList implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        l_username.setText(_Employee.getName());
+        // l_username.setText(_Employee.getName());
         b_listStaff.setStyle("-fx-background-color: #8d94d8; -fx-border-width: 5px;");
         b_freeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override

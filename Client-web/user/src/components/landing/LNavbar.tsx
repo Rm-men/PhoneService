@@ -119,10 +119,6 @@ export default function LNavbar() {
                       </div>
                     </Dropdown.Toggle>
                     <Dropdown.Menu className='dropdown-menu-arrow dropdown-toggle-split'>
-                      <Dropdown.Item>
-                        <i className='ni ni-single-02' />
-                        <span>Мой профиль</span>
-                      </Dropdown.Item>
                       <Dropdown.Item
                         onClick={() => dispatch(AuthService.logout())}
                         href={Links.home}

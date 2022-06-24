@@ -46,6 +46,7 @@ export default function BtnNewOrder() {
     ServGetLists.getPhones().then((res: any) => {
       console.log(res);
       setPhones(res);
+      // setPhone("Ноутилус ++");
     });
   };
 
@@ -66,7 +67,7 @@ export default function BtnNewOrder() {
     Address: 'Ул. Московская 36',
     IdPhone: 1,
     Descriptionord: ' ',
-    Namephone: '',
+    Namephone: 'Ноутилус ++',
   });
   // const user = useSelector((state: RootState) => state);
   const [validated, setValidated] = useState(false); //тумблер подсветки валидации
@@ -100,7 +101,8 @@ export default function BtnNewOrder() {
       // dispatch(res);
       handleClose();
       // dispatch(res);
-      navigate(Links.usercabinet);
+      navigate(0);
+      // window.location.reload();
     });
   };
   const navigate = useNavigate();

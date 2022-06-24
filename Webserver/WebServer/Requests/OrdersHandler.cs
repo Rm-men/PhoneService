@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestPanda.Requests;
 using RestPanda.Requests.Attributes;
+using ServiceDB;
 using ServiceDB.Models;
 using Trivial.Security;
 using WebServer.Models;
@@ -58,7 +59,6 @@ namespace WebServer.Requests
             }
             Send(new AnswerModel(true, new { order = order }, null, null));
         }
-
         [Get("getorder")]
         public void GetOrder()
         {
@@ -77,6 +77,78 @@ namespace WebServer.Requests
             List<OrderInfo> orders = GetOrdersInfoForUser(user.IdClient);
 
             Send(new AnswerModel(true, new { orders = orders }, null, null));
+        }
+        [Get("setagree")]
+        public void SetAgree()
+        {
+            if (!Headers.TryGetValue("Access-Token", out var token) || !TokenWorker.CheckToken(token))
+            {
+                Send(new AnswerModel(false, null, 400, "incorrect request"));
+                return;
+            }
+            if (!Params.TryGetValue("id", out var id))
+            {
+                Send(new AnswerModel(false, null, 401, "incorrect request body"));
+                return;
+            }
+
+            if (!Order.GetOrder(int.Parse(id)).SetAgree(true))
+            {
+                Send(new AnswerModel(false, null, 401, "incorrect request"));
+                return;
+            }
+
+            Send(new AnswerModel(true, null, null, null));
+        }
+        [Get("setdisagree")]
+        public void SetDisAgree()
+        {
+            if (!Headers.TryGetValue("Access-Token", out var token) || !TokenWorker.CheckToken(token))
+            {
+                Send(new AnswerModel(false, null, 400, "incorrect request"));
+                return;
+            }
+            if (!Params.TryGetValue("id", out var id))
+            {
+                Send(new AnswerModel(false, null, 401, "incorrect request body"));
+                return;
+            }
+            /*            var user = TokenWorker.GetUserByToken(token);
+                        if (user is null)
+                        {
+                            Send(new AnswerModel(false, null, 400, "incorrect request"));
+                            return;
+                        }*/
+            if (!Order.GetOrder(int.Parse(id)).SetAgree(false))
+            {
+                Send(new AnswerModel(false, null, 401, "incorrect request"));
+                return;
+            }
+            Send(new AnswerModel(true, null, null, null));
+        }
+        [Get("setpay")]
+        public void SetPay()
+        {
+            if (!Headers.TryGetValue("Access-Token", out var token) || !TokenWorker.CheckToken(token))
+            {
+                Send(new AnswerModel(false, null, 400, "incorrect request"));
+                return;
+            }
+
+            if (!Params.TryGetValue("id", out var id))
+            {
+                Send(new AnswerModel(false, null, 401, "incorrect request body"));
+                return;
+            }
+
+
+            if (!Order.GetOrder(int.Parse(id)).SetPay())
+            {
+                Send(new AnswerModel(false, null, 401, "incorrect request"));
+                return;
+            }
+
+            Send(new AnswerModel(true, null, null, null));
         }
     }
 }

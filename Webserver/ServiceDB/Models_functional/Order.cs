@@ -35,6 +35,29 @@ namespace ServiceDB.Models
             this.IdOrderStatus = "add_0";
             this.Comments = "";
         }
+        public static Order GetOrderOriginal(int id)
+        {
+            var orders = new List<Order>(from o in Context.db.Orders
+                                             where o.IdOrder == id
+                                             select new Order()
+                                             {
+                                                 IdClient = o.IdClient,
+                                                 Phonenumber = o.Phonenumber,
+                                                 IdOrder = o.IdOrder,
+                                                 Dateord = o.Dateord,
+                                                 Comments = o.Comments,
+                                                 Descriptionord = o.Descriptionord,
+                                                 IdMaster = o.IdMaster,
+                                                 IdOrderStatus = o.IdOrderStatus,
+                                                 IdPhone = o.IdPhone,
+                                                 Address = o.Address,
+                                                 Priceord = o.Priceord,
+                                                 Agreement = o.Agreement.Value,
+                                                 Diagnostic = o.Diagnostic,
+                                                 Payed = o.Payed,
+                                             }).ToList();
+            return (orders.FirstOrDefault());
+        }
         public class OrderInfo
         {
             public int IdOrder { get; set; }
@@ -48,6 +71,8 @@ namespace ServiceDB.Models
             public string Descriptionord { get; set; }
             public string Comments { get; set; }
             public decimal? Priceord { get; set; }
+            public string?  Manufacturer { get; set; }
+
             public bool ? Agreement { get; set; }
             public string AgreementText { get; set; }
             public string FIOCl { get; set; } //
@@ -63,11 +88,13 @@ namespace ServiceDB.Models
             var orders = new List<OrderInfo>(from o in Context.db.Orders
                                              join c in Context.db.Clients on o.IdClient equals c.IdClient
                                              join pm in Context.db.PhoneModels on o.IdPhone equals pm.IdPhoneModel
+                                             join m in Context.db.Manufacturers on pm.Manufacturer equals m.IdManufacturer
                                              /*                                             join m in Context.db.Employees on o.IdMaster equals m.Id
                                              */
                                              join st in Context.db.OrderStatuses on o.IdOrderStatus equals st.Idos
                                              select new OrderInfo()
                                              {
+                                                 Manufacturer = m.Name,
                                                  IdClient = o.IdClient,
                                                  Phonenumber = o.Phonenumber,
                                                  IdOrder = o.IdOrder,
@@ -84,7 +111,7 @@ namespace ServiceDB.Models
                                                  PhoneModel = pm.Namephone,
                                                  Diagnostic = o.Diagnostic,
                                                  Payed = o.Payed,
-                                                 FIOCl = getFIO(c.Family, c.Namecl, c.Patronymic),
+                                                 FIOCl = GetFIO(c.Family, c.Namecl, c.Patronymic),
                                                  /*                                                 FIOm = getFIO(m.Family, m.Name, m.Patronymic),
                                                  */
                                                  Status = st.Descriptionos,
@@ -104,6 +131,7 @@ namespace ServiceDB.Models
 
             return (orders);
         }
+
         public static List<OrderInfo> GetOrdersInfoForUser(int id)
         {
             List<OrderInfo> ordersForUser = new List<OrderInfo>();
@@ -114,12 +142,58 @@ namespace ServiceDB.Models
             }
             return ordersForUser;
         }
-
-        public static string getFIO(string f, string n, string p)
+        public static string GetFIO(string f, string n, string p)
         {
             string fio = $"{f} {n.Substring(0, 1)}.";
             if (p != "") fio += $"{f.Substring(0, 1)}.";
             return fio;
+        }
+        public static Order GetOrder(int IdOrder)
+        {
+            Order ord = Context.db.Orders.Where(a => a.IdOrder == IdOrder).FirstOrDefault();
+            return ord;
+        }
+        public bool SetAgree(bool agree)
+        {
+            try
+            {
+                Order NewOrder = GetOrderOriginal(this.IdOrder);
+                Order OldOrder = GetOrder(this.IdOrder);
+                {
+                    OldOrder.IdMaster = NewOrder.IdMaster;
+                    OldOrder.IdOrderStatus = NewOrder.IdOrderStatus;
+                    OldOrder.Descriptionord = NewOrder.Descriptionord;
+                    OldOrder.Priceord = NewOrder.Priceord;
+                }
+                this.IdOrderStatus = (agree) ? ("waiting_1") : ("waiting_2");
+                this.Agreement = agree;
+                if (!agree)
+                    this.Payed = false;
+                // Context.db.Attach(this).DetectChanges();
+                // Context.db.Entry(this).CurrentValues.SetValues(this);
+                // Context.db.Entry(this).DetectChanges();
+                Context.db.Update(this);
+                Context.db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool SetPay()
+        {
+            try
+            {
+                this.Payed = true;
+                Context.db.Update(this);
+                Context.db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool AddOrder()
         {

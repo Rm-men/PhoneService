@@ -3,6 +3,7 @@ export interface OrderModel {
 	IdOrder : number
 	Dateord : string,
 	Phonenumber: string ,
+	Manufacturer: string ,
 	Address: string,
 	IdPhone: number,
 	IdOrderStatus: number,
@@ -11,5 +12,6 @@ export interface OrderModel {
 	Priceord : number
 	Descriptionord : string,
 	Agreement : boolean,
+	Payed : boolean,
 	Diagnostic : string,
 }

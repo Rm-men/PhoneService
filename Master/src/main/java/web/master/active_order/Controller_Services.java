@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import web.master.Conn;
 import web.master.MainStart;
+import web.master.entity.Component;
 import web.master.entity.Employee;
 import web.master.entity.Order;
 import web.master.entity.Service;
@@ -307,6 +308,10 @@ public class Controller_Services implements Initializable {
                 ps.executeUpdate();
             }
             caclTotal();
+            ps = con.prepareStatement("Update orders set priceord= ? WHERE id_order =  ?" );
+            ps.setInt(1, Integer.parseInt(l_c_price.getText()));
+            ps.setInt(2, _Order.getId_order());
+            ps.executeUpdate();
             // con.close();
         } catch (SQLException e) {
             {

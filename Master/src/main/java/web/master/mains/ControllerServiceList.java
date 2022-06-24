@@ -29,7 +29,7 @@ public class ControllerServiceList implements Initializable {
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
 
-    @FXML public Label l_username;
+    // @FXML public Label l_username;
     @FXML private ObservableList<Service> ServicesData = FXCollections.observableArrayList();
     @FXML private TableColumn<Service, String> col_Service;
     @FXML private TableColumn<Service, String> col_Type;
@@ -37,29 +37,14 @@ public class ControllerServiceList implements Initializable {
     @FXML private TableColumn<Service, String> col_Price;
     @FXML private TableColumn<Service, String> col_Time;
 
-    @FXML public Button b_filters;
-
     public Employee _Employee; // private
 
     public ControllerServiceList(Employee cEmployee) { _Employee = cEmployee;  };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        l_username.setText(_Employee.getName());
+        // l_username.setText(_Employee.getName());
         b_listServices.setStyle("-fx-background-color: #8d94d8; -fx-border-width: 5px;");
-        b_filters.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Stage stage_c = (Stage) b_freeOrder.getScene().getWindow();
-                stage_c.close();
-                Conn c = new Conn();
-                try {
-                    c.getConnect().close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         b_freeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

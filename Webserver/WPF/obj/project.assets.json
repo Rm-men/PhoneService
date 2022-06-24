@@ -6215,19 +6215,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Noytbuk\\.nuget\\packages\\": {}
+    "C:\\Users\\ADDmen\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Noytbuk\\Documents\\GitHub\\PhoneService\\Webserver\\WPF\\WPF.csproj",
+      "projectUniqueName": "C:\\Users\\ADDmen\\source\\repos\\PhoneService\\Webserver\\WPF\\WPF.csproj",
       "projectName": "WPF",
-      "projectPath": "C:\\Users\\Noytbuk\\Documents\\GitHub\\PhoneService\\Webserver\\WPF\\WPF.csproj",
-      "packagesPath": "C:\\Users\\Noytbuk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Noytbuk\\Documents\\GitHub\\PhoneService\\Webserver\\WPF\\obj\\",
+      "projectPath": "C:\\Users\\ADDmen\\source\\repos\\PhoneService\\Webserver\\WPF\\WPF.csproj",
+      "packagesPath": "C:\\Users\\ADDmen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ADDmen\\source\\repos\\PhoneService\\Webserver\\WPF\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Noytbuk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADDmen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6241,8 +6241,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\Noytbuk\\Documents\\GitHub\\PhoneService\\Webserver\\ServiceDB\\ServiceDB.csproj": {
-              "projectPath": "C:\\Users\\Noytbuk\\Documents\\GitHub\\PhoneService\\Webserver\\ServiceDB\\ServiceDB.csproj"
+            "C:\\Users\\ADDmen\\source\\repos\\PhoneService\\Webserver\\ServiceDB\\ServiceDB.csproj": {
+              "projectPath": "C:\\Users\\ADDmen\\source\\repos\\PhoneService\\Webserver\\ServiceDB\\ServiceDB.csproj"
             }
           }
         }

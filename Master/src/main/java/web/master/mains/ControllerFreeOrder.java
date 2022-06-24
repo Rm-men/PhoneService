@@ -29,7 +29,7 @@ public class ControllerFreeOrder implements Initializable {
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
-    @FXML public Label l_username;
+    // @FXML public Label l_username;
     @FXML private ObservableList<Order> OrdersData = FXCollections.observableArrayList();
     @FXML private TableColumn<Order, String> col_fphone;
     @FXML private TableColumn<Order, String> col_fdescription;
@@ -47,7 +47,7 @@ public class ControllerFreeOrder implements Initializable {
         Conn с = new Conn();
         con = с.getConnect();
 
-        l_username.setText(_Employee.getName());
+        // l_username.setText(_Employee.getName());
         b_freeOrder.setStyle("-fx-background-color: #8d94d8; -fx-border-width: 5px;");
         b_freeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override

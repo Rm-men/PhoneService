@@ -26,7 +26,8 @@ class ServAddOrder {
 				// 	return clientActions.loginSuccess({isAuth: true, client: client});;
 				// }
 				// console.log ('Кто-то попутал логин/пароль');
-				// return LoginFail(data.errorText!);
+				return LoginFail(data.errorText!);
+				// return res.;
 			}).catch((err) => {
 				console.log ('Поизошла обшибка');
 			return LoginFail(err);

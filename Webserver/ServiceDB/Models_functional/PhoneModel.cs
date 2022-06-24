@@ -11,7 +11,6 @@ namespace ServiceDB.Models
         public static PhoneModel getPhoneModel(string Namephone)
         {
           return Context.db.PhoneModels.Where(a => a.Namephone == Namephone).FirstOrDefault();
-
         }
 
     }

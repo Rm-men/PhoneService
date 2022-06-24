@@ -23,7 +23,7 @@ public class ControllerMain implements Initializable {
     @FXML public Button b_activeOrder;
     @FXML public Button b_listStaff;
     @FXML public Button b_listServices;
-    @FXML public Label l_username;
+    // @FXML public Label l_username;
 
     public Employee _Employee; // private
 
@@ -32,7 +32,7 @@ public class ControllerMain implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        l_username.setText(_Employee.getName());
+        // l_username.setText(_Employee.getName());
         b_freeOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestPanda.Requests;
 using RestPanda.Requests.Attributes;
+using ServiceDB;
 using ServiceDB.Models;
 using Trivial.Security;
 using WebServer.Models;
@@ -58,14 +59,16 @@ namespace WebServer.Requests
         [Get("ordmove")]
         public void GetOrdMove()
         {
-            if (!Params.TryGetValue("id", out var id))
-            {
-                Send(new AnswerModel(false, null, 401, "incorrect request body"));
-                return;
-            }
+
             if (!Headers.TryGetValue("Access-Token", out var token) || !TokenWorker.CheckToken(token))
             {
                 Send(new AnswerModel(false, null, 400, "incorrect request"));
+                return;
+            }
+
+            if (!Params.TryGetValue("id", out var id))
+            {
+                Send(new AnswerModel(false, null, 401, "incorrect request body"));
                 return;
             }
 

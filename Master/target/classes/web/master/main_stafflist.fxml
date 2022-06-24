@@ -7,27 +7,22 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
     <Pane layoutX="-2.0" prefHeight="99.0" prefWidth="1924.0" style="-fx-background-color: rgba(174, 177, 202, 0.2);">
         <children>
-            <Label fx:id="l_username" layoutX="1700.0" layoutY="37.0" text="Label">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Label>
-            <Button fx:id="b_freeOrder" layoutX="42.0" layoutY="24.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Свободные заказы">
+            <Button fx:id="b_freeOrder" layoutX="45.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Свободные заказы">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Button>
-            <Button fx:id="b_activeOrder" layoutX="316.0" layoutY="23.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Активные заказы">
+            <Button fx:id="b_activeOrder" layoutX="315.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Активные заказы">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Button>
-            <Button fx:id="b_listStaff" layoutX="590.0" layoutY="22.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список товаров">
+            <Button fx:id="b_listStaff" layoutX="590.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список товаров">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Button>
-            <Button fx:id="b_listServices" layoutX="875.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список услуг">
+            <Button fx:id="b_listServices" layoutX="865.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список услуг">
                 <font>
                     <Font size="19.0" />
                 </font>

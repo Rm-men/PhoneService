@@ -40,7 +40,7 @@ public class ControllerActiveOrder implements Initializable {
     @FXML public TextField tf_fa_contacts;
     @FXML public DatePicker dp_ot;
     @FXML public DatePicker dp_do;
-    @FXML public Label l_username;
+    // @FXML public Label l_username;
     @FXML private ObservableList<Order> OrdersData = FXCollections.observableArrayList();
     @FXML private ObservableList<Order> OrdersDataBack = FXCollections.observableArrayList();
     @FXML private TableColumn<Order, String> col_aphone;
@@ -215,6 +215,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setPhone_number(rs.getString("phonenumber"));
                 order.setAddress(rs.getString("address"));
                 order.setAgreement(rs.getObject("agreement", Boolean.class));
+                order.setPayed(rs.getObject("payed", Boolean.class));
                 order.setId_client(rs.getInt("id_client"));
                 order.setId_master(rs.getInt("id_master"));
                 order.setId_phone(rs.getInt("id_phone"));
@@ -252,12 +253,12 @@ public class ControllerActiveOrder implements Initializable {
         Stage stage_c = (Stage) b_activeOrder.getScene().getWindow();
         Stage newWindow = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        if (order.getAgreement()== null){
+        if (order.getAgreement() == null){
             fxmlLoader = new FXMLLoader(MainStart.class.getResource("Order_info_picked_noagree.fxml"));
             fxmlLoader.setController(new ControllerActiveOrder_picked_noagree(_Employee, order, stage_c));
 
         }
-        else if (order.getAgreement()) {
+        else /*if (order.getAgreement())*/ {
             fxmlLoader = new FXMLLoader(MainStart.class.getResource("Order_info_picked.fxml"));
             fxmlLoader.setController( new ControllerActiveOrder_picked(_Employee, order, stage_c));
         }
@@ -383,6 +384,7 @@ public class ControllerActiveOrder implements Initializable {
                 order.setNamecl(rs.getString("patronymic"));
                 order.setNamecl(rs.getString("family"));
                 order.setAgreement(rs.getObject("agreement", Boolean.class));
+                order.setPayed(rs.getObject("payed", Boolean.class));
                 order.setContacts(rs.getString("family"), rs.getString("namecl"), rs.getString("patronymic"), rs.getString("phonenumber"));
 
                 tv_aOrders.getItems().add(order);

@@ -28,9 +28,9 @@
 
 .deactive {
     color: #868686;
-    text-decoration: none;
 }
 
 .active {
     color: #ffffff;
+    text-decoration: underline;
 }

@@ -7,22 +7,22 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
     <Pane layoutX="-2.0" prefHeight="99.0" prefWidth="1924.0" style="-fx-background-color: rgba(174, 177, 202, 0.2);">
         <children>
-            <Button fx:id="b_freeOrder" layoutX="42.0" layoutY="24.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Свободные заказы">
+            <Button fx:id="b_freeOrder" layoutX="45.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Свободные заказы">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Button>
-            <Button fx:id="b_activeOrder" layoutX="316.0" layoutY="23.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Активные заказы">
+            <Button fx:id="b_activeOrder" layoutX="315.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Активные заказы">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Button>
-            <Button fx:id="b_listStaff" layoutX="590.0" layoutY="22.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список товаров">
+            <Button fx:id="b_listStaff" layoutX="590.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список товаров">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Button>
-            <Button fx:id="b_listServices" layoutX="875.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список услуг">
+            <Button fx:id="b_listServices" layoutX="865.0" layoutY="20.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: A0A5CF;" text="Список услуг">
                 <font>
                     <Font size="19.0" />
                 </font>
@@ -32,33 +32,33 @@
                     <Font size="19.0" />
                 </font>
             </Text>
-            <Button fx:id="b_confimefilters" layoutX="1705.0" layoutY="61.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="136.0" text="Применить фильтры" />
-            <ComboBox fx:id="cb_fa_phone" layoutX="1252.0" layoutY="10.0" prefWidth="150.0" />
-            <Text layoutX="1180.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Статус:">
+            <Button fx:id="b_confimefilters" layoutX="1642.0" layoutY="68.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="174.0" text="Применить фильтры" />
+            <ComboBox fx:id="cb_fa_phone" layoutX="1247.0" layoutY="10.0" prefWidth="150.0" />
+            <Text layoutX="1180.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Статус:">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Text>
-            <ComboBox fx:id="cb_fa_status" layoutX="1252.0" layoutY="37.0" prefWidth="150.0" />
-            <TextField fx:id="tf_fa_contacts" layoutX="1253.0" layoutY="62.0" />
-            <Text layoutX="1154.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Контакты:">
+            <ComboBox fx:id="cb_fa_status" layoutX="1247.0" layoutY="40.0" prefWidth="150.0" />
+            <TextField fx:id="tf_fa_contacts" layoutX="1248.0" layoutY="69.0" />
+            <Text layoutX="1154.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Контакты:">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Text>
-            <Text layoutX="1480.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления от:">
+            <Text layoutX="1449.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления от:">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Text>
-            <Text layoutX="1479.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления до:">
+            <Text layoutX="1448.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата поступления до:">
                 <font>
                     <Font size="19.0" />
                 </font>
             </Text>
-            <DatePicker fx:id="dp_ot" layoutX="1667.0" layoutY="2.0" />
-            <DatePicker fx:id="dp_do" layoutX="1667.0" layoutY="35.0" />
-            <Button fx:id="b_removeilters" layoutX="1550.0" layoutY="62.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Сбросить фильтры">
+            <DatePicker fx:id="dp_ot" layoutX="1642.0" layoutY="10.0" />
+            <DatePicker fx:id="dp_do" layoutX="1642.0" layoutY="40.0" />
+            <Button fx:id="b_removeilters" layoutX="1512.0" layoutY="69.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Сбросить фильтры">
             <font>
                <Font size="11.0" />
             </font></Button>
@@ -70,13 +70,13 @@
     <TableView fx:id="tv_aOrders" layoutX="23.0" layoutY="100.0" prefHeight="900.0" prefWidth="1826.0">
       <columns>
           <TableColumn fx:id="col_aphone" prefWidth="151.0" text="Устройство" />
-          <TableColumn fx:id="col_adescription" prefWidth="403.0" text="Описание" />
-          <TableColumn fx:id="col_acomments" prefWidth="315.0" text="Комментарии" />
-          <TableColumn fx:id="col_aservices" prefWidth="344.0" text="Услуги" />
-          <TableColumn fx:id="col_acomponents" prefWidth="173.0" text="Компоненты" />
-          <TableColumn fx:id="col_acontacts" prefWidth="166.0" text="Контакты" />
-          <TableColumn fx:id="col_astatus" prefWidth="90.0" text="Статус" />
-          <TableColumn fx:id="col_adate" prefWidth="112.0" text="Дата" />
+          <TableColumn fx:id="col_adescription" prefWidth="349.0" text="Описание" />
+          <TableColumn fx:id="col_acomments" prefWidth="308.0" text="Комментарии" />
+          <TableColumn fx:id="col_aservices" prefWidth="295.0" text="Услуги" />
+          <TableColumn fx:id="col_acomponents" prefWidth="237.0" text="Компоненты" />
+          <TableColumn fx:id="col_acontacts" prefWidth="167.0" text="Контакты" />
+          <TableColumn fx:id="col_astatus" prefWidth="162.0" text="Статус" />
+          <TableColumn fx:id="col_adate" prefWidth="85.0" text="Дата" />
          <TableColumn fx:id="col_agreement" prefWidth="67.0" text="Согласие" />
       </columns>
     </TableView>

@@ -27,6 +27,59 @@ class ServOrders {
         return [];
       });
   }
+  setAgree(id : any) {
+    return axios.get(Links.api_orders + 'setagree?id='+id, { headers: authHeader() })
+      .then((response) => {
+         // console.log(response.data);
+        const data: Answer = response.data;
+        if (data.status) {
+          // const orders: OrderModel[] = data.answer.orders;
+          console.log("Заказ под номером "+id+" получил согласие");
+          return;
+        }
+        return [];
+      })
+      .catch((error) => {
+        console.log(error);
+        return [];
+      });
+  }
+  setDisAgree(id : any) {
+    return axios.get(Links.api_orders + 'setdisagree?id='+id, { headers: authHeader() })
+      .then((response) => {
+         // console.log(response.data);
+        const data: Answer = response.data;
+        if (data.status) {
+          // const orders: OrderModel[] = data.answer.orders;
+          console.log("Заказ под номером "+id+" получил отказ");
+          return;
+        }
+        return [];
+      })
+      .catch((error) => {
+        console.log(error);
+        return [];
+      });
+  }
+  setPay(id : any) {
+    return axios.get(Links.api_orders + 'setpay?id='+id, { headers: authHeader() })
+      .then((response) => {
+         // console.log(response.data);
+        const data: Answer = response.data;
+        if (data.status) {
+          console.log("Заказ под номером "+id+" оплачен");
+          alert("Оплачено!");
+          return;
+        }
+        return [];
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Ошибка оплаты!");
+        return [];
+      });
+  }
+  
   
 }
 
