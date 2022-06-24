@@ -93,7 +93,7 @@ export default function RForm() {
     <Container>
       {/* <ReactPhoneInput defaultCountry={'RU'} onChange={handleChange('phone')}/> */}
 
-      <Page__REGISTER></Page__REGISTER>
+      {/* <Page__REGISTER></Page__REGISTER> */}
       <Row className='justify-content-md-center'>
         <Col md='auto'>
           <div className='register-form'>

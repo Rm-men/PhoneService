@@ -207,6 +207,15 @@ public class ControllerActiveOrder_picked implements Initializable {
                 tv_components.setDisable(agree);
                 tv_services.setDisable(agree);
                 Statement st = con.createStatement();
+                if (Objects.equals(_Order.getId_order_status(), "getting_1"))
+                    cb_status.setDisable(true);
+                if (_Order.getPayed() != null)
+                {
+                    b_ch_components.setDisable(true);
+                    b_ch_services.setDisable(true);
+                    tv_components.setDisable(true);
+                    tv_services.setDisable(true);
+                }
             // ResultSet rs = st.executeQuery("SELECT id_order, order_date, phone_number, address, id_client, id_master, id_phone, id_order_status, description, comments, name_model FROM orders_view");
             PreparedStatement ps = con.prepareStatement("SELECT * FROM on_order_srv JOIN list_sirvices ls on ls.id = on_order_srv.id_srv_onlist WHERE id_order_forservice = ?");
             ps.setInt(1, _Order.getId_order());
@@ -291,6 +300,8 @@ public class ControllerActiveOrder_picked implements Initializable {
                 }
             }
             else {
+                if (Objects.equals(_Order.getId_order_status(), "getting_1"))
+                    return;
                 if (!_Order.getAgreement()) // если полчен отказ
                 {// отобразить всё от transfer_0 (Транспортируется к пункту выдачи) до пункта getting_0 (Готово к выдаче) вклюичтельно
                     while (rs.next()) {

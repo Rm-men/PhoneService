@@ -10,18 +10,7 @@ namespace ServiceDB.Models
 {
     public partial class Order
     {
-        /*        public int IdOrder { get; set; }
-                public DateTime? Dateord { get; set; }
-                public string Phonenumber { get; set; }
-                public string Address { get; set; }
-                public int? IdClient { get; set; }
-                public int? IdMaster { get; set; }
-                public int? IdPhone { get; set; }
-                public string IdOrderStatus { get; set; }
-                public string Descriptionord { get; set; }
-                public string Comments { get; set; }
-                public decimal? Priceord { get; set; }
-                public bool? Agreement { get; set; }*/
+    
 
         public Order(string Phonenumber, string Address, int IdClient, int? IdPhone, string Descriptionord)
         {
@@ -138,9 +127,20 @@ namespace ServiceDB.Models
             foreach (OrderInfo ord in GetOrders())
             {
                 if (ord.IdClient == id)
+                {
+                    if (ord.Payed != null)
+                    {
+                        ord.Status +=(bool)ord.Payed ? " | оплачено" : " | ожидает оплаты";
+                    }
                     ordersForUser.Add(ord);
+                }
             }
             return ordersForUser;
+        }
+        public static OrderInfo GetOrderInfo(int IdOrder)
+        {
+
+            return GetOrders().Where(a => a.IdOrder == IdOrder).FirstOrDefault();
         }
         public static string GetFIO(string f, string n, string p)
         {
@@ -163,6 +163,7 @@ namespace ServiceDB.Models
                     OldOrder.IdMaster = NewOrder.IdMaster;
                     OldOrder.IdOrderStatus = NewOrder.IdOrderStatus;
                     OldOrder.Descriptionord = NewOrder.Descriptionord;
+                    OldOrder.Diagnostic = NewOrder.Diagnostic;
                     OldOrder.Priceord = NewOrder.Priceord;
                 }
                 this.IdOrderStatus = (agree) ? ("waiting_1") : ("waiting_2");
@@ -185,6 +186,15 @@ namespace ServiceDB.Models
         {
             try
             {
+                Order NewOrder = GetOrderOriginal(this.IdOrder);
+                Order OldOrder = GetOrder(this.IdOrder);
+                {
+                    OldOrder.IdMaster = NewOrder.IdMaster;
+                    OldOrder.IdOrderStatus = NewOrder.IdOrderStatus;
+                    OldOrder.Descriptionord = NewOrder.Descriptionord;
+                    OldOrder.Priceord= NewOrder.Priceord;
+                    OldOrder.Diagnostic = NewOrder.Diagnostic;
+                }
                 this.Payed = true;
                 Context.db.Update(this);
                 Context.db.SaveChanges();

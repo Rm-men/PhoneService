@@ -108,7 +108,7 @@ export default function Orders_table() {
                 <th>Устройство</th>
                 <th>Описание</th>
                 <th>Статус</th>
-                <th>Цена</th>
+                <th>Стоимость</th>
               </tr>
             </thead>
             <tbody>
@@ -133,7 +133,9 @@ export default function Orders_table() {
             <BtnNewOrder />
           </div>
         </Form>
+        
       </Container>
+      
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -144,32 +146,38 @@ export default function Orders_table() {
             <Card body>Производитель: {curorder?.Manufacturer}</Card>
             <Card body>Описание: {curorder?.Descriptionord}</Card>
             <Card body>Текущий статус: {curorder?.Status}</Card>
-            <Card body>Сумма ремнота: {curorder?.Priceord}</Card>
             {curorder?.Agreement ? (
               <>
                 {curorder?.Payed !== null ? ( // если настало время оплаты
                   <>
+                                          <Card>
+                          <Card.Body>
+                            <Card.Title>Результат диагностики:</Card.Title>
+                            <Card.Text>{curorder?.Diagnostic}</Card.Text>
+                          </Card.Body>
+                        </Card>
                     {!curorder?.Payed ? ( // заказ не оплачен
-                        <Card className=' deactive'>
-                          <Card>
-                            <Card.Body>
-                              <Card.Title>Оплата заказа</Card.Title>
-                              <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
-                              <Button variant='primary' onClick={clickPay}>
-                                Оплатить
-                              </Button>
-                            </Card.Body>
-                          </Card>
+                      <Card className=' deactive'>
+                        <Card>
+                          <Card.Body>
+                            <Card.Title>Оплата заказа</Card.Title>
+                            <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
+                            <Button variant='primary' onClick={clickPay}>
+                              Оплатить
+                            </Button>
+                          </Card.Body>
                         </Card>
-                    ) : ( // заказ оплачен
-                        <Card className=' deactive'>
-                          <Card>
-                            <Card.Body>
-                              <Card.Title>Заказ оплачен</Card.Title>
-                              <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
-                            </Card.Body>
-                          </Card>
+                      </Card>
+                    ) : (
+                      // заказ оплачен
+                      <Card className=' deactive'>
+                        <Card>
+                          <Card.Body>
+                            <Card.Title>Заказ оплачен</Card.Title>
+                            <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
+                          </Card.Body>
                         </Card>
+                      </Card>
                     )}
                   </>
                 ) : (
@@ -178,7 +186,9 @@ export default function Orders_table() {
               </>
             ) : (
               <>
-                {curorder?.IdOrderStatus.toString() === 'waiting_0' && curorder?.Agreement === null ? ( // осуществление выбора согласия на ремонт
+                          <Card body>Сумма ремнота: {curorder?.Priceord}</Card>
+                {curorder?.IdOrderStatus.toString() === 'waiting_0' &&
+                curorder?.Agreement === null ? ( // осуществление выбора согласия на ремонт
                   <>
                     <Card>
                       <Card.Body>
@@ -210,6 +220,35 @@ export default function Orders_table() {
                             <Card.Text>{curorder?.Diagnostic}</Card.Text>
                           </Card.Body>
                         </Card>
+                        {curorder?.Payed !== null ? (
+                          <>
+                            {!curorder?.Payed ? ( // заказ не оплачен
+                              <Card className=' deactive'>
+                                <Card>
+                                  <Card.Body>
+                                    <Card.Title>Оплата заказа</Card.Title>
+                                    <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
+                                    <Button variant='primary' onClick={clickPay}>
+                                      Оплатить
+                                    </Button>
+                                  </Card.Body>
+                                </Card>
+                              </Card>
+                            ) : (
+                              // заказ оплачен
+                              <Card className=' deactive'>
+                                <Card>
+                                  <Card.Body>
+                                    <Card.Title>Заказ оплачен</Card.Title>
+                                    <Card.Text>Счет за заказ: {curorder?.Priceord}</Card.Text>
+                                  </Card.Body>
+                                </Card>
+                              </Card>
+                            )}
+                          </>
+                        ) : (
+                          <></>
+                        )}
                       </>
                     ) : (
                       <></>

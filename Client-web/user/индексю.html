@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payler</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        window.params_card = {
+            card_number: '{card_number}',
+            card_holder: '{card_holder}',
+            expired_month: '{expired_month}',
+            expired_year: '{expired_year}'
+        }
+    </script>
+</head>
+
+<body>
+    <strong>Онлайн платеж</strong><br> Оплата заказа сервисного центра по ремонту телефонов
+
+    <dl class="item invoice">
+        <dt>Заказ № {orderid}</dt>
+        <dd>Устройство: {orderid}</dd>
+        <dd>Описание неисправности: {orderid}</dd>
+        <dd>Заключение диагностики: {orderid}</dd>
+        <dd>Устройство: {orderid}</dd>
+        <dd>Устройство: {orderid}</dd>
+    </dl>
+    <table>
+        <thead>
+            <tr>
+                <th>Услуга</th>
+                <th>Стоимость</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{namesrv}</td>
+                <td>{costsrv}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Компонент</th>
+                <th>Стоимость</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{namesrv}</td>
+                <td>{costsrv}</td>
+            </tr>
+        </tbody>
+    </table>
+    <dt>Сумма платежа: <strong>{}</strong></dt>
+</body>
+
+</html>

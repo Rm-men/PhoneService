@@ -20,6 +20,7 @@ import web.master.entity.Service;
 import web.master.mains.ControllerActiveOrder;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
 import java.util.Objects;
@@ -31,6 +32,7 @@ public class Controller_Services implements Initializable {
     @FXML public ComboBox cb_category;
     @FXML public Label l_c_services;
     @FXML public Label l_c_price;
+
     @FXML public Label l_c_time;
 
     @FXML public TableView tv_all_list;
@@ -302,14 +304,27 @@ public class Controller_Services implements Initializable {
             ps.executeUpdate();
 
             ps = con.prepareStatement("INSERT INTO on_order_srv (id_order_forservice, id_srv_onlist) VALUES (?,?)" );
+            ps.setInt(1, _Order.getId_order());
             for (Service service : list_Cur) {
-                ps.setInt(1, _Order.getId_order());
                 ps.setInt(2, service.getId_service());
                 ps.executeUpdate();
             }
+            Double cost = 0.0;
+            ps = con.prepareStatement("SELECT * FROM on_order_cmp JOIN component c on c.id_component = on_order_cmp.id_cmp_onlist WHERE id_order_forcomp = ?");
+            ps.setInt(1, _Order.getId_order());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cost+= rs.getDouble("pricecmp");
+            }
+            ps = con.prepareStatement("SELECT * FROM on_order_srv join list_sirvices ls on ls.id = on_order_srv.id_srv_onlist WHERE  id_order_forservice = ?");
+            ps.setInt(1, _Order.getId_order());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cost+= rs.getDouble("costsrv");
+            }
             caclTotal();
-            ps = con.prepareStatement("Update orders set priceord= ? WHERE id_order =  ?" );
-            ps.setInt(1, Integer.parseInt(l_c_price.getText()));
+            ps = con.prepareStatement("Update orders set priceord = ? WHERE id_order =  ?" );
+            ps.setDouble(1, cost);
             ps.setInt(2, _Order.getId_order());
             ps.executeUpdate();
             // con.close();

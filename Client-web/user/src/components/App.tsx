@@ -34,7 +34,6 @@ export default function App() {
             <Route path={'/'} element={<Layout />}>
               <Route index element={<Landing />} />
               <Route path={Links.register} element={<Register />} />
-
               <Route path={Links.usercabinet} element={<UserCabinet />} />
               <Route path={Links.auth} element={<Login />} />
               <Route path='*' element={<Erorr />} />
