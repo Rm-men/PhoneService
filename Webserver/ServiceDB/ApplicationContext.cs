@@ -6,7 +6,8 @@ namespace ServiceDB
 {
     public partial class ApplicationContext : DbContext
     {
-        public static string ConnectionString = "host=localhost;port=5432;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7";
+        // public static string ConnectionString = "host=localhost;port=5432;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7";
+        public static string ConnectionString = "Host=localhost;Port=5432;Database=work100024;Username=work100024;Password=iS~pLC*gmrAgl6aJ1pL7";
 
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Component> Components { get; set; }
@@ -26,10 +27,10 @@ namespace ServiceDB
         public virtual DbSet<PhoneModel> PhoneModels { get; set; }
         public virtual DbSet<StoryOrderMove> StoryOrderMoves { get; set; }
 
-        public ApplicationContext() : base(GetDb())
+/*        public ApplicationContext() : base(GetDb())
         {
             // Database.Migrate();
-        }
+        }*/
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -40,15 +41,13 @@ namespace ServiceDB
 
         public static DbContextOptions<ApplicationContext> GetDb()
         {
-            StreamWriter stream = new StreamWriter("log.txt", true);
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>().UseNpgsql(ConnectionString);
-            // optionsBuilder.LogTo(stream.WriteLine);
             return optionsBuilder.Options;
         }
-        public static void InitDb()
+/*        public static void InitDb()
         {
             new ApplicationContext(GetDb());
-        }
+        }*/
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(ConnectionString);
@@ -690,3 +689,4 @@ namespace ServiceDB
 
 // Scaffold-DbContext "host=45.10.244.15;port=55532;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7" npgsql.entityframeworkcore.postgresql -OutputDir Models
 // Scaffold-DbContext "host=localhost;port=5432;database=work100024;username=work100024;password=iS~pLC*gmrAgl6aJ1pL7" npgsql.entityframeworkcore.postgresql -OutputDir Models -Force
+// Scaffold-DbContext "host=localhost;port=5432;database=ИМЯБД;username=ИМЯЮЗЕРА;password=ПАСВОРД" npgsql.entityframeworkcore.postgresql -OutputDir Models -Force

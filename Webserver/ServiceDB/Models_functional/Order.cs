@@ -50,7 +50,8 @@ namespace ServiceDB.Models
         public class OrderInfo
         {
             public int IdOrder { get; set; }
-            public DateTime? Dateord { get; set; }
+            public DateTime Dateord { get; set; }
+            public string DateStr { get; set; }
             public string Phonenumber { get; set; }
             public string Address { get; set; }
             public int? IdClient { get; set; }
@@ -59,9 +60,8 @@ namespace ServiceDB.Models
             public string IdOrderStatus { get; set; }
             public string Descriptionord { get; set; }
             public string Comments { get; set; }
-            public decimal? Priceord { get; set; }
+            public decimal Priceord { get; set; }
             public string?  Manufacturer { get; set; }
-
             public bool ? Agreement { get; set; }
             public string AgreementText { get; set; }
             public string FIOCl { get; set; } //
@@ -87,14 +87,15 @@ namespace ServiceDB.Models
                                                  IdClient = o.IdClient,
                                                  Phonenumber = o.Phonenumber,
                                                  IdOrder = o.IdOrder,
-                                                 Dateord = o.Dateord,
+                                                 Dateord = (DateTime)o.Dateord.Value.ToLocalTime(),
+                                                 DateStr = o.Dateord.Value.ToShortDateString(),
                                                  Comments = o.Comments,
                                                  Descriptionord = o.Descriptionord,
                                                  IdMaster = o.IdMaster,
                                                  IdOrderStatus = o.IdOrderStatus,
                                                  IdPhone = o.IdPhone,
                                                  Address = o.Address,
-                                                 Priceord = o.Priceord,
+                                                 Priceord = (decimal)o.Priceord,
                                                  Agreement = (bool)o.Agreement,
                                                  AgreementText = (bool)o.Agreement ? ("*") : (""),
                                                  PhoneModel = pm.Namephone,

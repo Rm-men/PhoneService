@@ -1,55 +1,31 @@
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  FormGroup,
-  Button,
-  Modal,
-  Card,
-  InputGroup,
-} from 'react-bootstrap';
-import { Label, Input } from 'reactstrap';
+import { Container, Form, Button, Modal, Card, InputGroup} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useLocation, useNavigate } from 'react-router-dom'; // берет текущий url
+import { useNavigate } from 'react-router-dom'; 
 import React, { useState } from 'react';
 import Links from '../Links';
-
 import { AppDispatch, RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-
-import FormNewOrderFull from './FormNewOrderFull';
 import { NewOrderModel } from '../../models/NewOrderModel';
-
 import ServAddOrder from '../../redux/services/ServAddOrder';
 import ServGetLists from '../../redux/services/ServGetLists';
 import { AddressModel } from '../../models/AddressModel';
 import { PhonesModel } from '../../models/PhonesModel';
 
 export default function BtnNewOrder() {
-
   const [addresses, setAdresses] = useState<AddressModel[]>([]);
   const [phones, setPhones] = useState<PhonesModel[]>([]);
   const [addres, setAddres] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [curphone, setCurPhone] = useState<PhonesModel>();
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const openNewOrderModal = () => {
-    console.log('Поехало');
     setShow(true);
-    // ServGetLists.getAddress().then((res: any) => {
-    //   console.log(res);
-    //   setAdresses(res);
-    // });
     ServGetLists.getPhones().then((res: any) => {
       console.log(res);
       setPhones(res);
-      // setPhone("Ноутилус ++");
     });
   };
-
   const user = useSelector((state: RootState) => state);
   const managerModal = () => {};
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,20 +45,17 @@ export default function BtnNewOrder() {
     Descriptionord: ' ',
     Namephone: 'Ноутилус ++',
   });
-  // const user = useSelector((state: RootState) => state);
-  const [validated, setValidated] = useState(false); //тумблер подсветки валидации
-
+  const [validated, setValidated] = useState(false);
   const toCreateNewOrder = (event: any) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
       return;
-    } else setValidated(true); // активация подсветки валидации
+    } else setValidated(true); 
     if (
       values.Phonenumber === '' ||
       values.Address === '' ||
-      // values.IdPhone === 1 ||
       values.Descriptionord === ''
     ) {
       console.log('' + 'не');
@@ -98,36 +71,18 @@ export default function BtnNewOrder() {
     };
     console.log(data);
     ServAddOrder.order(data).then((res) => {
-      // dispatch(res);
       handleClose();
-      // dispatch(res);
       navigate(0);
-      // window.location.reload();
     });
   };
   const navigate = useNavigate();
-
   const dispatch = useDispatch<AppDispatch>();
-
-  const [key, setKey] = useState<boolean>(false); // установка значений на странице
+  const [key, setKey] = useState<boolean>(false); 
 
   React.useEffect(() => {
-    // при загрузке страницы, один раз
     if (key) return;
     setKey(true);
   }, [addres, key]);
-
-  const varClick = (phone: any) => {
-    // setCu(order);
-    // ServGetLists.getOrderMove(order?.IdOrder).then((res: any) => {
-    //   console.log('ид заказа = ' + order?.IdOrder);
-    //   console.log('ид покупателя = ' + order?.IdClient);
-    //   setOrderMove(res);
-    //   setShow(true);
-    // });
-    // // console.log('тыкнули на '+curorder?.PhoneModel);
-    // setShow(true);
-  };
 
   return (
     <>
@@ -153,35 +108,21 @@ export default function BtnNewOrder() {
                           required
                           value={phone}
                           onChange={(e) => {
-                            // console.log(e.target.value);
                             values.Namephone = e.target.value;
                             setPhone( e.target.value)
-                            // setPhone(phones[e.target.id].id);
-                            // setPhone(e.target.value);
-                            // setValues(e.target.value);
-                            // handleChange('IdPhone');
-                            
-                            // console.log("выбранные телефон: "+values.Namephone);
-                            // console.log(" телефон: "+e.target.value);
-                            // console.log(" телефонsssss: "+curphone?.IdPhoneModel);
                           }}
                         >
                           {phones?.map((phones) => (
                             <option value={phones.Namephone}>{phones.Namephone}</option>
                           ))}
-                          {/* <option value='ул. Московская 36'>ул. Московская 36</option>
-                          <option value='???'>???</option>
-                          <option value='ул. Ивана Попова 36'>ул. Ивана Попова 36</option> */}
                         </Form.Select>
                       </Form.Group>
 
                       <Form.Group controlId='formBasicPhNumb'>
-                        {/* <Form.Group as={Col} md='4' controlId='formBasicPhNumb'>  - фикисрованная длина*/}
                         <Form.Label>Номер телефона</Form.Label>
                         <InputGroup hasValidation>
                           <InputGroup.Text id='inputGroupPrepend'>+7</InputGroup.Text>
                           <Form.Control
-                            // type='number' появляются стрелочки для изменения числа, для номера оно не надо
                             placeholder='Введите номер телефона'
                             required
                             value={values.Phonenumber}
@@ -193,24 +134,6 @@ export default function BtnNewOrder() {
                         </InputGroup>
                       </Form.Group>
                     </Form>
-                    {/* <Form>
-                      <Form.Group className='mb-3'>
-                        <Form.Label>Выберите пункт приема</Form.Label>
-                        <Form.Select
-                          value={addres}
-                          onChange={(e) => {
-                            values.Address = e.target.value;
-                            setAddres(e.target.value);
-                            handleChange('Address');
-                            console.log(values.Address);
-                          }}
-                        >
-                          {addresses?.map((addresses) => (
-                            <option value={addresses.Address}>{addresses.Address}</option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                    </Form> */}
                     <Form noValidate validated={validated}>
                       <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
                         <Form.Label>Введите описание неисправности</Form.Label>

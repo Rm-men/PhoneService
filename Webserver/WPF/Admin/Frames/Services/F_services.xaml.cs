@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceDB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,15 +32,14 @@ namespace WPF.Admin.Frames.Services
             Refresh();
         }
 
-        /*        public void to_update_Order(Order rp)
-                {
-                    spase.Navigate(new P_orders_update(rp, this));
-                }*/
+        public void To_update(ListSirvice sr)
+        {
+            spase.Navigate(new Redact_services(sr, this));
+        }
 
         private void Bto_add_Order(object sender, RoutedEventArgs e)
         {
-            /*            spase.Navigate(new P_orders_add(this));
-            */
+            spase.Navigate(new Add_Services(this));
         }
         public void Refresh()
         {

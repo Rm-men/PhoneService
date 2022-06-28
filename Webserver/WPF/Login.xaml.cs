@@ -1,4 +1,5 @@
-﻿using ServiceDB.Models;
+﻿using ServiceDB;
+using ServiceDB.Models;
 using System.Collections.Generic;
 using System.Windows;
 using WPF.Admin;
@@ -15,6 +16,7 @@ namespace WPF
 
         public Window1()
         {
+            new ApplicationContext(ApplicationContext.GetDb());
             InitializeComponent();
         }
         public void Enter_admin()

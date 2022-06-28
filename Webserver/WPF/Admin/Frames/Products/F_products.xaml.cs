@@ -39,8 +39,8 @@ namespace WPF.Admin.Frames.Products
 
         public void Bto_add(object sender, RoutedEventArgs e)
         {
-/*            spase.Navigate(new P_products_add(this));
-*/        }
+            spase.Navigate(new Add_product(this));
+     }
         public void Refresh()
         {
             spase.Navigate(new T_components(this));

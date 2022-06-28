@@ -7,14 +7,6 @@ namespace ServiceDB.Models
 {
     public partial class Client
     {
-
-/*        public string family { get; set; }
-        public string name { get; set; }
-        public string patronymic { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string clpassword { get; set; }
-*/
         public class ClientInfo
         {
             public int IdClient { get; set; }

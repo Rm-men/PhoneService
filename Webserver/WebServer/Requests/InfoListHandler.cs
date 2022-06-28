@@ -25,13 +25,6 @@ namespace WebServer.Requests
                 Send(new AnswerModel(false, null, 400, "incorrect request"));
                 return;
             }
-
-/*            var user = TokenWorker.GetUserByToken(token);
-            if (user is null)
-            {
-                Send(new AnswerModel(false, null, 400, "incorrect request"));
-                return;
-            }*/
             List<LM_Adress> addresses = LM_Adress.GetAdresses();
 
             Send(new AnswerModel(true, new { addresses = addresses }, null, null));

@@ -261,7 +261,7 @@ export default function Orders_table() {
             {ordmoves.length >= 1 ? ( // если статусы перемещения вообще есть - отобразить их
               <>
                 <Card body>
-                  <Card.Body>История перемещений:</Card.Body>
+                  <Card.Body>История действий:</Card.Body>
                   <Table>
                     <thead>
                       <tr>

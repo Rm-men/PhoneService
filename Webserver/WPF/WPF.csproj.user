@@ -20,6 +20,9 @@
     <Compile Update="Admin\Frames\Orders\T_orders.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Admin\Frames\Products\Add_product.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Admin\Frames\Products\F_products.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -29,7 +32,13 @@
     <Compile Update="Admin\Frames\Products\T_components.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Admin\Frames\Services\Add_Services.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Admin\Frames\Services\F_services.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin\Frames\Services\Redact_services.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Admin\Frames\Services\T_servisec.xaml.cs">
@@ -38,6 +47,11 @@
     <Compile Update="Admin\mainw_admin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Admin\Frames\Clietns\F_clients.xaml">
@@ -58,6 +72,9 @@
     <Page Update="Admin\Frames\Orders\T_orders.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Admin\Frames\Products\Add_product.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Admin\Frames\Products\F_products.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -67,7 +84,13 @@
     <Page Update="Admin\Frames\Products\T_components.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Admin\Frames\Services\Add_Services.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Admin\Frames\Services\F_services.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Admin\Frames\Services\Redact_services.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Admin\Frames\Services\T_servisec.xaml">

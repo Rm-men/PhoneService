@@ -56,20 +56,17 @@ namespace WebServer.Requests
             var body = Bind<RegModel>();
             if (RegModel.Check(body))
             {
-                Send(new AnswerModel(false, null, 401, "incorrect request"));
+                Send(new AnswerModel(false, null, 400, "incorrect request"));
                 return;
             }
             var client = new Client(body!.family, body.name, body.patronymic, body.phone, body.email, body.clpassword);
             if (!client.AddClient())
             {
-                Send(new AnswerModel(false, null, 401, "incorrect request"));
+                Send(new AnswerModel(false, null, 101, "incorrect request"));
                 return;
             }
-
             var newUser = new ClientModel(client);
-
             Send(new AnswerModel(true, new { access_token = GenerateToken(client), user = newUser }, null, null));
-
         }
     }
 }

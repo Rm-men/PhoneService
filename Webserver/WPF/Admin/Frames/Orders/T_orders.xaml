@@ -27,6 +27,7 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Устройство"             Binding="{Binding Path=PhoneModel}"/>
+                <DataGridTextColumn Header="Дата"                 Binding="{Binding Path=DateStr}"/>
                 <DataGridTextColumn Header="Мастер"                 Binding="{Binding Path=FIOm}"/>
                 <DataGridTextColumn Header="Номер в заказе"         Binding="{Binding Path=Phonenumber}"/>
                 <DataGridTextColumn Header="Статус"                 Binding="{Binding Path=Status}"/>

@@ -37,6 +37,8 @@ namespace WPF.Admin.Frames.Services
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
+            f_Services.To_update(dataGrid.SelectedValue as ListSirvice);
+
             /*            Order.Info ord = dataGrid.SelectedValue as Order.Info;
                         f_Services.to_update_Order(Order.GetOrder(ord.IdOrder));*/
             /*            W_products_update def_W = new W_products_update(product, this);
@@ -44,7 +46,7 @@ namespace WPF.Admin.Frames.Services
         }
         public void Refresn()
         {
-            dataGrid.ItemsSource = ListSirvice.GetServices();
+            dataGrid.ItemsSource = ListSirvice.GetServicesADO();
             dataGrid.Items.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Descending));
         }
     }

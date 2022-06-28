@@ -72,5 +72,10 @@ namespace ServiceDB.Models
         {
             return Context.db.Components.Where(a => a.IdComponent == IdProduct).FirstOrDefault();
         }
+        public void Add()
+        {
+            Context.db.Components.Add(this);
+            Context.db.SaveChanges();
+        }
     }
 }
