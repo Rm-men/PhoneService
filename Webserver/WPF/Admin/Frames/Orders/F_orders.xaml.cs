@@ -77,11 +77,19 @@ namespace WPF.Admin.Frames.Orders
                 sheet.GetRow(8).CreateCell(2);
                 sheet.GetRow(8).CreateCell(7);
 
+                //Создание объекта для генерации чисел
+                Random rnd = new Random();
+
+                //Получить случайное число (в диапазоне от 0 до 10)
+                int value = rnd.Next(0, 10);
+
+                sheet.GetRow(1).GetCell(7).SetCellValue(value);
                 sheet.GetRow(2).GetCell(7).SetCellValue(DateTime.Today.ToShortDateString());
                 // sheet.GetRow(7).GetCell(2).SetCellValue(DatePickerSearchStart.Text);
                 // sheet.GetRow(8).GetCell(2).SetCellValue(DatePickerSearchEnd.Text);
                 // sheet.GetRow(6).GetCell(7).SetCellValue(KolvoOrderBox.Text);
                 // sheet.GetRow(7).GetCell(7).SetCellValue(KolvoTimeBox.Text);
+                sheet.GetRow(6).GetCell(7).SetCellValue(ord.Count);
                 sheet.GetRow(7).GetCell(7).SetCellValue((double)totalSum);
                 sheet.GetRow(8).GetCell(7).SetCellValue((double)totalSum/ord.Count);
 

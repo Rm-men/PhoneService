@@ -53,7 +53,6 @@ namespace WPF.Admin.Frames.Products
             component.Pricecmp = Convert.ToDecimal(TB_Price.Text); 
             component.IdGuaranteecmp = Convert.ToInt32(TB_Garranty_id.Text);
             component.Count = Convert.ToInt32(TB_Count.Text);
-
             Context.db.SaveChanges();
             MessageBox.Show("Сохранения применены");
             f_Prod.Refresh();
